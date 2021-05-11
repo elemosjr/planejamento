@@ -4,6 +4,7 @@ Title: Planejamento e Análise de Experimentos
 Description: Pacote de funções utilizadas na matéria de Planejamento e Análise de Experimentos I do curso de Estatística da Universidade Estadual de Maringá
 Version: 0.1
 License: MIT
+URL: https://github.com/elemosjr/planejamento
 Author: Eduardo Lemos Júnior
 Maintainer: Eduardo Lemos Júnior <elemosjr@gmail.com>
 Encoding: UTF-8
