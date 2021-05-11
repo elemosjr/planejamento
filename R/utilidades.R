@@ -14,7 +14,7 @@ kable_ <- function(x) kable(x, align = rep("c", ncol(x)))
 #' @title Print Anova
 #'
 #' @import broom
-#' @import magrittr
+#' @import dplyr
 #'
 #' @description Organiza e printa uma tabela de anova em formato de LaTeX
 #'
@@ -38,7 +38,6 @@ print_anova <- function(model)
 
 #' @title Quadrados latinos
 #'
-#' @import magrittr
 #' @import dplyr
 #'
 #' @description Simula um delineamento em quadrados latinos a partir de um banco de dados
@@ -71,7 +70,6 @@ quadrados_latinos <- function(dados, tratamentos)
 
 #' @title Blocos incompletos
 #'
-#' @import magrittr
 #' @import stringr
 #' @import dplyr
 #' @import tidyr
