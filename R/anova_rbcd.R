@@ -35,18 +35,12 @@ anova_rbcd <- function(dados, x, y, bloco)
   ret_$qme <- ret_$sqe / ((ret_$a - 1) * (ret_$b - 1))
   ret_$f0 <- ret_$qmtrat / ret_$qme
   ret_$pvalor <- pf(ret_$f0, ret_$a - 1, (ret_$a - 1) * (ret_$b - 1), lower.tail = FALSE)
-  
-  ret_$estimados <- list()
-  
-  ret_$estimados[[1]] <- tibble(X1 = c("$\\hat{\\mu}$", "$\\hat{\\mu}_{i.}$",
-                                       paste0("$\\tau_{", 1:length(ret_$tau),
-                                              "j}$")),
-                                X2 = c(ret_$mu, sum(ret_$yi.)/ret_$b, ret_$tau)) %>%
-    spread(X1, X2)
-  ret_$estimados[[2]] <- tibble(X1 = c(paste0("$\\beta_{",
-                                              1:length(ret_$beta), "j}$"),
-                                       "$\\hat{\\beta}_{.j}$"),
-                                X2 = c(ret_$beta, sum(ret_$y.j)/ret_$a)) %>%
+
+  ret_$estimados <- tibble(X1 = c("$\\hat{\\mu}$", "$\\hat{\\tau}$",
+                                  "$\\hat{\\beta}$", "$\\hat{\\mu_i}$",
+                                  "$\\hat{\\beta_i}$"),
+                           X2 = with(ret_, c(mu, mean(tau), mean(beta),
+                                             mean(yi.), mean(y.j)))) %>%
     spread(X1, X2)
   
   ret_$modelo <- with(ret_,

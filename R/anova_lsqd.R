@@ -39,23 +39,14 @@ anova_lsqd <- function(dados, x, y, linha, coluna) # dados tem que ter NA
   ret_$qme <- ret_$sqe / ((ret_$p - 2) * (ret_$p - 1))
   ret_$f0 <- ret_$qmtrat / ret_$qme
   ret_$pvalor <- pf(ret_$f0, ret_$p - 1, (ret_$p - 2) * (ret_$p - 1), lower.tail = FALSE)
-  
-  ret_$estimados <- list()
-  
-  ret_$estimados[[1]] <- tibble(X1 = c("$\\hat{\\mu}$", "$\\hat{\\mu}_{i}$",
-                                       paste0("$\\tau_{", 1:length(ret_$tau),
-                                              "}$")),
-                                X2 = c(ret_$mu, sum(ret_$y.j.)/ret_$p, ret_$tau)) %>%
-    spread(X1, X2)
-  ret_$estimados[[2]] <- tibble(X1 = c(paste0("$\\beta_{",
-                                              1:length(ret_$alpha), "}$"),
-                                       "$\\hat{\\alpha}_{j}$"),
-         X2 = c(ret_$alpha, sum(ret_$yi..)/ret_$p)) %>%
-    spread(X1, X2)
-  ret_$estimados[[3]] <- tibble(X1 = c(paste0("$\\beta_{",
-                                              1:length(ret_$beta), "}$"),
-                                       "$\\hat{\\beta}_{k}$"),
-         X2 = c(ret_$beta, sum(ret_$y..j)/ret_$p)) %>%
+
+  ret_$estimados <- tibble(X1 = c("$\\hat{\\mu}$", "$\\hat{\\alpha}$",
+                                  "$\\hat{\\tau}$", "$\\hat{\\beta}$",
+                                  "$\\hat{\\alpha_i}$", "$\\hat{\\tau_i}$",
+                                  "$\\hat{\\beta_i}$"),
+                           X2 = with(ret_, c(mu, mean(alpha), mean(tau),
+                                             mean(beta), mean(yi..),
+                                             mean(y.j.), mean(y..k)))) %>%
     spread(X1, X2)
   
   ret_$modelo <- with(ret_,
