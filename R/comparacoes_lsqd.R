@@ -1,0 +1,124 @@
+#' @title Comparacoes (Quadrados Latinos)
+#'
+#' @import agricolae
+#' @import dplyr
+#' @import tibble
+#'
+#' @description Análises múltiplas para ANOVA de delineamentos em quadrados latinos
+#'
+#' @param x String com o nome da coluna dos tratamentos
+#' @param y String com o nome da coluna dos resultados
+#' @param bloco String com o nome da coluna dos blocos, manter NULL caso não hajam blocos
+#' @param dados Data frame com colunas separadas para os tratamentos, resultados, e caso haja, blocos
+#' @param alpha Nivel de significancia a ser utilizado, padrao 0.05
+#' @param group Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos
+#'
+#' @return comparacao
+#' @export
+
+comparacoes_lsqd <- function(dados, x, y, linha, coluna,  alpha = 0.05, group = FALSE)
+{
+  if(!is.factor(dados[[x]])) dados[[x]] <- as.factor(dados[[x]])
+  if(!is.factor(dados[[linha]])) dados[[linha]] <- as.factor(dados[[linha]])
+  if(!is.factor(dados[[coluna]])) dados[[coluna]] <- as.factor(dados[[coluna]])
+
+  formula_ <- as.formula(glue("`{y}` ~ `{x}` + `{linha}` + `{coluna}`"))
+  
+  modelo_anova <- aov(formula_, data = dados)
+  
+  ret_ <- list()
+  
+  ret_$variaveis <- list(tratamento = x,
+                         linha = linha,
+                         coluna = coluna,
+                         resultado = y)
+
+  ret_$formula <- formula_
+  
+  ret_$modelos$Modelo <- modelo_anova
+  
+  ret_$dados <- dados
+  
+  if(group)
+  {
+    ret_$modelos$fisher <- modelo_anova %>%
+      LSD.test(x, group = group, alpha = alpha)
+    
+    ret_$fisher <- ret_$modelos$fisher %>%
+      .$groups %>%
+      as.data.frame() %>%
+      rownames_to_column("Valores") %>%
+      select(`Valores`, y, Grupos = groups)
+    
+    ret_$modelos$bonferroni <- modelo_anova %>%
+      LSD.test(x, group = group, alpha = alpha, p.adj = "bonferroni")
+    
+    ret_$bonferroni <- ret_$modelos$bonferroni %>%
+      .$groups %>% as.data.frame() %>%
+      rownames_to_column("Valores") %>%
+      select(`Valores`, y, Grupos = groups)
+    
+    ret_$modelos$tukey <- modelo_anova %>%
+      HSD.test(x, group = group, alpha = alpha)
+    
+    ret_$tukey <- ret_$modelos$tukey %>%
+      .$groups %>% as.data.frame() %>%
+      rownames_to_column("Valores") %>%
+      select(`Valores`, y, Grupos = groups)
+    
+    ret_$modelos$duncan <- modelo_anova %>%
+      duncan.test(x, group = group, alpha = alpha)
+    
+    ret_$duncan <- ret_$modelos$duncan %>%
+      .$groups %>% as.data.frame() %>%
+      rownames_to_column("Valores") %>%
+      select(`Valores`, y, Grupos = groups)
+    
+  } else
+  {
+    ret_$modelos$fisher <- modelo_anova %>%
+      LSD.test(x, group = group, alpha = alpha) 
+    
+    ret_$fisher <- ret_$modelos$fisher %>%
+      .$comparison %>%
+      as.data.frame() %>%
+      rownames_to_column("Comparação") %>%
+      select(`Comparação`, `Diferença de Médias` = difference,
+             `Limite Inferior` = LCL, `Limite Superior` = UCL,
+             `P-valor` = pvalue)
+    
+    ret_$modelos$bonferroni <- modelo_anova %>%
+      LSD.test(x, group = group, alpha = alpha, p.adj = "bonferroni")
+    
+    ret_$bonferroni <- ret_$modelos$bonferroni %>%
+      .$comparison %>% as.data.frame() %>%
+      rownames_to_column("Comparação") %>%
+      select(`Comparação`, `Diferença de Médias` = difference,
+             `Limite Inferior` = LCL, `Limite Superior` = UCL,
+             `P-valor` = pvalue)
+    
+    ret_$modelos$tukey <- modelo_anova %>%
+      HSD.test(x, group = group, alpha = alpha)
+    
+    ret_$tukey <- ret_$modelos$tukey %>%
+      .$comparison %>% as.data.frame() %>%
+      rownames_to_column("Comparação") %>%
+      select(`Comparação`, `Diferença de Médias` = difference,
+             `Limite Inferior` = LCL, `Limite Superior` = UCL,
+             `P-valor` = pvalue)
+    
+    ret_$modelos$duncan <- modelo_anova %>%
+      duncan.test(x, group = group, alpha = alpha)
+    
+    ret_$duncan <- ret_$modelos$duncan %>%
+      .$comparison %>% as.data.frame() %>%
+      rownames_to_column("Comparação") %>%
+      select(`Comparação`, `Diferença de Médias` = difference,
+             `Limite Inferior` = LCL, `Limite Superior` = UCL,
+             `P-valor` = pvalue)
+  }
+  
+  class(ret_) <- "comparacao_lsqd"
+  
+  ret_
+}
