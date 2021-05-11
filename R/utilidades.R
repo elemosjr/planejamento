@@ -1,3 +1,17 @@
+pkginstall <- function(pkg) if(!require(pkg)) install.packages(pkg)
+
+.onAttach <- function(...)
+{
+  if(!require("tidyverse")) install.packages("tidyverse")
+  if(!require("knitr")) install.packages("knitr")
+  library("tidyverse")
+  library("knitr")
+}
+
+##' @import tidyverse
+##' @import knitr
+{}
+
 #' @title Kable_
 #'
 #' @import knitr

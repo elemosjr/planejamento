@@ -1,0 +1,61 @@
+---
+output: github_document
+---
+
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
+library(planejamento)
+```
+
+# Planejamento e Análise de Experimentos
+
+Pacote de funções utilizadas na matéria de Planejamento e Análise de Experimentos I do curso de Estatística da Universidade Estadual de Maringá.
+
+# Instalação
+
+```{r instalacao, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("elemosjr/planejamento")
+```
+
+# Exemplos
+
+```{r exemplo, fig.height = 5}
+## Simulações de delineamentos
+# Delineamento em blocos incompletos
+bloco_incompleto(4, 6, 2)$dados %>% kable_()
+
+# Quadrados Latinos
+quadrado <- quadrados_latinos(dados = tibble(x = 1:16),
+                              tratamentos = letters[1:4])
+head(quadrado) %>% kable_()
+
+quadrado %>% select(-x) %>%
+  spread(coluna, tratamento) %>% kable_()
+
+## ANOVA e comparações múltiplas
+# Definindo seed
+set.seed(1)
+ 
+# Gerando dados
+dados <- tibble(tratamento = as.factor(sort(rep(1:4, 5))),
+                bloco = as.factor(rep(1:5, 4)),
+                resultado = rnorm(20))
+
+# Gerando valores da anova a partir dos dados
+valores <- anova_rbcd(dados, "tratamento", "resultado", "bloco")
+
+# Gerasndo comparações múltiplas 
+comparacao <- comparacoes("tratamento", "resultado", "bloco", dados)
+
+# Comparação de tukey
+comparacao$tukey %>% kable_()
+
+# Gráfico de comparações dos tratamentos
+plot(comparacao, trat = TRUE)
+```
+
+# To Do
+
+- [x] Pkgdown
+- [x] README
+- [ ] Adicionar exemplos de cada funcao
