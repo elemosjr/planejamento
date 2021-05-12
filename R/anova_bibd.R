@@ -1,4 +1,4 @@
-#' @title anova_bibd
+#' Gera valores de anova para BIBD
 #'
 #' @description Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos incompletos balanceados
 #'
@@ -10,14 +10,25 @@
 #' @import glue
 #' @import tidyr
 #'
-#' @return list
+#' @return Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
+#'
+#' @examples
+#'
+#' bloco_incompleto(4, 6, 2)$dados %>%
+#'  anova_bibd("Trat", "resultado", "bloco")
+#'
 #' @export
 
 anova_bibd <- function(dados, x, y, bloco) # dados tem que ter NA
 {
   ret_ <- list()
   
-  for(i in seq_along(unique(dados[[x]])))
+  dados <- as_tibble(dados)
+
+  if(!is.factor(dados[[x]])) dados[[x]] <- as.factor(dados[[x]])
+  if(!is.factor(dados[[bloco]])) dados[[bloco]] <- as.factor(dados[[bloco]])
+  
+  for(i in unique(dados[[x]]))
   {
     blocos <- levels(dados[[bloco]])[!levels(dados[[bloco]]) %in% dados[[bloco]][dados[x] == i]]
     bind_ <- tibble(NA, as.factor(i), as.factor(blocos))
@@ -25,7 +36,7 @@ anova_bibd <- function(dados, x, y, bloco) # dados tem que ter NA
     dados <- bind_rows(dados, bind_)
   }
   
-  dados <- dados %>% arrange(dados[[x]], dados[[bloco]])
+  dados <- dados %>% arrange(x, bloco)
   coord_na <- as.numeric(!is.na(dados[[y]]))
   
   dados <- na.omit(dados)

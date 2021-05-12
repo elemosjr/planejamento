@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comparacoes — comparacoes • planejamento</title>
+<title>Comparacoes multiplas para DIC e RBCD — comparacoes • planejamento</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Comparacoes — comparacoes" />
+<meta property="og:title" content="Comparacoes multiplas para DIC e RBCD — comparacoes" />
 <meta property="og:description" content="Análises múltiplas para ANOVA de delineamentos inteiramente casualizados (DIC) e para delineamentos em blocos completos casualizados" />
 
 
@@ -108,7 +108,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Comparacoes</h1>
+    <h1>Comparacoes multiplas para DIC e RBCD</h1>
     <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/comparacoes.R'><code>R/comparacoes.R</code></a></small>
     <div class="hidden name"><code>comparacoes.Rd</code></div>
     </div>
@@ -150,8 +150,223 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>comparacao</p>
+    <p>Objeto do tipo <code>comparacao</code>, que contém:</p><ul>
+<li><p><code>dados</code> Dados alimentados a função</p></li>
+<li><p><code>variaveis</code> Lista com os nomes das variaveis</p></li>
+<li><p><code>formula</code> Objeto <code>formula</code> usado para criar o modelo</p></li>
+<li><p><code>modelos</code> Lista com todos os modelos criados</p></li>
+<li><p><code>fisher</code> Dados das comparações de fisher</p></li>
+<li><p><code>bonferroni</code> Dados das comparações de bonferroni</p></li>
+<li><p><code>tukey</code> Dados das comparações de tukey</p></li>
+<li><p><code>duncan</code> Dados das comparações de duncan</p></li>
+</ul>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>comparacoes</span><span class='op'>(</span><span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"carb"</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $dados
+#&gt;                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+#&gt; Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+#&gt; Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+#&gt; Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+#&gt; Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+#&gt; Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+#&gt; Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+#&gt; Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+#&gt; Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+#&gt; Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+#&gt; Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+#&gt; Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+#&gt; Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+#&gt; Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+#&gt; Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+#&gt; Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+#&gt; Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+#&gt; Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+#&gt; Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+#&gt; Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+#&gt; Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+#&gt; Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+#&gt; Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+#&gt; AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+#&gt; Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+#&gt; Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+#&gt; Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+#&gt; Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+#&gt; Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+#&gt; Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+#&gt; Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+#&gt; Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+#&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+#&gt; 
+#&gt; $variaveis
+#&gt; $variaveis$tratamento
+#&gt; [1] "gear"
+#&gt; 
+#&gt; $variaveis$bloco
+#&gt; [1] "carb"
+#&gt; 
+#&gt; $variaveis$resultado
+#&gt; [1] "hp"
+#&gt; 
+#&gt; 
+#&gt; $formula
+#&gt; hp ~ gear + carb
+#&gt; &lt;environment: 0x55f60feb1200&gt;
+#&gt; 
+#&gt; $modelos
+#&gt; $modelos$Modelo
+#&gt; Call:
+#&gt;    aov(formula = formula_, data = dados)
+#&gt; 
+#&gt; Terms:
+#&gt;                     gear     carb Residuals
+#&gt; Sum of Squares  64212.94 63298.08  18215.85
+#&gt; Deg. of Freedom        2        5        24
+#&gt; 
+#&gt; Residual standard error: 27.54984
+#&gt; Estimated effects may be unbalanced
+#&gt; 
+#&gt; $modelos$fisher
+#&gt; $statistics
+#&gt;    MSerror Df     Mean       CV
+#&gt;   758.9939 24 146.6875 18.78132
+#&gt; 
+#&gt; $parameters
+#&gt;         test p.ajusted name.t ntr alpha
+#&gt;   Fisher-LSD      none   gear   3  0.05
+#&gt; 
+#&gt; $means
+#&gt;         hp       std  r       LCL      UCL Min Max    Q25 Q50 Q75
+#&gt; 3 176.1333  47.68927 15 161.45212 190.8145  97 245 150.00 180 210
+#&gt; 4  89.5000  25.89314 12  73.08591 105.9141  52 123  65.75  94 110
+#&gt; 5 195.6000 102.83385  5 170.17140 221.0286  91 335 113.00 175 264
+#&gt; 
+#&gt; $comparison
+#&gt;       difference pvalue signif.        LCL        UCL
+#&gt; 3 - 4   86.63333 0.0000     ***   64.61152 108.655148
+#&gt; 3 - 5  -19.46667 0.1839          -48.82909   9.895754
+#&gt; 4 - 5 -106.10000 0.0000     *** -136.36609 -75.833910
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$bonferroni
+#&gt; $statistics
+#&gt;    MSerror Df     Mean       CV
+#&gt;   758.9939 24 146.6875 18.78132
+#&gt; 
+#&gt; $parameters
+#&gt;         test  p.ajusted name.t ntr alpha
+#&gt;   Fisher-LSD bonferroni   gear   3  0.05
+#&gt; 
+#&gt; $means
+#&gt;         hp       std  r       LCL      UCL Min Max    Q25 Q50 Q75
+#&gt; 3 176.1333  47.68927 15 161.45212 190.8145  97 245 150.00 180 210
+#&gt; 4  89.5000  25.89314 12  73.08591 105.9141  52 123  65.75  94 110
+#&gt; 5 195.6000 102.83385  5 170.17140 221.0286  91 335 113.00 175 264
+#&gt; 
+#&gt; $comparison
+#&gt;       difference pvalue signif.        LCL       UCL
+#&gt; 3 - 4   86.63333 0.0000     ***   59.17256 114.09410
+#&gt; 3 - 5  -19.46667 0.5517          -56.08103  17.14770
+#&gt; 4 - 5 -106.10000 0.0000     *** -143.84122 -68.35878
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$tukey
+#&gt; $statistics
+#&gt;    MSerror Df     Mean       CV
+#&gt;   758.9939 24 146.6875 18.78132
+#&gt; 
+#&gt; $parameters
+#&gt;    test name.t ntr StudentizedRange alpha
+#&gt;   Tukey   gear   3         3.531697  0.05
+#&gt; 
+#&gt; $means
+#&gt;         hp       std  r Min Max    Q25 Q50 Q75
+#&gt; 3 176.1333  47.68927 15  97 245 150.00 180 210
+#&gt; 4  89.5000  25.89314 12  52 123  65.75  94 110
+#&gt; 5 195.6000 102.83385  5  91 335 113.00 175 264
+#&gt; 
+#&gt; $comparison
+#&gt;       difference pvalue signif.        LCL       UCL
+#&gt; 3 - 4   86.63333 0.0000     ***   59.98726 113.27941
+#&gt; 3 - 5  -19.46667 0.3728          -54.99477  16.06143
+#&gt; 4 - 5 -106.10000 0.0000     *** -142.72153 -69.47847
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$duncan
+#&gt; $statistics
+#&gt;    MSerror Df     Mean       CV
+#&gt;   758.9939 24 146.6875 18.78132
+#&gt; 
+#&gt; $parameters
+#&gt;     test name.t ntr alpha
+#&gt;   Duncan   gear   3  0.05
+#&gt; 
+#&gt; $duncan
+#&gt; NULL
+#&gt; 
+#&gt; $means
+#&gt;         hp       std  r Min Max    Q25 Q50 Q75
+#&gt; 3 176.1333  47.68927 15  97 245 150.00 180 210
+#&gt; 4  89.5000  25.89314 12  52 123  65.75  94 110
+#&gt; 5 195.6000 102.83385  5  91 335 113.00 175 264
+#&gt; 
+#&gt; $comparison
+#&gt;       difference pvalue signif.        LCL       UCL
+#&gt; 3 - 4   86.63333 0.0000     ***   59.16731 114.09936
+#&gt; 3 - 5  -19.46667 0.1565          -46.93269   7.99936
+#&gt; 4 - 5 -106.10000 0.0000     *** -134.94759 -77.25241
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; 
+#&gt; $fisher
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      3 - 4            86.63333        64.61152      108.655148  0.0000
+#&gt; 2      3 - 5           -19.46667       -48.82909        9.895754  0.1839
+#&gt; 3      4 - 5          -106.10000      -136.36609      -75.833910  0.0000
+#&gt; 
+#&gt; $bonferroni
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      3 - 4            86.63333        59.17256       114.09410  0.0000
+#&gt; 2      3 - 5           -19.46667       -56.08103        17.14770  0.5517
+#&gt; 3      4 - 5          -106.10000      -143.84122       -68.35878  0.0000
+#&gt; 
+#&gt; $tukey
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      3 - 4            86.63333        59.98726       113.27941  0.0000
+#&gt; 2      3 - 5           -19.46667       -54.99477        16.06143  0.3728
+#&gt; 3      4 - 5          -106.10000      -142.72153       -69.47847  0.0000
+#&gt; 
+#&gt; $duncan
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      3 - 4            86.63333        59.16731       114.09936  0.0000
+#&gt; 2      3 - 5           -19.46667       -46.93269         7.99936  0.1565
+#&gt; 3      4 - 5          -106.10000      -134.94759       -77.25241  0.0000
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "comparacao"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

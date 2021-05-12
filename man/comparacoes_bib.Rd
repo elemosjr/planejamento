@@ -2,7 +2,7 @@
 % Please edit documentation in R/comparacoes_bib.R
 \name{comparacoes_bib}
 \alias{comparacoes_bib}
-\title{Comparacoes BIBD}
+\title{Comparacoes multiplas para BIBD}
 \usage{
 comparacoes_bib(x, y, bloco = NULL, dados, alpha = 0.05, group = FALSE)
 }
@@ -20,8 +20,26 @@ comparacoes_bib(x, y, bloco = NULL, dados, alpha = 0.05, group = FALSE)
 \item{group}{Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos}
 }
 \value{
-comparacao_bib
+Objeto do tipo \code{comparacao_bib}, que contém:
+\itemize{
+\item \code{dados} Dados alimentados a função
+\item \code{variaveis} Lista com os nomes das variaveis
+\item \code{formula} Objeto \code{formula} usado para criar o modelo
+\item \code{modelos} Lista com todos os modelos criados
+\item \code{fisher} Dados das comparações de fisher
+\item \code{bonferroni} Dados das comparações de bonferroni
+\item \code{tukey} Dados das comparações de tukey
+\item \code{duncan} Dados das comparações de duncan
+\item \code{waller} Dados das comparações de waller
+\item \code{snk} Dados das comparações de snk
+}
 }
 \description{
 Análises múltiplas para ANOVA de delineamentos em blocos incompletos balanceados
+}
+\examples{
+
+bloco_incompleto(4, 6, 2)$dados ->.;
+ comparacoes_bib("Trat", "resultado", "bloco", .)
+ 
 }

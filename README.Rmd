@@ -54,8 +54,11 @@ comparacao$tukey %>% kable_()
 plot(comparacao, trat = TRUE)
 ```
 
+
+<!--
 # To Do
 
 - [x] Pkgdown
 - [x] README
-- [ ] Adicionar exemplos de cada funcao
+- [x] Adicionar exemplos de cada funcao
+-->

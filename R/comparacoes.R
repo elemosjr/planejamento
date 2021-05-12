@@ -1,4 +1,4 @@
-#' @title Comparacoes
+#' Comparacoes multiplas para DIC e RBCD
 #'
 #' @import agricolae
 #' @import dplyr
@@ -13,7 +13,20 @@
 #' @param alpha Nivel de significancia a ser utilizado, padrao 0.05
 #' @param group Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos
 #'
-#' @return comparacao
+#' @return Objeto do tipo `comparacao`, que contém:
+#' * `dados` Dados alimentados a função
+#' * `variaveis` Lista com os nomes das variaveis
+#' * `formula` Objeto `formula` usado para criar o modelo
+#' * `modelos` Lista com todos os modelos criados
+#' * `fisher` Dados das comparações de fisher
+#' * `bonferroni` Dados das comparações de bonferroni
+#' * `tukey` Dados das comparações de tukey
+#' * `duncan` Dados das comparações de duncan
+#'  
+#' @examples
+#' 
+#' comparacoes("gear", "hp", "carb", mtcars)
+#' 
 #' @export
 
 comparacoes <- function(x, y, bloco = NULL, dados,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/anova_bibd.R
 \name{anova_bibd}
 \alias{anova_bibd}
-\title{anova_bibd}
+\title{Gera valores de anova para BIBD}
 \usage{
 anova_bibd(dados, x, y, bloco)
 }
@@ -16,8 +16,14 @@ anova_bibd(dados, x, y, bloco)
 \item{bloco}{String com o nome da coluna dos blocos}
 }
 \value{
-list
+Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
 }
 \description{
 Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos incompletos balanceados
+}
+\examples{
+
+bloco_incompleto(4, 6, 2)$dados \%>\%
+ anova_bibd("Trat", "resultado", "bloco")
+
 }

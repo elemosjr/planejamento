@@ -20,8 +20,24 @@ comparacoes_lsqd(dados, x, y, linha, coluna, alpha = 0.05, group = FALSE)
 \item{bloco}{String com o nome da coluna dos blocos, manter NULL caso não hajam blocos}
 }
 \value{
-comparacao
+Objeto do tipo \code{comparacao_lsqd}, que contém:
+\itemize{
+\item \code{variaveis} Lista com os nomes das variaveis
+\item \code{formula} Objeto \code{formula} usado para criar o modelo
+\item \code{modelos} Lista com todos os modelos criados
+\item \code{dados} Dados alimentados a função
+\item \code{fisher} Dados das comparações de fisher
+\item \code{bonferroni} Dados das comparações de bonferroni
+\item \code{tukey} Dados das comparações de tukey
+\item \code{duncan} Dados das comparações de duncan
+}
 }
 \description{
 Análises múltiplas para ANOVA de delineamentos em quadrados latinos
+}
+\examples{
+
+quadrados_latinos(tibble(y = rnorm(16)), 1:4) \%>\%
+  comparacoes_lsqd("tratamento", "y", "linha", "coluna")
+ 
 }

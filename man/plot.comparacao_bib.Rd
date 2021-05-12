@@ -4,16 +4,24 @@
 \alias{plot.comparacao_bib}
 \title{Grafico de comparacoes (BIBD)}
 \usage{
-\method{plot}{comparacao_bib}(comparacao, trat = FALSE, ...)
+\method{plot}{comparacao_bib}(comparacao, trat = TRUE, ...)
 }
 \arguments{
-\item{comparacao}{Objeto de comparacao_bib resultado da funcao `comparacao_bib`}
+\item{comparacao}{Objeto de comparacao_bib resultado da funcao \code{comparacao_bib}}
 
 \item{trat}{Variavel logica, caso verdadeira retorna somente o grafico de comparacoes dos tratamentos}
 }
 \value{
-ggplot
+Ggplot com comparações
 }
 \description{
 Graficos de comparacoes multiplas de delineamentos em blocos incompletos balanceados
+}
+\examples{
+
+bloco_incompleto(4, 6, 2)$dados ->.;
+comparacao <- comparacoes_bib("Trat", "resultado", "bloco", .)
+
+plot(comparacao)  
+ 
 }

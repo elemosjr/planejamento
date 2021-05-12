@@ -1,4 +1,4 @@
-#' @title Comparacoes BIBD
+#' Comparacoes multiplas para BIBD
 #'
 #' @import agricolae
 #' @import dplyr
@@ -13,7 +13,23 @@
 #' @param alpha Nivel de significancia a ser utilizado, padrao 0.05
 #' @param group Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos
 #'
-#' @return comparacao_bib
+#' @return Objeto do tipo `comparacao_bib`, que contém:
+#' * `dados` Dados alimentados a função
+#' * `variaveis` Lista com os nomes das variaveis
+#' * `formula` Objeto `formula` usado para criar o modelo
+#' * `modelos` Lista com todos os modelos criados
+#' * `fisher` Dados das comparações de fisher
+#' * `bonferroni` Dados das comparações de bonferroni
+#' * `tukey` Dados das comparações de tukey
+#' * `duncan` Dados das comparações de duncan
+#' * `waller` Dados das comparações de waller
+#' * `snk` Dados das comparações de snk
+#'  
+#' @examples 
+#' 
+#' bloco_incompleto(4, 6, 2)$dados ->.;
+#'  comparacoes_bib("Trat", "resultado", "bloco", .)
+#'  
 #' @export
 
 comparacoes_bib <- function(x, y, bloco = NULL, dados, alpha = 0.05, group = FALSE)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilidades.R
 \name{estimando_ausentes}
 \alias{estimando_ausentes}
-\title{Estimando ausentes bibd}
+\title{Estimando valores ausentes de BIBD}
 \usage{
 estimando_ausentes(dados, x, y, bloco)
 }
@@ -16,8 +16,14 @@ estimando_ausentes(dados, x, y, bloco)
 \item{bloco}{String com o nome da coluna dos blocos}
 }
 \value{
-data.frame
+Data frame com os valores estimados
 }
 \description{
 Estima os valores ausentes de um delineamento incompleto balanceado
+}
+\examples{
+
+bloco_incompleto(4, 6, 2)$dados \%>\%
+  estimando_ausentes("Trat", "resultado", "bloco")
+
 }

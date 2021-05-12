@@ -2,7 +2,7 @@
 % Please edit documentation in R/anova_lsqd.R
 \name{anova_lsqd}
 \alias{anova_lsqd}
-\title{anova_lsqd}
+\title{Gera valores de anova para Quadrados Latinos}
 \usage{
 anova_lsqd(dados, x, y, linha, coluna)
 }
@@ -18,8 +18,14 @@ anova_lsqd(dados, x, y, linha, coluna)
 \item{coluna}{String com o nome da coluna do data frame que representa a coluna do quadrado latino}
 }
 \value{
-list
+Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
 }
 \description{
 Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadrados latinos
+}
+\examples{
+
+quadrados_latinos(tibble(y = rnorm(16)), 1:4) \%>\%
+ anova_lsqd("tratamento", "y", "linha", "coluna")
+
 }

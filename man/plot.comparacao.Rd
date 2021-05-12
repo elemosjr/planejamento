@@ -4,16 +4,21 @@
 \alias{plot.comparacao}
 \title{Grafico de comparacoes (DIC, RBCD)}
 \usage{
-\method{plot}{comparacao}(comparacao, trat = FALSE, ...)
+\method{plot}{comparacao}(comparacao, trat = TRUE, ...)
 }
 \arguments{
-\item{comparacao}{Objeto de comparacao resultado da funcao `comparacao`}
+\item{comparacao}{Objeto de comparacao resultado da funcao \code{comparacao}}
 
 \item{trat}{Variavel logica, caso verdadeira retorna somente o grafico de comparacoes dos tratamentos}
 }
 \value{
-ggplot
+Ggplot com comparações
 }
 \description{
 Graficos de comparacoes multiplas de delineamentos inteiramente casualizados e delineamentos em blocos complettamente casualizados
+}
+\examples{
+
+plot(comparacoes("gear", "hp", "carb", mtcars))
+
 }

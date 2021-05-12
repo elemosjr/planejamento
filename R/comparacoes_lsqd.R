@@ -13,7 +13,21 @@
 #' @param alpha Nivel de significancia a ser utilizado, padrao 0.05
 #' @param group Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos
 #'
-#' @return comparacao
+#' @return Objeto do tipo `comparacao_lsqd`, que contém:
+#' * `variaveis` Lista com os nomes das variaveis
+#' * `formula` Objeto `formula` usado para criar o modelo
+#' * `modelos` Lista com todos os modelos criados
+#' * `dados` Dados alimentados a função
+#' * `fisher` Dados das comparações de fisher
+#' * `bonferroni` Dados das comparações de bonferroni
+#' * `tukey` Dados das comparações de tukey
+#' * `duncan` Dados das comparações de duncan
+#'  
+#' @examples 
+#' 
+#' quadrados_latinos(tibble(y = rnorm(16)), 1:4) %>%
+#'   comparacoes_lsqd("tratamento", "y", "linha", "coluna")
+#'  
 #' @export
 
 comparacoes_lsqd <- function(dados, x, y, linha, coluna,  alpha = 0.05, group = FALSE)

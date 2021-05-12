@@ -2,7 +2,7 @@
 % Please edit documentation in R/comparacoes.R
 \name{comparacoes}
 \alias{comparacoes}
-\title{Comparacoes}
+\title{Comparacoes multiplas para DIC e RBCD}
 \usage{
 comparacoes(x, y, bloco = NULL, dados, alpha = 0.05, group = FALSE)
 }
@@ -20,8 +20,23 @@ comparacoes(x, y, bloco = NULL, dados, alpha = 0.05, group = FALSE)
 \item{group}{Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos}
 }
 \value{
-comparacao
+Objeto do tipo \code{comparacao}, que contém:
+\itemize{
+\item \code{dados} Dados alimentados a função
+\item \code{variaveis} Lista com os nomes das variaveis
+\item \code{formula} Objeto \code{formula} usado para criar o modelo
+\item \code{modelos} Lista com todos os modelos criados
+\item \code{fisher} Dados das comparações de fisher
+\item \code{bonferroni} Dados das comparações de bonferroni
+\item \code{tukey} Dados das comparações de tukey
+\item \code{duncan} Dados das comparações de duncan
+}
 }
 \description{
 Análises múltiplas para ANOVA de delineamentos inteiramente casualizados (DIC) e para delineamentos em blocos completos casualizados
+}
+\examples{
+
+comparacoes("gear", "hp", "carb", mtcars)
+
 }

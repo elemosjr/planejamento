@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Blocos incompletos — bloco_incompleto • planejamento</title>
+<title>Simula delineamento de blocos incompletos — bloco_incompleto • planejamento</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Blocos incompletos — bloco_incompleto" />
-<meta property="og:description" content="Simula um delineamento em blocos incompletos" />
+<meta property="og:title" content="Simula delineamento de blocos incompletos — bloco_incompleto" />
+<meta property="og:description" content="Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições." />
 
 
 
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Blocos incompletos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/utilidades.R'><code>R/utilidades.R</code></a></small>
+    <h1>Simula delineamento de blocos incompletos</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/bloco_incompleto.R'><code>R/bloco_incompleto.R</code></a></small>
     <div class="hidden name"><code>bloco_incompleto.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Simula um delineamento em blocos incompletos</p>
+    <p>Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições.</p>
     </div>
 
     <pre class="usage"><span class='fu'>bloco_incompleto</span><span class='op'>(</span><span class='va'>ntrat</span>, <span class='va'>nbloco</span>, nrep <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
@@ -138,8 +138,66 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list</p>
+    <p>Objeto de tipo lista com os elementos:</p><ul>
+<li><p><strong>dados</strong> Dados simulados em formato longo</p></li>
+<li><p><strong>dados_matriz</strong> Dados simulados em formato largo, como matiz</p></li>
+<li><p><strong>kable</strong> Texto em LaTeX da tabela pré-formatada</p></li>
+<li><p><strong>matriz</strong> Matriz dos dados simulados</p></li>
+</ul>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>bloco_incompleto</span><span class='op'>(</span><span class='fl'>8</span>, <span class='fl'>14</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados_matriz</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='kable_.html'>kable_</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
+#&gt; 
+#&gt; | Trat | B01 | B02 | B03 | B04 | B05 | B06 | B07 | B08 | B09 | B10 | B11 | B12 | B13 | B14 |
+#&gt; |:----:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+#&gt; |  1   |  -  |  -  |  -  |  1  |  -  |  -  |  1  |  -  |  -  |  -  |  1  |  1  |  -  |  1  |
+#&gt; |  2   |  2  |  -  |  2  |  2  |  2  |  -  |  2  |  2  |  -  |  -  |  2  |  -  |  2  |  -  |
+#&gt; |  3   |  -  |  -  |  3  |  -  |  3  |  3  |  3  |  3  |  -  |  -  |  -  |  3  |  -  |  -  |
+#&gt; |  4   |  -  |  4  |  -  |  -  |  -  |  4  |  -  |  -  |  -  |  4  |  -  |  -  |  -  |  -  |
+#&gt; |  5   |  -  |  5  |  -  |  -  |  5  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  5  |  -  |
+#&gt; |  6   |  6  |  6  |  -  |  6  |  -  |  -  |  -  |  -  |  6  |  6  |  -  |  6  |  -  |  6  |
+#&gt; |  7   |  -  |  -  |  7  |  -  |  -  |  -  |  -  |  -  |  7  |  -  |  7  |  -  |  7  |  -  |
+#&gt; |  8   |  8  |  -  |  -  |  -  |  -  |  8  |  -  |  8  |  8  |  8  |  -  |  -  |  -  |  8  |</div><div class='input'>
+<span class='fu'>bloco_incompleto</span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $dados
+#&gt; <span style='color: #949494;'># A tibble: 24 x 3</span><span>
+#&gt;     Trat resultado bloco
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     1        </span><span style='color: #BB0000;'>NA</span><span> B1   
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     2        </span><span style='color: #BB0000;'>NA</span><span> B1   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     3         3 B1   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     4         4 B1   
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>     1         1 B2   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>     2        </span><span style='color: #BB0000;'>NA</span><span> B2   
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     3        </span><span style='color: #BB0000;'>NA</span><span> B2   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     4         4 B2   
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     1        </span><span style='color: #BB0000;'>NA</span><span> B3   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>     2         2 B3   
+#&gt; </span><span style='color: #949494;'># … with 14 more rows</span><span>
+#&gt; 
+#&gt; $dados_matriz
+#&gt; </span><span style='color: #949494;'># A tibble: 4 x 7</span><span>
+#&gt;    Trat B1    B2    B3    B4    B5    B6   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 -     1     -     1     -     1    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 -     -     2     -     2     2    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 3     -     3     3     -     -    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 4     4     -     -     4     -    
+#&gt; 
+#&gt; $kable
+#&gt; [1] "\n\\begin{tabular}{c|cc}\n\\hline\nTrat &amp; resultado &amp; bloco\\\\\n1 &amp; NA &amp; B1\\\\\n2 &amp; NA &amp; B1\\\\\n3 &amp; 3 &amp; B1\\\\\n4 &amp; 4 &amp; B1\\\\\n1 &amp; 1 &amp; B2\\\\\n2 &amp; NA &amp; B2\\\\\n3 &amp; NA &amp; B2\\\\\n4 &amp; 4 &amp; B2\\\\\n1 &amp; NA &amp; B3\\\\\n2 &amp; 2 &amp; B3\\\\\n3 &amp; 3 &amp; B3\\\\\n4 &amp; NA &amp; B3\\\\\n1 &amp; 1 &amp; B4\\\\\n2 &amp; NA &amp; B4\\\\\n3 &amp; 3 &amp; B4\\\\\n4 &amp; NA &amp; B4\\\\\n1 &amp; NA &amp; B5\\\\\n2 &amp; 2 &amp; B5\\\\\n3 &amp; NA &amp; B5\\\\\n4 &amp; 4 &amp; B5\\\\\n1 &amp; 1 &amp; B6\\\\\n2 &amp; 2 &amp; B6\\\\\n3 &amp; NA &amp; B6\\\\\n4 &amp; NA &amp; B6\\\\\n\\end{tabular}"
+#&gt; 
+#&gt; $matriz
+#&gt;    1  2  3  4  5  6
+#&gt; 1 NA  1 NA  1 NA  1
+#&gt; 2 NA NA  2 NA  2  2
+#&gt; 3  3 NA  3  3 NA NA
+#&gt; 4  4  4 NA NA  4 NA
+#&gt; </div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

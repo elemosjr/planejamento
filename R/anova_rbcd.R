@@ -1,4 +1,4 @@
-#' @title anova_rbcd
+#' Gera valores de anova para RBCD
 #'
 #' @description Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos completamente casualizados
 #'
@@ -10,7 +10,12 @@
 #' @import glue
 #' @import tidyr
 #'
-#' @return list
+#' @return Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
+#'
+#' @examples
+#'
+#' anova_rbcd(mtcars, "gear", "hp", "carb")
+#'
 #' @export
 
 anova_rbcd <- function(dados, x, y, bloco)

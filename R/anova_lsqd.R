@@ -1,4 +1,4 @@
-#' @title anova_lsqd
+#' Gera valores de anova para Quadrados Latinos
 #'
 #' @description Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadrados latinos
 #'
@@ -11,7 +11,13 @@
 #' @import glue
 #' @import tidyr
 #'
-#' @return list
+#' @return Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
+#' 
+#' @examples
+#'
+#' quadrados_latinos(tibble(y = rnorm(16)), 1:4) %>%
+#'  anova_lsqd("tratamento", "y", "linha", "coluna")
+#'
 #' @export
 
 anova_lsqd <- function(dados, x, y, linha, coluna) # dados tem que ter NA

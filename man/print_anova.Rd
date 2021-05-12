@@ -10,8 +10,13 @@ print_anova(model)
 \item{model}{Modelo de anova}
 }
 \value{
-character
+Kable
 }
 \description{
 Organiza e printa uma tabela de anova em formato de LaTeX
+}
+\examples{
+
+aov(hp ~ cyl, data = mtcars) \%>\% print_anova()
+
 }

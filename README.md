@@ -22,10 +22,10 @@ bloco_incompleto(4, 6, 2)$dados %>% kable_()
 
 | Trat | B1  | B2  | B3  | B4  | B5  | B6  |
 |:----:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  1   | \-  | \-  |  1  |  1  |  1  | \-  |
-|  2   |  2  |  2  |  2  | \-  | \-  | \-  |
-|  3   | \-  |  3  | \-  |  3  | \-  |  3  |
-|  4   |  4  | \-  | \-  | \-  |  4  |  4  |
+|  1   |  1  | \-  | \-  |  1  |  1  | \-  |
+|  2   |  2  |  2  | \-  | \-  | \-  |  2  |
+|  3   | \-  |  3  |  3  | \-  |  3  | \-  |
+|  4   | \-  | \-  |  4  |  4  | \-  |  4  |
 
 ``` r
 # Quadrados Latinos
@@ -36,12 +36,12 @@ head(quadrado) %>% kable_()
 
 |  x  | tratamento | coluna | linha |
 |:---:|:----------:|:------:|:-----:|
-|  1  |     c      |   1    |   1   |
-|  2  |     d      |   1    |   2   |
-|  3  |     a      |   1    |   3   |
-|  4  |     b      |   1    |   4   |
-|  5  |     d      |   2    |   1   |
-|  6  |     a      |   2    |   2   |
+|  1  |     d      |   1    |   1   |
+|  2  |     c      |   1    |   2   |
+|  3  |     b      |   1    |   3   |
+|  4  |     a      |   1    |   4   |
+|  5  |     a      |   2    |   1   |
+|  6  |     d      |   2    |   2   |
 
 ``` r
 quadrado %>% select(-x) %>%
@@ -50,10 +50,10 @@ quadrado %>% select(-x) %>%
 
 | linha |  1  |  2  |  3  |  4  |
 |:-----:|:---:|:---:|:---:|:---:|
-|   1   |  c  |  d  |  a  |  b  |
-|   2   |  d  |  a  |  b  |  c  |
-|   3   |  a  |  b  |  c  |  d  |
-|   4   |  b  |  c  |  d  |  a  |
+|   1   |  d  |  a  |  b  |  c  |
+|   2   |  c  |  d  |  a  |  b  |
+|   3   |  b  |  c  |  d  |  a  |
+|   4   |  a  |  b  |  c  |  d  |
 
 ``` r
 ## ANOVA e comparações múltiplas
@@ -91,8 +91,10 @@ plot(comparacao, trat = TRUE)
 
 ![](README_files/figure-gfm/exemplo-1.png)<!-- -->
 
+<!--
 # To Do
 
--   [x] Pkgdown
--   [x] README
--   [ ] Adicionar exemplos de cada funcao
+- [x] Pkgdown
+- [x] README
+- [x] Adicionar exemplos de cada funcao
+-->

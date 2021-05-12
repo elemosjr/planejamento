@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comparacoes BIBD — comparacoes_bib • planejamento</title>
+<title>Comparacoes multiplas para BIBD — comparacoes_bib • planejamento</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Comparacoes BIBD — comparacoes_bib" />
+<meta property="og:title" content="Comparacoes multiplas para BIBD — comparacoes_bib" />
 <meta property="og:description" content="Análises múltiplas para ANOVA de delineamentos em blocos incompletos balanceados" />
 
 
@@ -108,7 +108,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Comparacoes BIBD</h1>
+    <h1>Comparacoes multiplas para BIBD</h1>
     <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/comparacoes_bib.R'><code>R/comparacoes_bib.R</code></a></small>
     <div class="hidden name"><code>comparacoes_bib.Rd</code></div>
     </div>
@@ -150,8 +150,285 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>comparacao_bib</p>
+    <p>Objeto do tipo <code>comparacao_bib</code>, que contém:</p><ul>
+<li><p><code>dados</code> Dados alimentados a função</p></li>
+<li><p><code>variaveis</code> Lista com os nomes das variaveis</p></li>
+<li><p><code>formula</code> Objeto <code>formula</code> usado para criar o modelo</p></li>
+<li><p><code>modelos</code> Lista com todos os modelos criados</p></li>
+<li><p><code>fisher</code> Dados das comparações de fisher</p></li>
+<li><p><code>bonferroni</code> Dados das comparações de bonferroni</p></li>
+<li><p><code>tukey</code> Dados das comparações de tukey</p></li>
+<li><p><code>duncan</code> Dados das comparações de duncan</p></li>
+<li><p><code>waller</code> Dados das comparações de waller</p></li>
+<li><p><code>snk</code> Dados das comparações de snk</p></li>
+</ul>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='bloco_incompleto.html'>bloco_incompleto</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>-&gt;</span><span class='va'>.</span>;
+ <span class='fu'>comparacoes_bib</span><span class='op'>(</span><span class='st'>"Trat"</span>, <span class='st'>"resultado"</span>, <span class='st'>"bloco"</span>, <span class='va'>.</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: attempting model selection on an essentially perfect fit is nonsense</span></div><div class='output co'>#&gt; $variaveis
+#&gt; $variaveis$tratamento
+#&gt; [1] "Trat"
+#&gt; 
+#&gt; $variaveis$bloco
+#&gt; [1] "bloco"
+#&gt; 
+#&gt; $variaveis$resultado
+#&gt; [1] "resultado"
+#&gt; 
+#&gt; 
+#&gt; $formula
+#&gt; resultado ~ Trat + bloco
+#&gt; &lt;environment: 0x55f60ec9bb58&gt;
+#&gt; 
+#&gt; $modelos
+#&gt; $modelos$Modelo
+#&gt; Call:
+#&gt;    aov(formula = formula_, data = dados)
+#&gt; 
+#&gt; Terms:
+#&gt;                 Trat bloco Residuals
+#&gt; Sum of Squares    15     0         0
+#&gt; Deg. of Freedom    3     5         3
+#&gt; 
+#&gt; Residual standard error: 1.786179e-16
+#&gt; Estimated effects may be unbalanced
+#&gt; 
+#&gt; $modelos$Modelo_aj
+#&gt; Single term deletions
+#&gt; 
+#&gt; Model:
+#&gt; resultado ~ Trat + bloco
+#&gt;        Df Sum of Sq RSS     AIC    F value  Pr(&gt;F)    
+#&gt; &lt;none&gt;                0 -868.91                       
+#&gt; Trat    3        10  10    9.81 1.0448e+32 &lt; 2e-16 ***
+#&gt; bloco   5         0   0 -844.82 9.6767e+00 0.04541 *  
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#&gt; 
+#&gt; $modelos$lsd
+#&gt; $parameters
+#&gt;   lambda treatmeans blockSize blocks r alpha test
+#&gt;        1          4         2      6 3  0.05  BIB
+#&gt; 
+#&gt; $statistics
+#&gt;   Mean Efficiency           CV
+#&gt;    2.5  0.6666667 2.773336e-14
+#&gt; 
+#&gt; $comparison
+#&gt;       Difference pvalue sig.
+#&gt; 1 - 2         -1      0  ***
+#&gt; 1 - 3         -2      0  ***
+#&gt; 1 - 4         -3      0  ***
+#&gt; 2 - 3         -1      0  ***
+#&gt; 2 - 4         -2      0  ***
+#&gt; 3 - 4         -1      0  ***
+#&gt; 
+#&gt; $means
+#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
+#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
+#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
+#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
+#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$tukey
+#&gt; $parameters
+#&gt;   lambda treatmeans blockSize blocks r alpha test
+#&gt;        1          4         2      6 3  0.05  BIB
+#&gt; 
+#&gt; $statistics
+#&gt;   Mean Efficiency           CV
+#&gt;    2.5  0.6666667 2.773336e-14
+#&gt; 
+#&gt; $comparison
+#&gt;       Difference pvalue sig.
+#&gt; 1 - 2         -1      0  ***
+#&gt; 1 - 3         -2      0  ***
+#&gt; 1 - 4         -3      0  ***
+#&gt; 2 - 3         -1      0  ***
+#&gt; 2 - 4         -2      0  ***
+#&gt; 3 - 4         -1      0  ***
+#&gt; 
+#&gt; $means
+#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
+#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
+#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
+#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
+#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$duncan
+#&gt; $parameters
+#&gt;   lambda treatmeans blockSize blocks r alpha test
+#&gt;        1          4         2      6 3  0.05  BIB
+#&gt; 
+#&gt; $statistics
+#&gt;   Mean Efficiency           CV
+#&gt;    2.5  0.6666667 2.773336e-14
+#&gt; 
+#&gt; $comparison
+#&gt;       Difference pvalue sig.
+#&gt; 1 - 2         -1      0  ***
+#&gt; 1 - 3         -2      0  ***
+#&gt; 1 - 4         -3      0  ***
+#&gt; 2 - 3         -1      0  ***
+#&gt; 2 - 4         -2      0  ***
+#&gt; 3 - 4         -1      0  ***
+#&gt; 
+#&gt; $means
+#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
+#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
+#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
+#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
+#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$waller
+#&gt; $parameters
+#&gt;   lambda treatmeans blockSize blocks r alpha test
+#&gt;        1          4         2      6 3  0.05  BIB
+#&gt; 
+#&gt; $statistics
+#&gt;   Mean Efficiency           CV
+#&gt;    2.5  0.6666667 2.773336e-14
+#&gt; 
+#&gt; $comparison
+#&gt;       Difference significant
+#&gt; 1 - 2         -1        TRUE
+#&gt; 1 - 3         -2        TRUE
+#&gt; 1 - 4         -3        TRUE
+#&gt; 2 - 3         -1        TRUE
+#&gt; 2 - 4         -2        TRUE
+#&gt; 3 - 4         -1        TRUE
+#&gt; 
+#&gt; $means
+#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
+#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
+#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
+#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
+#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$snk
+#&gt; $parameters
+#&gt;   lambda treatmeans blockSize blocks r alpha test
+#&gt;        1          4         2      6 3  0.05  BIB
+#&gt; 
+#&gt; $statistics
+#&gt;   Mean Efficiency           CV
+#&gt;    2.5  0.6666667 2.773336e-14
+#&gt; 
+#&gt; $comparison
+#&gt;       Difference pvalue sig.
+#&gt; 1 - 2         -1      0  ***
+#&gt; 1 - 3         -2      0  ***
+#&gt; 1 - 4         -3      0  ***
+#&gt; 2 - 3         -1      0  ***
+#&gt; 2 - 4         -2      0  ***
+#&gt; 3 - 4         -1      0  ***
+#&gt; 
+#&gt; $means
+#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
+#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
+#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
+#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
+#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; 
+#&gt; $dados
+#&gt; <span style='color: #949494;'># A tibble: 12 x 3</span><span>
+#&gt;    Trat  resultado bloco
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2             2 B1   
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 4             4 B1   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1             1 B2   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2             2 B2   
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2             2 B3   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 3             3 B3   
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1             1 B4   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 3             3 B4   
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1             1 B5   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 4             4 B5   
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> 3             3 B6   
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> 4             4 B6   
+#&gt; 
+#&gt; $lsd
+#&gt;   Comparação Diferença de Médias P-valor
+#&gt; 1      1 - 2                  -1       0
+#&gt; 2      1 - 3                  -2       0
+#&gt; 3      1 - 4                  -3       0
+#&gt; 4      2 - 3                  -1       0
+#&gt; 5      2 - 4                  -2       0
+#&gt; 6      3 - 4                  -1       0
+#&gt; 
+#&gt; $tukey
+#&gt;   Comparação Diferença de Médias P-valor
+#&gt; 1      1 - 2                  -1       0
+#&gt; 2      1 - 3                  -2       0
+#&gt; 3      1 - 4                  -3       0
+#&gt; 4      2 - 3                  -1       0
+#&gt; 5      2 - 4                  -2       0
+#&gt; 6      3 - 4                  -1       0
+#&gt; 
+#&gt; $duncan
+#&gt;   Comparação Diferença de Médias P-valor
+#&gt; 1      1 - 2                  -1       0
+#&gt; 2      1 - 3                  -2       0
+#&gt; 3      1 - 4                  -3       0
+#&gt; 4      2 - 3                  -1       0
+#&gt; 5      2 - 4                  -2       0
+#&gt; 6      3 - 4                  -1       0
+#&gt; 
+#&gt; $waller
+#&gt;   Comparação Diferença de Médias Significante
+#&gt; 1      1 - 2                  -1         TRUE
+#&gt; 2      1 - 3                  -2         TRUE
+#&gt; 3      1 - 4                  -3         TRUE
+#&gt; 4      2 - 3                  -1         TRUE
+#&gt; 5      2 - 4                  -2         TRUE
+#&gt; 6      3 - 4                  -1         TRUE
+#&gt; 
+#&gt; $snk
+#&gt;   Comparação Diferença de Médias P-valor
+#&gt; 1      1 - 2                  -1       0
+#&gt; 2      1 - 3                  -2       0
+#&gt; 3      1 - 4                  -3       0
+#&gt; 4      2 - 3                  -1       0
+#&gt; 5      2 - 4                  -2       0
+#&gt; 6      3 - 4                  -1       0
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "comparacao_bib"</div><div class='input'> 
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

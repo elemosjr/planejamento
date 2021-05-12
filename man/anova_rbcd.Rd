@@ -2,7 +2,7 @@
 % Please edit documentation in R/anova_rbcd.R
 \name{anova_rbcd}
 \alias{anova_rbcd}
-\title{anova_rbcd}
+\title{Gera valores de anova para RBCD}
 \usage{
 anova_rbcd(dados, x, y, bloco)
 }
@@ -16,8 +16,13 @@ anova_rbcd(dados, x, y, bloco)
 \item{bloco}{String com o nome da coluna dos blocos}
 }
 \value{
-list
+Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
 }
 \description{
 Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos completamente casualizados
+}
+\examples{
+
+anova_rbcd(mtcars, "gear", "hp", "carb")
+
 }

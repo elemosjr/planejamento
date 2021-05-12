@@ -4,15 +4,18 @@ pkginstall <- function(pkg) if(!require(pkg)) install.packages(pkg)
 {
   if(!require("tidyverse")) install.packages("tidyverse")
   if(!require("knitr")) install.packages("knitr")
+  if(!require("glue")) install.packages("glue")
   library("tidyverse")
   library("knitr")
+  library("glue")
 }
 
-##' @import tidyverse
-##' @import knitr
+#' @import tidyverse
+#' @import knitr
+#' @md
 {}
 
-#' @title Kable_
+#' Kable pre configurada
 #'
 #' @import knitr
 #'
@@ -20,12 +23,17 @@ pkginstall <- function(pkg) if(!require(pkg)) install.packages(pkg)
 #'
 #' @param x Data frame a ser printado
 #'
-#' @return character
+#' @return Kable com colunas centralizadas
+#' 
+#' @examples 
+#' 
+#' kable_(mtcars)
+#' 
 #' @export
 
 kable_ <- function(x) kable(x, align = rep("c", ncol(x)))
 
-#' @title Print Anova
+#' Print Anova
 #'
 #' @import broom
 #' @import dplyr
@@ -34,7 +42,12 @@ kable_ <- function(x) kable(x, align = rep("c", ncol(x)))
 #'
 #' @param model Modelo de anova
 #'
-#' @return character
+#' @return Kable
+#' 
+#' @examples 
+#' 
+#' aov(hp ~ cyl, data = mtcars) %>% print_anova()
+#' 
 #' @export
 
 print_anova <- function(model)
@@ -50,113 +63,8 @@ print_anova <- function(model)
     kable_()
 }
 
-#' @title Quadrados latinos
-#'
-#' @import dplyr
-#'
-#' @description Simula um delineamento em quadrados latinos a partir de um banco de dados
-#'
-#' @param dados Data frame com os resultados
-#' @param tratamentos Vetor com fatores dos tratamentos
-#'
-#' @return data.frame
-#' @export
 
-quadrados_latinos <- function(dados, tratamentos)
-{
-  n <- length(tratamentos)
-  ordem <- matrix(NA, n, n)
-  
-  for (i in 1:n) {
-    for (j in 1:n) {
-      k <- i + j - 1
-      if (k > n) k <- i + j - n - 1
-      ordem[i, j] <- k
-    }
-  }
-  
-  dados %>%
-    bind_cols(tibble(tratamento = tratamentos[ordem[sample(1:n, n),]])) %>%
-    mutate(coluna = sort(rep(1:n, n)),
-           linha = rep(1:n, n))
-}
-
-
-#' @title Blocos incompletos
-#'
-#' @import stringr
-#' @import dplyr
-#' @import tidyr
-#'
-#' @description Simula um delineamento em blocos incompletos
-#'
-#' @param ntrat Numero de tratamentos a serem simulados
-#' @param nbloco Numero de blocos a serem simulados
-#' @param nrep Numero de repeticoes a serem simuladas, caso haja, padrao = NULL
-#'
-#' @return list
-#' @export
-
-bloco_incompleto <- function(ntrat, nbloco, nrep = NULL)
-{
-  if(is.null(nrep)) nrep <- ntrat
-  
-  n_na <- ntrat - nrep
-  
-  combinacoes <- combn(1:ntrat, n_na)
-  
-  rand <- combinacoes[,sample(1:ncol(combinacoes), nbloco)]
-  
-  trat <- as.factor(rep(1:ntrat, nbloco))
-  
-  for(i in 1:nbloco) rand[,i] <- rand[,i] + ntrat * (i - 1)
-  
-  trat[rand] <- NA
-  
-  ret_ <- list()
-  
-  bloco <- sort(rep(1:nbloco, ntrat))
-  sapply(sort(rep(1:nbloco, ntrat)),
-         function(x) nchar(x) != nchar(max(bloco))) ->.;
-
-  bloco[.] <- bloco[.] %>%
-    sapply(function(x) paste0(paste0(rep("0", nchar(max(bloco)) - 1),
-                                     collapse = ""), x))
-  
-  ret_$dados_originais <- tibble(Trat = rep(1:ntrat, nbloco),
-                       resultado = trat,
-                       bloco = paste0("B", bloco))
-  
-  ret_$dados <- ret_$dados_originais %>%
-    mutate(resultado = ifelse(is.na(resultado), "-", as.character(resultado))) %>%
-    spread(bloco, resultado) 
-
-  class(ret_$dados) <- c(class(ret_$dados), "bloco_incompleto")
-  
-  alinhamento <- rep("c", ncol(ret_$dados))
-  
-  alinhamento_novo <- paste0("{c|", paste0(alinhamento[-1],
-                                           collapse = ""), "}\\n\\\\hline")
-  
-  ret_$kable <- kable(ret_$dados, "latex", align = alinhamento) %>%
-    as.character() %>%
-    str_replace_all("\\n\\\\hline", "") %>%
-    str_replace(paste0("\\{", paste0(alinhamento, collapse = "\\|"), "\\}"),
-                paste0("{c|", paste0(alinhamento[-1], collapse = ""), "}\\\n\\\\hline"))
-  
-  matriz <- ret_$dados_originais %>%
-    .$resultado %>% matrix(ntrat, nbloco)
-  
-  rownames(matriz) <- 1:ntrat
-  colnames(matriz) <- 1:nbloco
-  
-  ret_$matriz <- matriz
-  
-  ret_
-}
-
-
-#' @title Estimando ausentes bibd
+#' Estimando valores ausentes de BIBD
 #'
 #' @description Estima os valores ausentes de um delineamento incompleto balanceado
 #'
@@ -165,7 +73,13 @@ bloco_incompleto <- function(ntrat, nbloco, nrep = NULL)
 #' @param y String com o nome da coluna dos resultados
 #' @param bloco String com o nome da coluna dos blocos
 #'
-#' @return data.frame
+#' @return Data frame com os valores estimados
+#' 
+#' @examples 
+#' 
+#' bloco_incompleto(4, 6, 2)$dados %>%
+#'   estimando_ausentes("Trat", "resultado", "bloco")
+#' 
 #' @export
 
 estimando_ausentes <- function(dados, x, y, bloco)

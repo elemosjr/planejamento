@@ -7,11 +7,19 @@
 \method{plot}{comparacao_lsqd}(comparacao, ...)
 }
 \arguments{
-\item{comparacao}{Objeto de comparacao_lsqd resultado da funcao `comparacao_lsqd`}
+\item{comparacao}{Objeto de comparacao_lsqd resultado da funcao \code{comparacao_lsqd}}
 }
 \value{
-ggplot
+Ggplot com comparações
 }
 \description{
 Graficos de comparacoes multiplas de delineamentos em quadrados latinos
+}
+\examples{
+
+comparacao <- quadrados_latinos(tibble(y = rnorm(16)), 1:4) \%>\%
+  comparacoes_lsqd("tratamento", "y", "linha", "coluna")
+  
+plot(comparacao)
+
 }

@@ -150,8 +150,254 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>comparacao</p>
+    <p>Objeto do tipo <code>comparacao_lsqd</code>, que contém:</p><ul>
+<li><p><code>variaveis</code> Lista com os nomes das variaveis</p></li>
+<li><p><code>formula</code> Objeto <code>formula</code> usado para criar o modelo</p></li>
+<li><p><code>modelos</code> Lista com todos os modelos criados</p></li>
+<li><p><code>dados</code> Dados alimentados a função</p></li>
+<li><p><code>fisher</code> Dados das comparações de fisher</p></li>
+<li><p><code>bonferroni</code> Dados das comparações de bonferroni</p></li>
+<li><p><code>tukey</code> Dados das comparações de tukey</p></li>
+<li><p><code>duncan</code> Dados das comparações de duncan</p></li>
+</ul>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='quadrados_latinos.html'>quadrados_latinos</a></span><span class='op'>(</span><span class='fu'>tibble</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>comparacoes_lsqd</span><span class='op'>(</span><span class='st'>"tratamento"</span>, <span class='st'>"y"</span>, <span class='st'>"linha"</span>, <span class='st'>"coluna"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $variaveis
+#&gt; $variaveis$tratamento
+#&gt; [1] "tratamento"
+#&gt; 
+#&gt; $variaveis$linha
+#&gt; [1] "linha"
+#&gt; 
+#&gt; $variaveis$coluna
+#&gt; [1] "coluna"
+#&gt; 
+#&gt; $variaveis$resultado
+#&gt; [1] "y"
+#&gt; 
+#&gt; 
+#&gt; $formula
+#&gt; y ~ tratamento + linha + coluna
+#&gt; &lt;environment: 0x55f60e519820&gt;
+#&gt; 
+#&gt; $modelos
+#&gt; $modelos$Modelo
+#&gt; Call:
+#&gt;    aov(formula = formula_, data = dados)
+#&gt; 
+#&gt; Terms:
+#&gt;                 tratamento    linha   coluna Residuals
+#&gt; Sum of Squares    0.235990 5.054071 3.613504  4.994708
+#&gt; Deg. of Freedom          3        3        3         6
+#&gt; 
+#&gt; Residual standard error: 0.9123877
+#&gt; Estimated effects may be unbalanced
+#&gt; 
+#&gt; $modelos$fisher
+#&gt; $statistics
+#&gt;     MSerror Df      Mean       CV  t.value      LSD
+#&gt;   0.8324514  6 0.1855902 491.6142 2.446912 1.578639
+#&gt; 
+#&gt; $parameters
+#&gt;         test p.ajusted     name.t ntr alpha
+#&gt;   Fisher-LSD      none tratamento   4  0.05
+#&gt; 
+#&gt; $means
+#&gt;            y       std r        LCL      UCL        Min       Max        Q25
+#&gt; 1 0.03945468 0.8034924 4 -1.0768115 1.155721 -0.7020820 0.9763418 -0.5904491
+#&gt; 2 0.20107459 1.2886263 4 -0.9151916 1.317341 -1.0405791 1.4051089 -0.8432721
+#&gt; 3 0.13077553 1.2578007 4 -0.9854907 1.247042 -1.5665145 1.1465005 -0.4492419
+#&gt; 4 0.37105592 0.8160111 4 -0.7452103 1.487322 -0.7954609 0.9733158  0.1112177
+#&gt;           Q50       Q75
+#&gt; 1 -0.05822054 0.5716833
+#&gt; 2  0.21988430 1.2642310
+#&gt; 3  0.47155805 1.0515754
+#&gt; 4  0.65318443 0.9130226
+#&gt; 
+#&gt; $comparison
+#&gt;        difference pvalue signif.       LCL      UCL
+#&gt; 1 - 2 -0.16161991 0.8105         -1.740259 1.417019
+#&gt; 1 - 3 -0.09132085 0.8921         -1.669960 1.487318
+#&gt; 1 - 4 -0.33160124 0.6256         -1.910240 1.247038
+#&gt; 2 - 3  0.07029906 0.9168         -1.508340 1.648938
+#&gt; 2 - 4 -0.16998133 0.8010         -1.748620 1.408657
+#&gt; 3 - 4 -0.24028039 0.7224         -1.818919 1.338358
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$bonferroni
+#&gt; $statistics
+#&gt;     MSerror Df      Mean       CV  t.value     MSD
+#&gt;   0.8324514  6 0.1855902 491.6142 3.862991 2.49223
+#&gt; 
+#&gt; $parameters
+#&gt;         test  p.ajusted     name.t ntr alpha
+#&gt;   Fisher-LSD bonferroni tratamento   4  0.05
+#&gt; 
+#&gt; $means
+#&gt;            y       std r        LCL      UCL        Min       Max        Q25
+#&gt; 1 0.03945468 0.8034924 4 -1.0768115 1.155721 -0.7020820 0.9763418 -0.5904491
+#&gt; 2 0.20107459 1.2886263 4 -0.9151916 1.317341 -1.0405791 1.4051089 -0.8432721
+#&gt; 3 0.13077553 1.2578007 4 -0.9854907 1.247042 -1.5665145 1.1465005 -0.4492419
+#&gt; 4 0.37105592 0.8160111 4 -0.7452103 1.487322 -0.7954609 0.9733158  0.1112177
+#&gt;           Q50       Q75
+#&gt; 1 -0.05822054 0.5716833
+#&gt; 2  0.21988430 1.2642310
+#&gt; 3  0.47155805 1.0515754
+#&gt; 4  0.65318443 0.9130226
+#&gt; 
+#&gt; $comparison
+#&gt;        difference pvalue signif.       LCL      UCL
+#&gt; 1 - 2 -0.16161991      1         -2.653850 2.330610
+#&gt; 1 - 3 -0.09132085      1         -2.583551 2.400909
+#&gt; 1 - 4 -0.33160124      1         -2.823831 2.160629
+#&gt; 2 - 3  0.07029906      1         -2.421931 2.562529
+#&gt; 2 - 4 -0.16998133      1         -2.662211 2.322249
+#&gt; 3 - 4 -0.24028039      1         -2.732510 2.251949
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$tukey
+#&gt; $statistics
+#&gt;     MSerror Df      Mean       CV      MSD
+#&gt;   0.8324514  6 0.1855902 491.6142 2.233342
+#&gt; 
+#&gt; $parameters
+#&gt;    test     name.t ntr StudentizedRange alpha
+#&gt;   Tukey tratamento   4         4.895599  0.05
+#&gt; 
+#&gt; $means
+#&gt;            y       std r        Min       Max        Q25         Q50       Q75
+#&gt; 1 0.03945468 0.8034924 4 -0.7020820 0.9763418 -0.5904491 -0.05822054 0.5716833
+#&gt; 2 0.20107459 1.2886263 4 -1.0405791 1.4051089 -0.8432721  0.21988430 1.2642310
+#&gt; 3 0.13077553 1.2578007 4 -1.5665145 1.1465005 -0.4492419  0.47155805 1.0515754
+#&gt; 4 0.37105592 0.8160111 4 -0.7954609 0.9733158  0.1112177  0.65318443 0.9130226
+#&gt; 
+#&gt; $comparison
+#&gt;        difference pvalue signif.       LCL      UCL
+#&gt; 1 - 2 -0.16161991 0.9939         -2.394962 2.071722
+#&gt; 1 - 3 -0.09132085 0.9989         -2.324663 2.142021
+#&gt; 1 - 4 -0.33160124 0.9527         -2.564944 1.901741
+#&gt; 2 - 3  0.07029906 0.9995         -2.163043 2.303641
+#&gt; 2 - 4 -0.16998133 0.9929         -2.403324 2.063361
+#&gt; 3 - 4 -0.24028039 0.9808         -2.473623 1.993062
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; $modelos$duncan
+#&gt; $statistics
+#&gt;     MSerror Df      Mean       CV
+#&gt;   0.8324514  6 0.1855902 491.6142
+#&gt; 
+#&gt; $parameters
+#&gt;     test     name.t ntr alpha
+#&gt;   Duncan tratamento   4  0.05
+#&gt; 
+#&gt; $duncan
+#&gt;      Table CriticalRange
+#&gt; 2 3.460456      1.578639
+#&gt; 3 3.586498      1.636138
+#&gt; 4 3.648934      1.664621
+#&gt; 
+#&gt; $means
+#&gt;            y       std r        Min       Max        Q25         Q50       Q75
+#&gt; 1 0.03945468 0.8034924 4 -0.7020820 0.9763418 -0.5904491 -0.05822054 0.5716833
+#&gt; 2 0.20107459 1.2886263 4 -1.0405791 1.4051089 -0.8432721  0.21988430 1.2642310
+#&gt; 3 0.13077553 1.2578007 4 -1.5665145 1.1465005 -0.4492419  0.47155805 1.0515754
+#&gt; 4 0.37105592 0.8160111 4 -0.7954609 0.9733158  0.1112177  0.65318443 0.9130226
+#&gt; 
+#&gt; $comparison
+#&gt;        difference pvalue signif.       LCL      UCL
+#&gt; 1 - 2 -0.16161991 0.8161         -1.797758 1.474518
+#&gt; 1 - 3 -0.09132085 0.8921         -1.669960 1.487318
+#&gt; 1 - 4 -0.33160124 0.6384         -1.996223 1.333020
+#&gt; 2 - 3  0.07029906 0.9168         -1.508340 1.648938
+#&gt; 2 - 4 -0.16998133 0.8010         -1.748620 1.408657
+#&gt; 3 - 4 -0.24028039 0.7304         -1.876419 1.395858
+#&gt; 
+#&gt; $groups
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "group"
+#&gt; 
+#&gt; 
+#&gt; $dados
+#&gt; <span style='color: #949494;'># A tibble: 16 x 4</span><span>
+#&gt;          y tratamento coluna linha
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> -</span><span style='color: #BB0000;'>0.553</span><span>  1          1      1    
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  1.41   2          1      2    
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>0.795</span><span>  4          1      3    
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> -</span><span style='color: #BB0000;'>1.57</span><span>   3          1      4    
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;'>1.04</span><span>   2          2      1    
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  1.02   3          2      2    
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.702</span><span>  1          2      3    
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  0.973  4          2      4    
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span> 3          3      1    
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  0.893  4          3      2    
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> -</span><span style='color: #BB0000;'>0.778</span><span>  2          3      3    
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span>  0.437  1          3      4    
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span>  0.413  4          4      1    
+#&gt; </span><span style='color: #BCBCBC;'>14</span><span>  0.976  1          4      2    
+#&gt; </span><span style='color: #BCBCBC;'>15</span><span>  1.15   3          4      3    
+#&gt; </span><span style='color: #BCBCBC;'>16</span><span>  1.22   2          4      4    
+#&gt; 
+#&gt; $fisher
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      1 - 2         -0.16161991       -1.740259        1.417019  0.8105
+#&gt; 2      1 - 3         -0.09132085       -1.669960        1.487318  0.8921
+#&gt; 3      1 - 4         -0.33160124       -1.910240        1.247038  0.6256
+#&gt; 4      2 - 3          0.07029906       -1.508340        1.648938  0.9168
+#&gt; 5      2 - 4         -0.16998133       -1.748620        1.408657  0.8010
+#&gt; 6      3 - 4         -0.24028039       -1.818919        1.338358  0.7224
+#&gt; 
+#&gt; $bonferroni
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      1 - 2         -0.16161991       -2.653850        2.330610       1
+#&gt; 2      1 - 3         -0.09132085       -2.583551        2.400909       1
+#&gt; 3      1 - 4         -0.33160124       -2.823831        2.160629       1
+#&gt; 4      2 - 3          0.07029906       -2.421931        2.562529       1
+#&gt; 5      2 - 4         -0.16998133       -2.662211        2.322249       1
+#&gt; 6      3 - 4         -0.24028039       -2.732510        2.251949       1
+#&gt; 
+#&gt; $tukey
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      1 - 2         -0.16161991       -2.394962        2.071722  0.9939
+#&gt; 2      1 - 3         -0.09132085       -2.324663        2.142021  0.9989
+#&gt; 3      1 - 4         -0.33160124       -2.564944        1.901741  0.9527
+#&gt; 4      2 - 3          0.07029906       -2.163043        2.303641  0.9995
+#&gt; 5      2 - 4         -0.16998133       -2.403324        2.063361  0.9929
+#&gt; 6      3 - 4         -0.24028039       -2.473623        1.993062  0.9808
+#&gt; 
+#&gt; $duncan
+#&gt;   Comparação Diferença de Médias Limite Inferior Limite Superior P-valor
+#&gt; 1      1 - 2         -0.16161991       -1.797758        1.474518  0.8161
+#&gt; 2      1 - 3         -0.09132085       -1.669960        1.487318  0.8921
+#&gt; 3      1 - 4         -0.33160124       -1.996223        1.333020  0.6384
+#&gt; 4      2 - 3          0.07029906       -1.508340        1.648938  0.9168
+#&gt; 5      2 - 4         -0.16998133       -1.748620        1.408657  0.8010
+#&gt; 6      3 - 4         -0.24028039       -1.876419        1.395858  0.7304
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "comparacao_lsqd"</div><div class='input'> 
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

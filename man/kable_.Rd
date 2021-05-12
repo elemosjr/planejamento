@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilidades.R
 \name{kable_}
 \alias{kable_}
-\title{Kable_}
+\title{Kable pre configurada}
 \usage{
 kable_(x)
 }
@@ -10,8 +10,13 @@ kable_(x)
 \item{x}{Data frame a ser printado}
 }
 \value{
-character
+Kable com colunas centralizadas
 }
 \description{
 Kable modificada para centralizar todas as colunas
+}
+\examples{
+
+kable_(mtcars)
+
 }
