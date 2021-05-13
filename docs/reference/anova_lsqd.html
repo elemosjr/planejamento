@@ -165,7 +165,7 @@
     <p>Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadrados latinos</p>
     </div>
 
-    <pre class="usage"><span class='fu'>anova_lsqd</span><span class='op'>(</span><span class='va'>dados</span>, <span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>linha</span>, <span class='va'>coluna</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>anova_lsqd</span><span class='op'>(</span><span class='va'>dados</span>, <span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>linha</span>, <span class='va'>coluna</span>, replica <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,82 +203,85 @@
 </div><div class='output co'>#&gt; $N
 #&gt; [1] 16
 #&gt; 
+#&gt; $n
+#&gt; [1] 1
+#&gt; 
 #&gt; $p
 #&gt; [1] 4
 #&gt; 
 #&gt; $y...
-#&gt; [1] -1.688061
+#&gt; [1] 3.851342
 #&gt; 
 #&gt; $y.j.
-#&gt;          1          2          3          4 
-#&gt; -1.9133553 -0.2513712  0.3973412  0.0793243 
+#&gt;           1           2           3           4 
+#&gt; -0.57939977  2.84800118  1.55413837  0.02860251 
 #&gt; 
 #&gt; $yi..
 #&gt;          1          2          3          4 
-#&gt; -2.4231561 -0.8072113  0.6839904  0.8583160 
+#&gt;  0.6839904  0.8583160 -1.1515700  3.4606059 
 #&gt; 
 #&gt; $y..k
 #&gt;          1          2          3          4 
-#&gt; -1.2273368  1.8452754 -1.4354628 -0.8705368 
+#&gt;  2.9790861 -2.2112836  0.1847734  2.8987663 
 #&gt; 
 #&gt; $mu
-#&gt; [1] -0.1055038
+#&gt; [1] 0.2407089
 #&gt; 
 #&gt; $tau
 #&gt;          1          2          3          4 
-#&gt; -1.8078515 -0.1458674  0.5028450  0.1848281 
+#&gt; -0.8201087  2.6072923  1.3134295 -0.2121064 
 #&gt; 
 #&gt; $alpha
 #&gt;          1          2          3          4 
-#&gt; -2.3176523 -0.7017075  0.7894942  0.9638198 
+#&gt;  0.4432815  0.6176071 -1.3922789  3.2198970 
 #&gt; 
 #&gt; $beta
-#&gt;         1         2         3         4 
-#&gt; -1.121833  1.950779 -1.329959 -0.765033 
+#&gt;           1           2           3           4 
+#&gt;  2.73837726 -2.45199253 -0.05593547  2.65805746 
 #&gt; 
 #&gt; $sqt
-#&gt; [1] 11.86762
+#&gt; [1] 15.9379
 #&gt; 
 #&gt; $sqtrat
-#&gt; [1] 0.7939752
+#&gt; [1] 1.788692
 #&gt; 
 #&gt; $sqlinha
-#&gt; [1] 1.753859
+#&gt; [1] 2.699562
 #&gt; 
 #&gt; $sqcol
-#&gt; [1] 1.754349
+#&gt; [1] 4.623377
 #&gt; 
 #&gt; $sqe
-#&gt; [1] 7.565432
+#&gt; [1] 6.826267
 #&gt; 
 #&gt; $qmtrat
-#&gt; [1] 0.2646584
+#&gt; [1] 0.5962308
 #&gt; 
 #&gt; $qmlinha
-#&gt; [1] 0.5846198
+#&gt; [1] 0.8998539
 #&gt; 
 #&gt; $qmcol
-#&gt; [1] 0.5847831
+#&gt; [1] 1.541126
 #&gt; 
 #&gt; $qme
-#&gt; [1] 1.260905
+#&gt; [1] 1.137711
 #&gt; 
 #&gt; $f0
-#&gt; [1] 0.2098955
+#&gt; [1] 0.5240617
 #&gt; 
 #&gt; $pvalor
-#&gt; [1] 0.8860376
+#&gt; [1] 0.6815724
 #&gt; 
 #&gt; $estimados
 #&gt; <span style='color: #949494;'># A tibble: 1 x 7</span><span>
 #&gt;   `$\\hat{\\alpha}_i$` `$\\hat{\\alpha}$` `$\\hat{\\beta}_i$` `$\\hat{\\beta}$`
 #&gt;                  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>               -</span><span style='color: #BB0000;'>0.422</span><span>             -</span><span style='color: #BB0000;'>0.317</span><span>              -</span><span style='color: #BB0000;'>0.422</span><span>            -</span><span style='color: #BB0000;'>0.317</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                0.963              0.722               0.963             0.722
 #&gt; </span><span style='color: #949494;'># … with 3 more variables: $\hat{\mu}$ &lt;dbl&gt;, $\hat{\tau}_i$ &lt;dbl&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   $\hat{\tau}$ &lt;dbl&gt;</span><span>
 #&gt; 
 #&gt; $modelo
-#&gt; $$\color{red}{y_{ij} = -0.105503813207907 +
+#&gt; $$\color{red}{y_{ij} = 0.240708892799958 +
 #&gt; \alpha_i +\tau_k + \beta_k + e_{ij}}$$
 #&gt; </div><div class='input'>
 </div></span></pre>

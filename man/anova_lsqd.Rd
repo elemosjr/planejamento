@@ -4,7 +4,7 @@
 \alias{anova_lsqd}
 \title{Gera valores de anova para Quadrados Latinos}
 \usage{
-anova_lsqd(dados, x, y, linha, coluna)
+anova_lsqd(dados, x, y, linha, coluna, replica = NULL)
 }
 \arguments{
 \item{dados}{Data frame com colunas separadas para os tratamentos, os blocos e os resultados a serem analisados}

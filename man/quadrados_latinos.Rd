@@ -4,7 +4,7 @@
 \alias{quadrados_latinos}
 \title{Simula delineamento de quadrados latinos}
 \usage{
-quadrados_latinos(n, fun = rnorm)
+quadrados_latinos(n, nrep = 1, fun = rnorm)
 }
 \arguments{
 \item{n}{Número de linhas (ou colunas)}

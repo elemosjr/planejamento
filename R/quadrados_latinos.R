@@ -15,8 +15,10 @@
 #'
 #' @export
 
-quadrados_latinos <- function(n, fun = rnorm)
+quadrados_latinos <- function(n, nrep = 1, fun = rnorm)
 {
+  if(nrep < 1) stop("O número de repetições deve ser um número positivo!")
+  
   ordem <- matrix(NA, n, n)
   
   for (i in 1:n) {
@@ -27,20 +29,55 @@ quadrados_latinos <- function(n, fun = rnorm)
     }
   }
   
+  tratamento <- replicate(nrep, factor(1:n)[ordem[sample(1:n, n),]])
+  
+  tratamentos <- paste0("[",
+                        apply(tratamento, 1,
+                              function(x) paste(x, collapse = " ")),
+                        "]")
+  
+  resultado <- replicate(nrep, fun(n^2))
+  
+  resultados <- apply(resultado, 1, sum)
+
+  coluna <- sort(rep(1:n, n))
+  linha <- rep(1:n, n)
+  replica <- sort(rep(1:nrep, n^2))
+  
   ret_ <- list()
   
-  ret_$dados <- tibble(resultado = fun(n^2)) %>%
-    bind_cols(tibble(tratamento = factor(1:n)[ordem[sample(1:n, n),]])) %>%
-    mutate(coluna = sort(rep(1:n, n)),
-           linha = rep(1:n, n))
+  ret_$dados_resumidos <- tibble(resultado = resultados,
+                                 tratamento = tratamentos,
+                                 coluna = coluna,
+                                 linha = linha)
   
-  ret_$dados_matriz <- ret_$dados %>%
-    unite("x", tratamento:resultado, sep = " = ") %>%
-    spread(coluna, x)
+  ret_$dados <- tibble(resultado = c(resultado),
+                       tratamento = c(tratamento),
+                       coluna = c(replicate(nrep, coluna)),
+                       linha = c(replicate(nrep, linha)),
+                       replica = replica)
   
-  matriz <- ret_$dados %>%
-    unite("x", tratamento:resultado, sep = " = ") %>%
-    .$x %>% matrix(n, n)
+  if(nrep > 1)
+  {
+    ret_$dados_individuais <- lapply(
+      1:nrep,
+      function(x)
+      {
+        tibble(resultado = resultado[,x],
+               tratamento = tratamento[,x],
+               coluna = coluna,
+               linha = linha,
+               replica = x)
+      }
+    )
+  }
+  
+  ret_$dados_matriz <- ret_$dados_resumidos %>%
+    select(-resultado) %>%
+    spread(coluna, tratamento)
+  
+  matriz <- ret_$dados_resumidos %>%
+    .$tratamento %>% matrix(n, n)
   
   rownames(matriz) <- 1:n
   colnames(matriz) <- 1:n
