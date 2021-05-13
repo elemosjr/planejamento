@@ -4,7 +4,8 @@
 #'
 #' @param ntrat Numero de tratamentos a serem simulados
 #' @param nbloco Numero de blocos a serem simulados
-#' @param nrep Numero de repeticoes a serem simuladas, caso haja, padrao = NULL
+#' @param k Numero de tratamentos por bloco
+#' @param fun Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()
 #' 
 #' @import stringr
 #' @import dplyr
@@ -24,21 +25,31 @@
 #'
 #' @export
 
-bloco_incompleto <- function(ntrat, nbloco, nrep = NULL)
+bloco_incompleto <- function(ntrat, nbloco, k = 0, fun = rnorm)
 {
-  if(is.null(nrep)) nrep <- ntrat
+  resultado <- fun(ntrat*nbloco)
   
-  n_na <- ntrat - nrep
+  if(k > ntrat) stop("k deve ser igual ou menor que o número de tratamentos!")
+  if(k < 0) stop("k deve ser um número positivo!")
   
-  combinacoes <- combn(1:ntrat, n_na)
+  if(k != ntrat)
+  {
+    n_na <- ntrat - k
+    
+    combinacoes <- combn(1:ntrat, n_na)
+    
+    if(ncol(combinacoes) < nbloco)
+    {
+      combinacoes <- rep(combinacoes, ceiling(n_na*nbloco/length(combinacoes)))[1:(nbloco*n_na)]
+      combinacoes <- matrix(combinacoes, n_na)
+    }
+    
+    rand <- matrix(combinacoes[,sample(1:ncol(combinacoes), nbloco)], n_na)
   
-  rand <- combinacoes[,sample(1:ncol(combinacoes), nbloco)]
+    for(i in 1:nbloco) rand[,i] <- rand[,i] + ntrat * (i - 1)
   
-  trat <- as.factor(rep(1:ntrat, nbloco))
-  
-  for(i in 1:nbloco) rand[,i] <- rand[,i] + ntrat * (i - 1)
-  
-  trat[rand] <- NA
+    resultado[rand] <- NA
+  }
   
   ret_ <- list()
   
@@ -51,25 +62,12 @@ bloco_incompleto <- function(ntrat, nbloco, nrep = NULL)
                                      collapse = ""), x))
   
   ret_$dados <- tibble(Trat = rep(1:ntrat, nbloco),
-                       resultado = as.numeric(trat),
+                       resultado = as.numeric(resultado),
                        bloco = paste0("B", bloco))
   
   ret_$dados_matriz <- ret_$dados %>%
     mutate(resultado = ifelse(is.na(resultado), "-", as.character(resultado))) %>%
     spread(bloco, resultado) 
-  
-  class(ret_$dados) <- c(class(ret_$dados), "bloco_incompleto")
-  
-  alinhamento <- rep("c", ncol(ret_$dados))
-  
-  alinhamento_novo <- paste0("{c|", paste0(alinhamento[-1],
-                                           collapse = ""), "}\\n\\\\hline")
-  
-  ret_$kable <- kable(ret_$dados, "latex", align = alinhamento) %>%
-    as.character() %>%
-    str_replace_all("\\n\\\\hline", "") %>%
-    str_replace(paste0("\\{", paste0(alinhamento, collapse = "\\|"), "\\}"),
-                paste0("{c|", paste0(alinhamento[-1], collapse = ""), "}\\\n\\\\hline"))
   
   matriz <- ret_$dados %>%
     .$resultado %>% matrix(ntrat, nbloco)

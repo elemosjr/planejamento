@@ -25,7 +25,7 @@ Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadra
 }
 \examples{
 
-quadrados_latinos(tibble(y = rnorm(16)), 1:4) \%>\%
- anova_lsqd("tratamento", "y", "linha", "coluna")
+quadrados_latinos(4)$dados \%>\%
+ anova_lsqd("tratamento", "resultado", "linha", "coluna")
 
 }

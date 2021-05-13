@@ -25,8 +25,8 @@
 #'  
 #' @examples 
 #' 
-#' quadrados_latinos(tibble(y = rnorm(16)), 1:4) %>%
-#'   comparacoes_lsqd("tratamento", "y", "linha", "coluna")
+#' quadrados_latinos(4)$dados %>%
+#'   comparacoes_lsqd("tratamento", "resultado", "linha", "coluna")
 #'  
 #' @export
 

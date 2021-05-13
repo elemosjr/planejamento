@@ -17,43 +17,42 @@ devtools::install_github("elemosjr/planejamento")
 ``` r
 ## Simulações de delineamentos
 # Delineamento em blocos incompletos
-bloco_incompleto(4, 6, 2)$dados %>% kable_()
+bloco_incompleto(4, 4, 2)$dados_matriz %>% kable_()
 ```
 
-| Trat | B1  | B2  | B3  | B4  | B5  | B6  |
-|:----:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  1   |  1  | \-  | \-  |  1  |  1  | \-  |
-|  2   |  2  |  2  | \-  | \-  | \-  |  2  |
-|  3   | \-  |  3  |  3  | \-  |  3  | \-  |
-|  4   | \-  | \-  |  4  |  4  | \-  |  4  |
+| Trat |         B1         |         B2         |        B3         |         B4         |
+|:----:|:------------------:|:------------------:|:-----------------:|:------------------:|
+|  1   |         \-         | -0.499502238978849 | -1.17968613985484 |         \-         |
+|  2   |         \-         |         \-         | 0.936215394692747 | -0.549672942936815 |
+|  3   | -0.585355135701042 | 0.0673241315727544 |        \-         |         \-         |
+|  4   | 0.392842478135926  |         \-         |        \-         | -1.74818463913506  |
 
 ``` r
 # Quadrados Latinos
-quadrado <- quadrados_latinos(dados = tibble(x = 1:16),
-                              tratamentos = letters[1:4])
-head(quadrado) %>% kable_()
+quadrado <- quadrados_latinos(4)
+
+head(quadrado$dados) %>% kable_()
 ```
 
-|  x  | tratamento | coluna | linha |
-|:---:|:----------:|:------:|:-----:|
-|  1  |     d      |   1    |   1   |
-|  2  |     c      |   1    |   2   |
-|  3  |     b      |   1    |   3   |
-|  4  |     a      |   1    |   4   |
-|  5  |     a      |   2    |   1   |
-|  6  |     d      |   2    |   2   |
+| resultado  | tratamento | coluna | linha |
+|:----------:|:----------:|:------:|:-----:|
+| -0.0658432 |     3      |   1    |   1   |
+| -1.6616680 |     2      |   1    |   2   |
+| 1.3449107  |     4      |   1    |   3   |
+| -0.1763123 |     1      |   1    |   4   |
+| 1.0106518  |     4      |   2    |   1   |
+| 2.3479557  |     3      |   2    |   2   |
 
 ``` r
-quadrado %>% select(-x) %>%
-  spread(coluna, tratamento) %>% kable_()
+quadrado$dados_matriz %>% kable_() 
 ```
 
-| linha |  1  |  2  |  3  |  4  |
-|:-----:|:---:|:---:|:---:|:---:|
-|   1   |  d  |  a  |  b  |  c  |
-|   2   |  c  |  d  |  a  |  b  |
-|   3   |  b  |  c  |  d  |  a  |
-|   4   |  a  |  b  |  c  |  d  |
+| linha |            1            |           2            |           3            |           4            |
+|:-----:|:-----------------------:|:----------------------:|:----------------------:|:----------------------:|
+|   1   | 3 = -0.0658431688744901 |  4 = 1.01065181187071  | 1 = -0.353471590883585 | 2 = -1.14147474480607  |
+|   2   |  2 = -1.66166804758624  |  3 = 2.34795574880188  | 4 = -0.666239854133388 |  1 = 1.31532450118812  |
+|   3   |  4 = 1.34491066464993   | 1 = -0.727039438286461 | 2 = 0.349646088353395  | 3 = 0.404860899530856  |
+|   4   | 1 = -0.176312341105661  | 2 = -0.350650529873071 |  3 = 1.04391779928509  | 4 = -0.409661999133257 |
 
 ``` r
 ## ANOVA e comparações múltiplas
@@ -61,15 +60,21 @@ quadrado %>% select(-x) %>%
 set.seed(1)
  
 # Gerando dados
-dados <- tibble(tratamento = as.factor(sort(rep(1:4, 5))),
-                bloco = as.factor(rep(1:5, 4)),
-                resultado = rnorm(20))
+dados <- bloco_casualizado(4, 5)$dados
 
 # Gerando valores da anova a partir dos dados
-valores <- anova_rbcd(dados, "tratamento", "resultado", "bloco")
+valores <- anova_rbcd(dados, "Trat", "resultado", "bloco")
 
+valores$estimados %>% kable_()
+```
+
+| *β̂*<sub>*i*</sub> |    *β̂*    | *μ̂*<sub>*i*</sub> |    *μ̂*    |    *τ̂*    |
+|:-----------------:|:---------:|:-----------------:|:---------:|:---------:|
+|     0.7620955     | 0.5715716 |     0.9526194     | 0.1905239 | 0.7620955 |
+
+``` r
 # Gerasndo comparações múltiplas 
-comparacao <- comparacoes("tratamento", "resultado", "bloco", dados)
+comparacao <- comparacoes("Trat", "resultado", "bloco", dados)
 
 # Comparação de tukey
 comparacao$tukey %>% kable_()
@@ -77,12 +82,12 @@ comparacao$tukey %>% kable_()
 
 | Comparação | Diferença de Médias | Limite Inferior | Limite Superior | P-valor |
 |:----------:|:-------------------:|:---------------:|:---------------:|:-------:|
-|   1 - 2    |     -0.0058658      |    -2.095669    |    2.083938     | 1.0000  |
-|   1 - 3    |      0.0911469      |    -1.998657    |    2.180950     | 0.9992  |
-|   1 - 4    |     -0.3302971      |    -2.420101    |    1.759506     | 0.9644  |
-|   2 - 3    |      0.0970127      |    -1.992791    |    2.186816     | 0.9990  |
-|   2 - 4    |     -0.3244313      |    -2.414235    |    1.765372     | 0.9662  |
-|   3 - 4    |     -0.4214440      |    -2.511248    |    1.668359     | 0.9305  |
+|   1 - 2    |      0.3708963      |    -1.231121    |    1.9729140    | 0.8999  |
+|   1 - 3    |     -0.6936659      |    -2.295684    |    0.9083519    | 0.5885  |
+|   1 - 4    |     -0.7262024      |    -2.328220    |    0.8758153    | 0.5536  |
+|   2 - 3    |     -1.0645622      |    -2.666580    |    0.5374556    | 0.2509  |
+|   2 - 4    |     -1.0970987      |    -2.699116    |    0.5049190    | 0.2297  |
+|   3 - 4    |     -0.0325365      |    -1.634554    |    1.5694812    | 0.9999  |
 
 ``` r
 # Gráfico de comparações dos tratamentos

@@ -24,6 +24,13 @@
 
 <title>Comparacoes multiplas para BIBD — comparacoes_bib • planejamento</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -209,7 +216,7 @@
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='bloco_incompleto.html'>bloco_incompleto</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>-&gt;</span><span class='va'>.</span>;
  <span class='fu'>comparacoes_bib</span><span class='op'>(</span><span class='st'>"Trat"</span>, <span class='st'>"resultado"</span>, <span class='st'>"bloco"</span>, <span class='va'>.</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: attempting model selection on an essentially perfect fit is nonsense</span></div><div class='output co'>#&gt; $variaveis
+</div><div class='output co'>#&gt; $variaveis
 #&gt; $variaveis$tratamento
 #&gt; [1] "Trat"
 #&gt; 
@@ -222,7 +229,7 @@
 #&gt; 
 #&gt; $formula
 #&gt; resultado ~ Trat + bloco
-#&gt; &lt;environment: 0x563d2eae9990&gt;
+#&gt; &lt;environment: 0x558f12704ed0&gt;
 #&gt; 
 #&gt; $modelos
 #&gt; $modelos$Modelo
@@ -230,11 +237,11 @@
 #&gt;    aov(formula = formula_, data = dados)
 #&gt; 
 #&gt; Terms:
-#&gt;                 Trat bloco Residuals
-#&gt; Sum of Squares    15     0         0
-#&gt; Deg. of Freedom    3     5         3
+#&gt;                     Trat    bloco Residuals
+#&gt; Sum of Squares  4.760410 5.155038  0.830304
+#&gt; Deg. of Freedom        3        5         3
 #&gt; 
-#&gt; Residual standard error: 1.786179e-16
+#&gt; Residual standard error: 0.5260876
 #&gt; Estimated effects may be unbalanced
 #&gt; 
 #&gt; $modelos$Modelo_aj
@@ -242,12 +249,10 @@
 #&gt; 
 #&gt; Model:
 #&gt; resultado ~ Trat + bloco
-#&gt;        Df Sum of Sq RSS     AIC    F value  Pr(&gt;F)    
-#&gt; &lt;none&gt;                0 -868.91                       
-#&gt; Trat    3        10  10    9.81 1.0448e+32 &lt; 2e-16 ***
-#&gt; bloco   5         0   0 -844.82 9.6767e+00 0.04541 *  
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#&gt;        Df Sum of Sq    RSS      AIC F value Pr(&gt;F)
+#&gt; &lt;none&gt;              0.8303 -14.0504               
+#&gt; Trat    3    2.8604 3.6907  -2.1491  3.4450 0.1684
+#&gt; bloco   5    5.1550 5.9853  -0.3471  3.7252 0.1541
 #&gt; 
 #&gt; $modelos$lsd
 #&gt; $parameters
@@ -255,24 +260,29 @@
 #&gt;        1          4         2      6 3  0.05  BIB
 #&gt; 
 #&gt; $statistics
-#&gt;   Mean Efficiency           CV
-#&gt;    2.5  0.6666667 2.773336e-14
+#&gt;         Mean Efficiency        CV
+#&gt;   -0.5358054  0.6666667 -98.18631
 #&gt; 
 #&gt; $comparison
 #&gt;       Difference pvalue sig.
-#&gt; 1 - 2         -1      0  ***
-#&gt; 1 - 3         -2      0  ***
-#&gt; 1 - 4         -3      0  ***
-#&gt; 2 - 3         -1      0  ***
-#&gt; 2 - 4         -2      0  ***
-#&gt; 3 - 4         -1      0  ***
+#&gt; 1 - 2  0.9790153 0.1596     
+#&gt; 1 - 3  0.5207612 0.3952     
+#&gt; 1 - 4 -0.6257242 0.3198     
+#&gt; 2 - 3 -0.4582541 0.4478     
+#&gt; 2 - 4 -1.6047396 0.0554    .
+#&gt; 3 - 4 -1.1464854 0.1174     
 #&gt; 
 #&gt; $means
-#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
-#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
-#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
-#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
-#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt;             y   mean.adj       SE r       std        Min        Max        Q25
+#&gt; 1 -0.14459040 -0.3172924 0.356163 3 0.4238438 -0.6331782  0.1243011 -0.2790361
+#&gt; 2 -1.61642345 -1.2963077 0.356163 3 1.1227903 -2.4466800 -0.3389359 -2.2551672
+#&gt; 3 -0.31022699 -0.8380536 0.356163 3 0.8671087 -1.2705131  0.4154064 -0.6730437
+#&gt; 4 -0.07198095  0.3084319 0.356163 3 0.8947023 -1.0985089  0.5421415 -0.3790422
+#&gt;           Q50         Q75
+#&gt; 1  0.07510590  0.09970348
+#&gt; 2 -2.06365445 -1.20129516
+#&gt; 3 -0.07557425  0.16991608
+#&gt; 4  0.34042449  0.44128302
 #&gt; 
 #&gt; $groups
 #&gt; NULL
@@ -286,24 +296,29 @@
 #&gt;        1          4         2      6 3  0.05  BIB
 #&gt; 
 #&gt; $statistics
-#&gt;   Mean Efficiency           CV
-#&gt;    2.5  0.6666667 2.773336e-14
+#&gt;         Mean Efficiency        CV
+#&gt;   -0.5358054  0.6666667 -98.18631
 #&gt; 
 #&gt; $comparison
 #&gt;       Difference pvalue sig.
-#&gt; 1 - 2         -1      0  ***
-#&gt; 1 - 3         -2      0  ***
-#&gt; 1 - 4         -3      0  ***
-#&gt; 2 - 3         -1      0  ***
-#&gt; 2 - 4         -2      0  ***
-#&gt; 3 - 4         -1      0  ***
+#&gt; 1 - 2  0.9790153 0.3967     
+#&gt; 1 - 3  0.5207612 0.7666     
+#&gt; 1 - 4 -0.6257242 0.6718     
+#&gt; 2 - 3 -0.4582541 0.8209     
+#&gt; 2 - 4 -1.6047396 0.1548     
+#&gt; 3 - 4 -1.1464854 0.3053     
 #&gt; 
 #&gt; $means
-#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
-#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
-#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
-#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
-#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt;             y   mean.adj       SE r       std        Min        Max        Q25
+#&gt; 1 -0.14459040 -0.3172924 0.356163 3 0.4238438 -0.6331782  0.1243011 -0.2790361
+#&gt; 2 -1.61642345 -1.2963077 0.356163 3 1.1227903 -2.4466800 -0.3389359 -2.2551672
+#&gt; 3 -0.31022699 -0.8380536 0.356163 3 0.8671087 -1.2705131  0.4154064 -0.6730437
+#&gt; 4 -0.07198095  0.3084319 0.356163 3 0.8947023 -1.0985089  0.5421415 -0.3790422
+#&gt;           Q50         Q75
+#&gt; 1  0.07510590  0.09970348
+#&gt; 2 -2.06365445 -1.20129516
+#&gt; 3 -0.07557425  0.16991608
+#&gt; 4  0.34042449  0.44128302
 #&gt; 
 #&gt; $groups
 #&gt; NULL
@@ -317,24 +332,29 @@
 #&gt;        1          4         2      6 3  0.05  BIB
 #&gt; 
 #&gt; $statistics
-#&gt;   Mean Efficiency           CV
-#&gt;    2.5  0.6666667 2.773336e-14
+#&gt;         Mean Efficiency        CV
+#&gt;   -0.5358054  0.6666667 -98.18631
 #&gt; 
 #&gt; $comparison
 #&gt;       Difference pvalue sig.
-#&gt; 1 - 2         -1      0  ***
-#&gt; 1 - 3         -2      0  ***
-#&gt; 1 - 4         -3      0  ***
-#&gt; 2 - 3         -1      0  ***
-#&gt; 2 - 4         -2      0  ***
-#&gt; 3 - 4         -1      0  ***
+#&gt; 1 - 2  0.9790153 0.1592     
+#&gt; 1 - 3  0.5207612 0.3952     
+#&gt; 1 - 4 -0.6257242 0.3198     
+#&gt; 2 - 3 -0.4582541 0.4478     
+#&gt; 2 - 4 -1.6047396 0.0545    .
+#&gt; 3 - 4 -1.1464854 0.1174     
 #&gt; 
 #&gt; $means
-#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
-#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
-#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
-#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
-#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt;             y   mean.adj       SE r       std        Min        Max        Q25
+#&gt; 1 -0.14459040 -0.3172924 0.356163 3 0.4238438 -0.6331782  0.1243011 -0.2790361
+#&gt; 2 -1.61642345 -1.2963077 0.356163 3 1.1227903 -2.4466800 -0.3389359 -2.2551672
+#&gt; 3 -0.31022699 -0.8380536 0.356163 3 0.8671087 -1.2705131  0.4154064 -0.6730437
+#&gt; 4 -0.07198095  0.3084319 0.356163 3 0.8947023 -1.0985089  0.5421415 -0.3790422
+#&gt;           Q50         Q75
+#&gt; 1  0.07510590  0.09970348
+#&gt; 2 -2.06365445 -1.20129516
+#&gt; 3 -0.07557425  0.16991608
+#&gt; 4  0.34042449  0.44128302
 #&gt; 
 #&gt; $groups
 #&gt; NULL
@@ -348,24 +368,29 @@
 #&gt;        1          4         2      6 3  0.05  BIB
 #&gt; 
 #&gt; $statistics
-#&gt;   Mean Efficiency           CV
-#&gt;    2.5  0.6666667 2.773336e-14
+#&gt;         Mean Efficiency        CV
+#&gt;   -0.5358054  0.6666667 -98.18631
 #&gt; 
 #&gt; $comparison
 #&gt;       Difference significant
-#&gt; 1 - 2         -1        TRUE
-#&gt; 1 - 3         -2        TRUE
-#&gt; 1 - 4         -3        TRUE
-#&gt; 2 - 3         -1        TRUE
-#&gt; 2 - 4         -2        TRUE
-#&gt; 3 - 4         -1        TRUE
+#&gt; 1 - 2  0.9790153       FALSE
+#&gt; 1 - 3  0.5207612       FALSE
+#&gt; 1 - 4 -0.6257242       FALSE
+#&gt; 2 - 3 -0.4582541       FALSE
+#&gt; 2 - 4 -1.6047396        TRUE
+#&gt; 3 - 4 -1.1464854       FALSE
 #&gt; 
 #&gt; $means
-#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
-#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
-#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
-#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
-#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt;             y   mean.adj       SE r       std        Min        Max        Q25
+#&gt; 1 -0.14459040 -0.3172924 0.356163 3 0.4238438 -0.6331782  0.1243011 -0.2790361
+#&gt; 2 -1.61642345 -1.2963077 0.356163 3 1.1227903 -2.4466800 -0.3389359 -2.2551672
+#&gt; 3 -0.31022699 -0.8380536 0.356163 3 0.8671087 -1.2705131  0.4154064 -0.6730437
+#&gt; 4 -0.07198095  0.3084319 0.356163 3 0.8947023 -1.0985089  0.5421415 -0.3790422
+#&gt;           Q50         Q75
+#&gt; 1  0.07510590  0.09970348
+#&gt; 2 -2.06365445 -1.20129516
+#&gt; 3 -0.07557425  0.16991608
+#&gt; 4  0.34042449  0.44128302
 #&gt; 
 #&gt; $groups
 #&gt; NULL
@@ -379,24 +404,29 @@
 #&gt;        1          4         2      6 3  0.05  BIB
 #&gt; 
 #&gt; $statistics
-#&gt;   Mean Efficiency           CV
-#&gt;    2.5  0.6666667 2.773336e-14
+#&gt;         Mean Efficiency        CV
+#&gt;   -0.5358054  0.6666667 -98.18631
 #&gt; 
 #&gt; $comparison
 #&gt;       Difference pvalue sig.
-#&gt; 1 - 2         -1      0  ***
-#&gt; 1 - 3         -2      0  ***
-#&gt; 1 - 4         -3      0  ***
-#&gt; 2 - 3         -1      0  ***
-#&gt; 2 - 4         -2      0  ***
-#&gt; 3 - 4         -1      0  ***
+#&gt; 1 - 2  0.9790153 0.2931     
+#&gt; 1 - 3  0.5207612 0.3952     
+#&gt; 1 - 4 -0.6257242 0.3198     
+#&gt; 2 - 3 -0.4582541 0.4478     
+#&gt; 2 - 4 -1.6047396 0.1548     
+#&gt; 3 - 4 -1.1464854 0.2210     
 #&gt; 
 #&gt; $means
-#&gt;   y mean.adj           SE r std Min Max Q25 Q50 Q75
-#&gt; 1 1        1 4.693894e-16 3   0   1   1   1   1   1
-#&gt; 2 2        2 4.693894e-16 3   0   2   2   2   2   2
-#&gt; 3 3        3 4.693894e-16 3   0   3   3   3   3   3
-#&gt; 4 4        4 4.693894e-16 3   0   4   4   4   4   4
+#&gt;             y   mean.adj       SE r       std        Min        Max        Q25
+#&gt; 1 -0.14459040 -0.3172924 0.356163 3 0.4238438 -0.6331782  0.1243011 -0.2790361
+#&gt; 2 -1.61642345 -1.2963077 0.356163 3 1.1227903 -2.4466800 -0.3389359 -2.2551672
+#&gt; 3 -0.31022699 -0.8380536 0.356163 3 0.8671087 -1.2705131  0.4154064 -0.6730437
+#&gt; 4 -0.07198095  0.3084319 0.356163 3 0.8947023 -1.0985089  0.5421415 -0.3790422
+#&gt;           Q50         Q75
+#&gt; 1  0.07510590  0.09970348
+#&gt; 2 -2.06365445 -1.20129516
+#&gt; 3 -0.07557425  0.16991608
+#&gt; 4  0.34042449  0.44128302
 #&gt; 
 #&gt; $groups
 #&gt; NULL
@@ -409,63 +439,63 @@
 #&gt; <span style='color: #949494;'># A tibble: 12 x 3</span><span>
 #&gt;    Trat  resultado bloco
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2             2 B1   
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 4             4 B1   
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1             1 B2   
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2             2 B2   
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 2             2 B3   
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 3             3 B3   
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1             1 B4   
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 3             3 B4   
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1             1 B5   
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 4             4 B5   
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> 3             3 B6   
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> 4             4 B6   
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 2       -</span><span style='color: #BB0000;'>2.45</span><span>   B1   
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 4       -</span><span style='color: #BB0000;'>1.10</span><span>   B1   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1       -</span><span style='color: #BB0000;'>0.633</span><span>  B2   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 2       -</span><span style='color: #BB0000;'>2.06</span><span>   B2   
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 3       -</span><span style='color: #BB0000;'>1.27</span><span>   B3   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 4        0.542  B3   
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1        0.075</span><span style='text-decoration: underline;'>1</span><span> B4   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 3        0.415  B4   
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 2       -</span><span style='color: #BB0000;'>0.339</span><span>  B5   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 3       -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> B5   
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> 1        0.124  B6   
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> 4        0.340  B6   
 #&gt; 
 #&gt; $lsd
 #&gt;   Comparação Diferença de Médias P-valor
-#&gt; 1      1 - 2                  -1       0
-#&gt; 2      1 - 3                  -2       0
-#&gt; 3      1 - 4                  -3       0
-#&gt; 4      2 - 3                  -1       0
-#&gt; 5      2 - 4                  -2       0
-#&gt; 6      3 - 4                  -1       0
+#&gt; 1      1 - 2           0.9790153  0.1596
+#&gt; 2      1 - 3           0.5207612  0.3952
+#&gt; 3      1 - 4          -0.6257242  0.3198
+#&gt; 4      2 - 3          -0.4582541  0.4478
+#&gt; 5      2 - 4          -1.6047396  0.0554
+#&gt; 6      3 - 4          -1.1464854  0.1174
 #&gt; 
 #&gt; $tukey
 #&gt;   Comparação Diferença de Médias P-valor
-#&gt; 1      1 - 2                  -1       0
-#&gt; 2      1 - 3                  -2       0
-#&gt; 3      1 - 4                  -3       0
-#&gt; 4      2 - 3                  -1       0
-#&gt; 5      2 - 4                  -2       0
-#&gt; 6      3 - 4                  -1       0
+#&gt; 1      1 - 2           0.9790153  0.3967
+#&gt; 2      1 - 3           0.5207612  0.7666
+#&gt; 3      1 - 4          -0.6257242  0.6718
+#&gt; 4      2 - 3          -0.4582541  0.8209
+#&gt; 5      2 - 4          -1.6047396  0.1548
+#&gt; 6      3 - 4          -1.1464854  0.3053
 #&gt; 
 #&gt; $duncan
 #&gt;   Comparação Diferença de Médias P-valor
-#&gt; 1      1 - 2                  -1       0
-#&gt; 2      1 - 3                  -2       0
-#&gt; 3      1 - 4                  -3       0
-#&gt; 4      2 - 3                  -1       0
-#&gt; 5      2 - 4                  -2       0
-#&gt; 6      3 - 4                  -1       0
+#&gt; 1      1 - 2           0.9790153  0.1592
+#&gt; 2      1 - 3           0.5207612  0.3952
+#&gt; 3      1 - 4          -0.6257242  0.3198
+#&gt; 4      2 - 3          -0.4582541  0.4478
+#&gt; 5      2 - 4          -1.6047396  0.0545
+#&gt; 6      3 - 4          -1.1464854  0.1174
 #&gt; 
 #&gt; $waller
 #&gt;   Comparação Diferença de Médias Significante
-#&gt; 1      1 - 2                  -1         TRUE
-#&gt; 2      1 - 3                  -2         TRUE
-#&gt; 3      1 - 4                  -3         TRUE
-#&gt; 4      2 - 3                  -1         TRUE
-#&gt; 5      2 - 4                  -2         TRUE
-#&gt; 6      3 - 4                  -1         TRUE
+#&gt; 1      1 - 2           0.9790153        FALSE
+#&gt; 2      1 - 3           0.5207612        FALSE
+#&gt; 3      1 - 4          -0.6257242        FALSE
+#&gt; 4      2 - 3          -0.4582541        FALSE
+#&gt; 5      2 - 4          -1.6047396         TRUE
+#&gt; 6      3 - 4          -1.1464854        FALSE
 #&gt; 
 #&gt; $snk
 #&gt;   Comparação Diferença de Médias P-valor
-#&gt; 1      1 - 2                  -1       0
-#&gt; 2      1 - 3                  -2       0
-#&gt; 3      1 - 4                  -3       0
-#&gt; 4      2 - 3                  -1       0
-#&gt; 5      2 - 4                  -2       0
-#&gt; 6      3 - 4                  -1       0
+#&gt; 1      1 - 2           0.9790153  0.2931
+#&gt; 2      1 - 3           0.5207612  0.3952
+#&gt; 3      1 - 4          -0.6257242  0.3198
+#&gt; 4      2 - 3          -0.4582541  0.4478
+#&gt; 5      2 - 4          -1.6047396  0.1548
+#&gt; 6      3 - 4          -1.1464854  0.2210
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "comparacao_bib"</div><div class='input'> 

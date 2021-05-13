@@ -42,8 +42,8 @@ anova_rbcd <- function(dados, x, y, bloco)
   ret_$pvalor <- pf(ret_$f0, ret_$a - 1, (ret_$a - 1) * (ret_$b - 1), lower.tail = FALSE)
 
   ret_$estimados <- tibble(X1 = c("$\\hat{\\mu}$", "$\\hat{\\tau}$",
-                                  "$\\hat{\\beta}$", "$\\hat{\\mu_i}$",
-                                  "$\\hat{\\beta_i}$"),
+                                  "$\\hat{\\beta}$", "$\\hat{\\mu}_i$",
+                                  "$\\hat{\\beta}_i$"),
                            X2 = with(ret_, c(mu, mean(tau), mean(beta),
                                              mean(yi.), mean(y.j)))) %>%
     spread(X1, X2)

@@ -4,12 +4,12 @@
 \alias{quadrados_latinos}
 \title{Simula delineamento de quadrados latinos}
 \usage{
-quadrados_latinos(dados, tratamentos)
+quadrados_latinos(n, fun = rnorm)
 }
 \arguments{
-\item{dados}{Data frame com os resultados}
+\item{n}{Número de linhas (ou colunas)}
 
-\item{tratamentos}{Vetor com fatores dos tratamentos}
+\item{fun}{Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()}
 }
 \value{
 Banco de dados com colunas dos tratamentos, linhas e colunas
@@ -19,6 +19,6 @@ Simula um delineamento em quadrados latinos a partir de um banco de dados
 }
 \examples{
 
-quadrados_latinos(tibble(y = rnorm(16)), 1:4)
+quadrados_latinos(4)
 
 }

@@ -4,14 +4,16 @@
 \alias{bloco_incompleto}
 \title{Simula delineamento de blocos incompletos}
 \usage{
-bloco_incompleto(ntrat, nbloco, nrep = NULL)
+bloco_incompleto(ntrat, nbloco, k = 0, fun = rnorm)
 }
 \arguments{
 \item{ntrat}{Numero de tratamentos a serem simulados}
 
 \item{nbloco}{Numero de blocos a serem simulados}
 
-\item{nrep}{Numero de repeticoes a serem simuladas, caso haja, padrao = NULL}
+\item{k}{Numero de tratamentos por bloco}
+
+\item{fun}{Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()}
 }
 \value{
 Objeto de tipo lista com os elementos:

@@ -15,8 +15,8 @@
 #' 
 #' @examples
 #'
-#' quadrados_latinos(tibble(y = rnorm(16)), 1:4) %>%
-#'  anova_lsqd("tratamento", "y", "linha", "coluna")
+#' quadrados_latinos(4)$dados %>%
+#'  anova_lsqd("tratamento", "resultado", "linha", "coluna")
 #'
 #' @export
 
@@ -48,8 +48,8 @@ anova_lsqd <- function(dados, x, y, linha, coluna) # dados tem que ter NA
 
   ret_$estimados <- tibble(X1 = c("$\\hat{\\mu}$", "$\\hat{\\alpha}$",
                                   "$\\hat{\\tau}$", "$\\hat{\\beta}$",
-                                  "$\\hat{\\alpha_i}$", "$\\hat{\\tau_i}$",
-                                  "$\\hat{\\beta_i}$"),
+                                  "$\\hat{\\alpha}_i$", "$\\hat{\\tau}_i$",
+                                  "$\\hat{\\beta}_i$"),
                            X2 = with(ret_, c(mu, mean(alpha), mean(tau),
                                              mean(beta), mean(yi..),
                                              mean(y.j.), mean(y..k)))) %>%
