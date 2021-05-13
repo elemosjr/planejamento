@@ -1,14 +1,13 @@
-pkginstall <- function(pkg) if(!require(pkg)) install.packages(pkg)
-
-.onAttach <- function(...)
+pkgcall <- function(pkg)
 {
-  if(!require("tidyverse")) install.packages("tidyverse")
-  if(!require("knitr")) install.packages("knitr")
-  if(!require("glue")) install.packages("glue")
-  library("tidyverse")
-  library("knitr")
-  library("glue")
+  if(!do.call("require", list(pkg)))
+  {
+    install.packages(pkg)
+    do.call("library", list(pkg))
+  }
 }
+
+.onAttach <- function(...) mapply(pkgcall, c("tidyverse", "knitr", "glue"))
 
 #' @import tidyverse
 #' @import knitr
