@@ -1,6 +1,7 @@
 #!/bin/sh
 
-Rscript -e 'roxygen2::roxygenize();
+Rscript -e 'Rcpp::compileAttributes();
+            roxygen2::roxygenize();
             install.packages(".", repos = NULL);
             rmarkdown::render("README.Rmd")'
 

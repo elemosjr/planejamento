@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>Simula delineamento de blocos incompletos — bloco_casualizado • planejamento</title>
+<title>Gera valores de anova para RBCD teste — anova_teste • planejamento</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,8 +73,8 @@
 
 
 
-<meta property="og:title" content="Simula delineamento de blocos incompletos — bloco_casualizado" />
-<meta property="og:description" content="Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições." />
+<meta property="og:title" content="Gera valores de anova para RBCD teste — anova_teste" />
+<meta property="og:description" content="Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos completamente casualizados" />
 
 
 
@@ -156,75 +156,113 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simula delineamento de blocos incompletos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/bloco_casualizado.R'><code>R/bloco_casualizado.R</code></a></small>
-    <div class="hidden name"><code>bloco_casualizado.Rd</code></div>
+    <h1>Gera valores de anova para RBCD teste</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
+    <div class="hidden name"><code>anova_teste.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições.</p>
+    <p>Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos completamente casualizados</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bloco_casualizado</span><span class='op'>(</span><span class='va'>ntrat</span>, <span class='va'>nbloco</span>, nrep <span class='op'>=</span> <span class='fl'>1</span>, fun <span class='op'>=</span> <span class='va'>rnorm</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>anova_teste</span><span class='op'>(</span><span class='va'>dados</span>, <span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>bloco</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ntrat</th>
-      <td><p>Numero de tratamentos a serem simulados</p></td>
+      <th>dados</th>
+      <td><p>Data frame com colunas separadas para os tratamentos, os blocos e os resultados a serem analisados</p></td>
     </tr>
     <tr>
-      <th>nbloco</th>
-      <td><p>Numero de blocos a serem simulados</p></td>
+      <th>x</th>
+      <td><p>String com o nome da coluna dos tratamentos</p></td>
     </tr>
     <tr>
-      <th>fun</th>
-      <td><p>Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()</p></td>
+      <th>y</th>
+      <td><p>String com o nome da coluna dos resultados</p></td>
+    </tr>
+    <tr>
+      <th>bloco</th>
+      <td><p>String com o nome da coluna dos blocos</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Objeto de tipo lista com os elementos:</p><ul>
-<li><p><strong>dados</strong> Dados simulados em formato longo</p></li>
-<li><p><strong>dados_matriz</strong> Dados simulados em formato largo, como matiz</p></li>
-<li><p><strong>kable</strong> Texto em LaTeX da tabela pré-formatada</p></li>
-<li><p><strong>matriz</strong> Matriz dos dados simulados</p></li>
-</ul>
-
+    <p>Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>bloco_casualizado</span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $dados
-#&gt; <span style='color: #949494;'># A tibble: 8 x 3</span><span>
-#&gt;    Trat resultado bloco
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1    0.046</span><span style='text-decoration: underline;'>5</span><span> B1   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2    0.578  B1   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3    0.118  B1   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4   -</span><span style='color: #BB0000;'>1.91</span><span>   B1   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     1    0.862  B2   
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     2   -</span><span style='color: #BB0000;'>0.243</span><span>  B2   
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     3   -</span><span style='color: #BB0000;'>0.206</span><span>  B2   
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span>     4    0.019</span><span style='text-decoration: underline;'>2</span><span> B2   
+<span class='fu'><a href='anova_rbcd.html'>anova_rbcd</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"carb"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $a
+#&gt; [1] 3
 #&gt; 
-#&gt; $dados_matriz
-#&gt; </span><span style='color: #949494;'># A tibble: 4 x 3</span><span>
-#&gt;    Trat B1          B2         
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 </span><span style='color: #949494;'>"</span><span> 0.046531</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span> 0.862086</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 </span><span style='color: #949494;'>"</span><span> 0.577709</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span>-0.243237</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 </span><span style='color: #949494;'>"</span><span> 0.118195</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span>-0.206087</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 </span><span style='color: #949494;'>"</span><span>-1.911720</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span> 0.019178</span><span style='color: #949494;'>"</span><span>
+#&gt; $b
+#&gt; [1] 6
 #&gt; 
-#&gt; $matriz
-#&gt;             1           2
-#&gt; 1  0.04653138  0.86208648
-#&gt; 2  0.57770907 -0.24323674
-#&gt; 3  0.11819487 -0.20608719
-#&gt; 4 -1.91172049  0.01917759
+#&gt; $N
+#&gt; [1] 32
+#&gt; 
+#&gt; $y..
+#&gt; [1] 4694
+#&gt; 
+#&gt; $yi.
+#&gt;    3    4    5 
+#&gt; 2642 1074  978 
+#&gt; 
+#&gt; $y.j
+#&gt;    1    2    3    4    6    8 
+#&gt;  602 1172  540 1870  175  335 
+#&gt; 
+#&gt; $mu
+#&gt; [1] 146.6875
+#&gt; 
+#&gt; $tau
+#&gt;         3         4         5 
+#&gt; 2495.3125  927.3125  831.3125 
+#&gt; 
+#&gt; $beta
+#&gt;         1         2         3         4         6         8 
+#&gt;  455.3125 1025.3125  393.3125 1723.3125   28.3125  188.3125 
+#&gt; 
+#&gt; $sqt
+#&gt; [1] 145726.9
+#&gt; 
+#&gt; $sqtrat
+#&gt; [1] 826469.5
+#&gt; 
+#&gt; $sqbloco
+#&gt; [1] 1200562
+#&gt; 
+#&gt; $sqe
+#&gt; [1] -1881304
+#&gt; 
+#&gt; $qmtrat
+#&gt; [1] 413234.8
+#&gt; 
+#&gt; $qmbloco
+#&gt; [1] 240112.3
+#&gt; 
+#&gt; $qme
+#&gt; [1] -188130.4
+#&gt; 
+#&gt; $f0
+#&gt; [1] -2.196533
+#&gt; 
+#&gt; $pvalor
+#&gt; [1] 1
+#&gt; 
+#&gt; $estimados
+#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;   `$\\hat{\\beta}_i$` `$\\hat{\\beta}$` `$\\hat{\\mu}_i$` `$\\hat{\\mu}$`
+#&gt;                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                782.              636.             </span><span style='text-decoration: underline;'>1</span><span>565.            147.
+#&gt; </span><span style='color: #949494;'># … with 1 more variable: $\hat{\tau}$ &lt;dbl&gt;</span><span>
+#&gt; 
+#&gt; $modelo
+#&gt; $$\color{red}{y_{ij} = 146.6875 +
+#&gt; \tau_i + \beta_j + e_{ij}}$$
 #&gt; </div><div class='input'>
 </div></span></pre>
   </div>

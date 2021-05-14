@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>Gera valores de anova para RBCD — anova_rbcd • planejamento</title>
+<title>Gera valores de anova para RBCD teste — anova_rbcd • planejamento</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,7 +73,7 @@
 
 
 
-<meta property="og:title" content="Gera valores de anova para RBCD — anova_rbcd" />
+<meta property="og:title" content="Gera valores de anova para RBCD teste — anova_rbcd" />
 <meta property="og:description" content="Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos completamente casualizados" />
 
 
@@ -156,8 +156,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Gera valores de anova para RBCD</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/anova_rbcd.R'><code>R/anova_rbcd.R</code></a></small>
+    <h1>Gera valores de anova para RBCD teste</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
     <div class="hidden name"><code>anova_rbcd.Rd</code></div>
     </div>
 
@@ -201,12 +201,6 @@
 #&gt; $b
 #&gt; [1] 6
 #&gt; 
-#&gt; $N
-#&gt; [1] 32
-#&gt; 
-#&gt; $y..
-#&gt; [1] 4694
-#&gt; 
 #&gt; $yi.
 #&gt;    3    4    5 
 #&gt; 2642 1074  978 
@@ -219,12 +213,10 @@
 #&gt; [1] 146.6875
 #&gt; 
 #&gt; $tau
-#&gt;         3         4         5 
-#&gt; 2495.3125  927.3125  831.3125 
+#&gt; [1] 2495.3125  927.3125  831.3125
 #&gt; 
 #&gt; $beta
-#&gt;         1         2         3         4         6         8 
-#&gt;  455.3125 1025.3125  393.3125 1723.3125   28.3125  188.3125 
+#&gt; [1]  455.3125 1025.3125  393.3125 1723.3125   28.3125  188.3125
 #&gt; 
 #&gt; $sqt
 #&gt; [1] 145726.9
@@ -254,17 +246,10 @@
 #&gt; [1] 1
 #&gt; 
 #&gt; $estimados
-#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;   `$\\hat{\\beta}_i$` `$\\hat{\\beta}$` `$\\hat{\\mu}_i$` `$\\hat{\\mu}$`
-#&gt;                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                782.              636.             </span><span style='text-decoration: underline;'>1</span><span>565.            147.
-#&gt; </span><span style='color: #949494;'># … with 1 more variable: $\hat{\tau}$ &lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $modelo
-#&gt; $$\color{red}{y_{ij} = 146.6875 +
-#&gt; \tau_i + \beta_j + e_{ij}}$$
+#&gt;   X..hat..mu.. X..hat..tau.. X..hat..beta.. X..hat..tau._i. X..hat..beta._i.
+#&gt; 1     146.6875      1417.979       635.6458        1564.667         782.3333
 #&gt; </div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -66,7 +66,7 @@ bloco_incompleto <- function(ntrat, nbloco, k = 0, fun = rnorm)
                        bloco = paste0("B", bloco))
   
   ret_$dados_matriz <- ret_$dados %>%
-    mutate(resultado = ifelse(is.na(resultado), "-", as.character(resultado))) %>%
+    mutate(resultado = ifelse(is.na(resultado), "-", format(resultado, digits = 5))) %>%
     spread(bloco, resultado) 
   
   matriz <- ret_$dados %>%

@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>Simula delineamento de blocos incompletos — bloco_casualizado • planejamento</title>
+<title>Multiplicação de matrizes — mmult • planejamento</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,8 +73,8 @@
 
 
 
-<meta property="og:title" content="Simula delineamento de blocos incompletos — bloco_casualizado" />
-<meta property="og:description" content="Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições." />
+<meta property="og:title" content="Multiplicação de matrizes — mmult" />
+<meta property="og:description" content="Multplica duas matrizes." />
 
 
 
@@ -156,77 +156,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simula delineamento de blocos incompletos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/bloco_casualizado.R'><code>R/bloco_casualizado.R</code></a></small>
-    <div class="hidden name"><code>bloco_casualizado.Rd</code></div>
+    <h1>Multiplicação de matrizes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
+    <div class="hidden name"><code>mmult.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições.</p>
+    <p>Multplica duas matrizes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bloco_casualizado</span><span class='op'>(</span><span class='va'>ntrat</span>, <span class='va'>nbloco</span>, nrep <span class='op'>=</span> <span class='fl'>1</span>, fun <span class='op'>=</span> <span class='va'>rnorm</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mmult</span><span class='op'>(</span><span class='va'>m</span>, <span class='va'>v</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ntrat</th>
-      <td><p>Numero de tratamentos a serem simulados</p></td>
+      <th>m</th>
+      <td><p>Primeira matriz</p></td>
     </tr>
     <tr>
-      <th>nbloco</th>
-      <td><p>Numero de blocos a serem simulados</p></td>
-    </tr>
-    <tr>
-      <th>fun</th>
-      <td><p>Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()</p></td>
+      <th>v</th>
+      <td><p>Segunda matriz</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Objeto de tipo lista com os elementos:</p><ul>
-<li><p><strong>dados</strong> Dados simulados em formato longo</p></li>
-<li><p><strong>dados_matriz</strong> Dados simulados em formato largo, como matiz</p></li>
-<li><p><strong>kable</strong> Texto em LaTeX da tabela pré-formatada</p></li>
-<li><p><strong>matriz</strong> Matriz dos dados simulados</p></li>
-</ul>
+    <p>Matriz.</p>
 
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>bloco_casualizado</span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $dados
-#&gt; <span style='color: #949494;'># A tibble: 8 x 3</span><span>
-#&gt;    Trat resultado bloco
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1    0.046</span><span style='text-decoration: underline;'>5</span><span> B1   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2    0.578  B1   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3    0.118  B1   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4   -</span><span style='color: #BB0000;'>1.91</span><span>   B1   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     1    0.862  B2   
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     2   -</span><span style='color: #BB0000;'>0.243</span><span>  B2   
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     3   -</span><span style='color: #BB0000;'>0.206</span><span>  B2   
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span>     4    0.019</span><span style='text-decoration: underline;'>2</span><span> B2   
-#&gt; 
-#&gt; $dados_matriz
-#&gt; </span><span style='color: #949494;'># A tibble: 4 x 3</span><span>
-#&gt;    Trat B1          B2         
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 </span><span style='color: #949494;'>"</span><span> 0.046531</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span> 0.862086</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 </span><span style='color: #949494;'>"</span><span> 0.577709</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span>-0.243237</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 </span><span style='color: #949494;'>"</span><span> 0.118195</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span>-0.206087</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 </span><span style='color: #949494;'>"</span><span>-1.911720</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span> 0.019178</span><span style='color: #949494;'>"</span><span>
-#&gt; 
-#&gt; $matriz
-#&gt;             1           2
-#&gt; 1  0.04653138  0.86208648
-#&gt; 2  0.57770907 -0.24323674
-#&gt; 3  0.11819487 -0.20608719
-#&gt; 4 -1.91172049  0.01917759
-#&gt; </div><div class='input'>
-</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
