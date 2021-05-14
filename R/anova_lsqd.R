@@ -7,6 +7,7 @@
 #' @param y String com o nome da coluna dos resultados
 #' @param linha String com o nome da coluna do data frame que representa a linha do quadrado latino
 #' @param coluna String com o nome da coluna do data frame que representa a coluna do quadrado latino
+#' @param replica String com o nome da coluna do data frame que representa as replicas
 #'
 #' @import glue
 #' @import tidyr

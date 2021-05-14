@@ -4,6 +4,7 @@
 #'
 #' @param n Número de linhas (ou colunas)
 #' @param fun Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()
+#' @param nrep Número de réplicas a serem feitas, Padrão = 1
 #'
 #' @import dplyr
 #'

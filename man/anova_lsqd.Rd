@@ -16,6 +16,8 @@ anova_lsqd(dados, x, y, linha, coluna, replica = NULL)
 \item{linha}{String com o nome da coluna do data frame que representa a linha do quadrado latino}
 
 \item{coluna}{String com o nome da coluna do data frame que representa a coluna do quadrado latino}
+
+\item{replica}{String com o nome da coluna do data frame que representa as replicas}
 }
 \value{
 Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.

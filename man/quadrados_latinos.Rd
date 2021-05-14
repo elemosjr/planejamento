@@ -9,6 +9,8 @@ quadrados_latinos(n, nrep = 1, fun = rnorm)
 \arguments{
 \item{n}{Número de linhas (ou colunas)}
 
+\item{nrep}{Número de réplicas a serem feitas, Padrão = 1}
+
 \item{fun}{Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()}
 }
 \value{
