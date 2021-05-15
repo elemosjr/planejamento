@@ -4,7 +4,7 @@
 \alias{bloco_incompleto}
 \title{Simula delineamento de blocos incompletos}
 \usage{
-bloco_incompleto(ntrat, nbloco, k = 0, fun = rnorm)
+bloco_incompleto(ntrat, nbloco, k = NULL, fun = rnorm)
 }
 \arguments{
 \item{ntrat}{Numero de tratamentos a serem simulados}

@@ -25,15 +25,15 @@
 #'
 #' @export
 
-bloco_incompleto <- function(ntrat, nbloco, k = 0, fun = rnorm)
+bloco_incompleto <- function(ntrat, nbloco, k = NULL, fun = rnorm)
 {
   resultado <- fun(ntrat*nbloco)
   
-  if(k > ntrat) stop("k deve ser igual ou menor que o número de tratamentos!")
-  if(k < 0) stop("k deve ser um número positivo!")
-  
-  if(k != ntrat)
+  if(!is.null(k))
   {
+    if(k > ntrat) stop("k deve ser igual ou menor que o número de tratamentos!")
+    if(k < 0) stop("k deve ser um número positivo!")
+    
     n_na <- ntrat - k
     
     combinacoes <- combn(1:ntrat, n_na)
