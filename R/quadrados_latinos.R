@@ -1,6 +1,6 @@
 #' Simula delineamento de quadrados latinos
 #'
-#' @description Simula um delineamento em quadrados latinos a partir de um banco de dados
+#' @description Simula um delineamento em quadrados latinos
 #'
 #' @param n Número de linhas (ou colunas)
 #' @param fun Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()

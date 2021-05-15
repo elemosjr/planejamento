@@ -29,6 +29,33 @@ anova_bibd <- function(dados, x, y, bloco) {
 #'
 #' @param dados Data frame com colunas separadas para os tratamentos, os blocos e os resultados a serem analisados
 #' @param x String com o nome da coluna dos tratamentos
+#' @param chi String com o nome da coluna dos outros tratamentos
+#' @param y String com o nome da coluna dos resultados
+#' @param linha String com o nome da coluna do data frame que representa a linha do quadrado latino
+#' @param coluna String com o nome da coluna do data frame que representa a coluna do quadrado latino
+#'
+#' @import glue
+#' @import tidyr
+#'
+#' @return Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.
+#' 
+#' @examples
+#'
+#' quadrados_latinos(4)$dados %>%
+#'  anova_lsqd("tratamento", "resultado", "linha", "coluna")
+#'
+#' @export
+#'
+anova_glsqd <- function(dados, x, chi, y, linha, coluna) {
+    .Call(`_planejamento_anova_glsqd`, dados, x, chi, y, linha, coluna)
+}
+
+#' Gera valores de anova para Quadrados Latinos
+#'
+#' @description Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadrados latinos
+#'
+#' @param dados Data frame com colunas separadas para os tratamentos, os blocos e os resultados a serem analisados
+#' @param x String com o nome da coluna dos tratamentos
 #' @param y String com o nome da coluna dos resultados
 #' @param linha String com o nome da coluna do data frame que representa a linha do quadrado latino
 #' @param coluna String com o nome da coluna do data frame que representa a coluna do quadrado latino

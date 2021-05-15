@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>Simula delineamento de quadrados latinos — quadrados_latinos • planejamento</title>
+<title>Simula delineamento de quadrados greco-latinos — quadrados_glatinos • planejamento</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,8 +73,8 @@
 
 
 
-<meta property="og:title" content="Simula delineamento de quadrados latinos — quadrados_latinos" />
-<meta property="og:description" content="Simula um delineamento em quadrados latinos" />
+<meta property="og:title" content="Simula delineamento de quadrados greco-latinos — quadrados_glatinos" />
+<meta property="og:description" content="Simula um delineamento em quadrados greco-latinos" />
 
 
 
@@ -156,16 +156,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simula delineamento de quadrados latinos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/quadrados_latinos.R'><code>R/quadrados_latinos.R</code></a></small>
-    <div class="hidden name"><code>quadrados_latinos.Rd</code></div>
+    <h1>Simula delineamento de quadrados greco-latinos</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/quadrados_glatinos.R'><code>R/quadrados_glatinos.R</code></a></small>
+    <div class="hidden name"><code>quadrados_glatinos.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Simula um delineamento em quadrados latinos</p>
+    <p>Simula um delineamento em quadrados greco-latinos</p>
     </div>
 
-    <pre class="usage"><span class='fu'>quadrados_latinos</span><span class='op'>(</span><span class='va'>n</span>, nrep <span class='op'>=</span> <span class='fl'>1</span>, fun <span class='op'>=</span> <span class='va'>rnorm</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>quadrados_glatinos</span><span class='op'>(</span><span class='va'>n</span>, fun <span class='op'>=</span> <span class='va'>rnorm</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,12 +175,12 @@
       <td><p>Número de linhas (ou colunas)</p></td>
     </tr>
     <tr>
-      <th>nrep</th>
-      <td><p>Número de réplicas a serem feitas, Padrão = 1</p></td>
-    </tr>
-    <tr>
       <th>fun</th>
       <td><p>Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()</p></td>
+    </tr>
+    <tr>
+      <th>nrep</th>
+      <td><p>Número de réplicas a serem feitas, Padrão = 1</p></td>
     </tr>
     </table>
 
@@ -190,64 +190,43 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>quadrados_latinos</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $dados_resumidos
-#&gt; <span style='color: #949494;'># A tibble: 16 x 4</span><span>
-#&gt;    resultado tratamento coluna linha
-#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     0.496 [4]             1     1
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     0.901 [1]             1     2
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     1.62  [2]             1     3
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     0.379 [3]             1     4
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>    -</span><span style='color: #BB0000;'>0.169</span><span> [1]             2     1
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>    -</span><span style='color: #BB0000;'>0.542</span><span> [2]             2     2
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>    -</span><span style='color: #BB0000;'>1.45</span><span>  [3]             2     3
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     0.180 [4]             2     4
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     0.498 [2]             3     1
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>    -</span><span style='color: #BB0000;'>1.29</span><span>  [3]             3     2
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span>     0.755 [4]             3     3
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span>    -</span><span style='color: #BB0000;'>0.267</span><span> [1]             3     4
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span>     0.642 [3]             4     1
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span>    -</span><span style='color: #BB0000;'>0.417</span><span> [4]             4     2
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span>    -</span><span style='color: #BB0000;'>1.22</span><span>  [1]             4     3
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span>     2.13  [2]             4     4
-#&gt; 
-#&gt; $dados
-#&gt; </span><span style='color: #949494;'># A tibble: 16 x 5</span><span>
-#&gt;    resultado tratamento coluna linha replica
-#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     0.496 4               1     1       1
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     0.901 1               1     2       1
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     1.62  2               1     3       1
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     0.379 3               1     4       1
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>    -</span><span style='color: #BB0000;'>0.169</span><span> 1               2     1       1
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>    -</span><span style='color: #BB0000;'>0.542</span><span> 2               2     2       1
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>    -</span><span style='color: #BB0000;'>1.45</span><span>  3               2     3       1
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     0.180 4               2     4       1
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     0.498 2               3     1       1
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>    -</span><span style='color: #BB0000;'>1.29</span><span>  3               3     2       1
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span>     0.755 4               3     3       1
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span>    -</span><span style='color: #BB0000;'>0.267</span><span> 1               3     4       1
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span>     0.642 3               4     1       1
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span>    -</span><span style='color: #BB0000;'>0.417</span><span> 4               4     2       1
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span>    -</span><span style='color: #BB0000;'>1.22</span><span>  1               4     3       1
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span>     2.13  2               4     4       1
+<span class='fu'>quadrados_glatinos</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $dados
+#&gt; <span style='color: #949494;'># A tibble: 16 x 5</span><span>
+#&gt;    resultado tratamento trat_g coluna linha
+#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>    0.168  2          2           1     1
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>    1.18   1          4           1     2
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>    1.53   3          1           1     3
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>   -</span><span style='color: #BB0000;'>0.565</span><span>  4          3           1     4
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>    0.296  3          3           2     1
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>   -</span><span style='color: #BB0000;'>0.249</span><span>  2          1           2     2
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>   -</span><span style='color: #BB0000;'>0.207</span><span>  4          2           2     3
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>    0.822  1          4           2     4
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>    0.704  4          4           3     1
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>   -</span><span style='color: #BB0000;'>0.158</span><span>  3          2           3     2
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span>   -</span><span style='color: #BB0000;'>0.177</span><span>  1          3           3     3
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span>    1.42   2          1           3     4
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span>   -</span><span style='color: #BB0000;'>1.32</span><span>   1          1           4     1
+#&gt; </span><span style='color: #BCBCBC;'>14</span><span>   -</span><span style='color: #BB0000;'>0.061</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> 4          3           4     2
+#&gt; </span><span style='color: #BCBCBC;'>15</span><span>    0.095</span><span style='text-decoration: underline;'>6</span><span> 2          4           4     3
+#&gt; </span><span style='color: #BCBCBC;'>16</span><span>   -</span><span style='color: #BB0000;'>0.543</span><span>  3          2           4     4
 #&gt; 
 #&gt; $dados_matriz
 #&gt; </span><span style='color: #949494;'># A tibble: 4 x 5</span><span>
-#&gt;   linha `1`   `2`   `3`   `4`  
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 [4]   [1]   [2]   [3]  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 [1]   [2]   [3]   [4]  
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 [2]   [3]   [4]   [1]  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 [3]   [4]   [1]   [2]  
+#&gt;   linha `1`    `2`    `3`    `4`   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;glue&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;glue&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;glue&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;glue&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 [2, 2] [3, 3] [4, 4] [1, 1]
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 [1, 4] [2, 1] [3, 2] [4, 3]
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 [3, 1] [4, 2] [1, 3] [2, 4]
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 [4, 3] [1, 4] [2, 1] [3, 2]
 #&gt; 
 #&gt; $matriz
-#&gt;   1     2     3     4    
-#&gt; 1 "[4]" "[1]" "[2]" "[3]"
-#&gt; 2 "[1]" "[2]" "[3]" "[4]"
-#&gt; 3 "[2]" "[3]" "[4]" "[1]"
-#&gt; 4 "[3]" "[4]" "[1]" "[2]"
+#&gt;   1        2        3        4       
+#&gt; 1 "[2, 2]" "[3, 3]" "[4, 4]" "[1, 1]"
+#&gt; 2 "[1, 4]" "[2, 1]" "[3, 2]" "[4, 3]"
+#&gt; 3 "[3, 1]" "[4, 2]" "[1, 3]" "[2, 4]"
+#&gt; 4 "[4, 3]" "[1, 4]" "[2, 1]" "[3, 2]"
 #&gt; </div><div class='input'>
 </div></span></pre>
   </div>

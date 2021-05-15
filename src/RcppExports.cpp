@@ -19,6 +19,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// anova_glsqd
+List anova_glsqd(DataFrame dados, std::string x, std::string chi, std::string y, std::string linha, std::string coluna);
+RcppExport SEXP _planejamento_anova_glsqd(SEXP dadosSEXP, SEXP xSEXP, SEXP chiSEXP, SEXP ySEXP, SEXP linhaSEXP, SEXP colunaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type dados(dadosSEXP);
+    Rcpp::traits::input_parameter< std::string >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type chi(chiSEXP);
+    Rcpp::traits::input_parameter< std::string >::type y(ySEXP);
+    Rcpp::traits::input_parameter< std::string >::type linha(linhaSEXP);
+    Rcpp::traits::input_parameter< std::string >::type coluna(colunaSEXP);
+    rcpp_result_gen = Rcpp::wrap(anova_glsqd(dados, x, chi, y, linha, coluna));
+    return rcpp_result_gen;
+END_RCPP
+}
 // anova_lsqd
 List anova_lsqd(DataFrame dados, std::string x, std::string y, std::string linha, std::string coluna, std::string replica);
 RcppExport SEXP _planejamento_anova_lsqd(SEXP dadosSEXP, SEXP xSEXP, SEXP ySEXP, SEXP linhaSEXP, SEXP colunaSEXP, SEXP replicaSEXP) {
@@ -87,6 +103,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_planejamento_anova_bibd", (DL_FUNC) &_planejamento_anova_bibd, 4},
+    {"_planejamento_anova_glsqd", (DL_FUNC) &_planejamento_anova_glsqd, 6},
     {"_planejamento_anova_lsqd", (DL_FUNC) &_planejamento_anova_lsqd, 6},
     {"_planejamento_anova_rbcd", (DL_FUNC) &_planejamento_anova_rbcd, 4},
     {"_planejamento_soma_grupo", (DL_FUNC) &_planejamento_soma_grupo, 2},
