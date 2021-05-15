@@ -195,59 +195,91 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>anova_rbcd</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='st'>"gear"</span>, <span class='st'>"hp"</span>, <span class='st'>"carb"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $a
+</div><div class='output co'>#&gt; $stat
+#&gt; $stat$a
 #&gt; [1] 3
 #&gt; 
-#&gt; $b
+#&gt; $stat$b
 #&gt; [1] 6
 #&gt; 
-#&gt; $yi.
+#&gt; $stat$N
+#&gt; [1] 32
+#&gt; 
+#&gt; $stat$y..
+#&gt; [1] 4694
+#&gt; 
+#&gt; $stat$yi.
 #&gt;    3    4    5 
 #&gt; 2642 1074  978 
 #&gt; 
-#&gt; $y.j
+#&gt; $stat$y.j
 #&gt;    1    2    3    4    6    8 
 #&gt;  602 1172  540 1870  175  335 
 #&gt; 
-#&gt; $mu
+#&gt; $stat$mu
 #&gt; [1] 146.6875
 #&gt; 
-#&gt; $tau
+#&gt; $stat$tau
 #&gt; [1] 2495.3125  927.3125  831.3125
 #&gt; 
-#&gt; $beta
+#&gt; $stat$beta
 #&gt; [1]  455.3125 1025.3125  393.3125 1723.3125   28.3125  188.3125
 #&gt; 
-#&gt; $sqt
+#&gt; $stat$tau_
+#&gt; [1] 1417.979
+#&gt; 
+#&gt; $stat$beta_
+#&gt; [1] 635.6458
+#&gt; 
+#&gt; $stat$tau_i
+#&gt; [1] 1564.667
+#&gt; 
+#&gt; $stat$beta_i
+#&gt; [1] 782.3333
+#&gt; 
+#&gt; 
+#&gt; $anova_df
+#&gt;   Fonte.de.variação Graus.de.liberdade Quadrado.Médio        F0 p.valor
+#&gt; 1              gear                  2       413234.8 -2.196533       1
+#&gt; 2              carb                  5       240112.3 -1.276308       1
+#&gt; 3             Erros                 10      -188130.4       NaN     NaN
+#&gt; 4             Total                 31            NaN       NaN     NaN
+#&gt; 
+#&gt; $anova_list
+#&gt; $anova_list$sqt
 #&gt; [1] 145726.9
 #&gt; 
-#&gt; $sqtrat
+#&gt; $anova_list$sqtrat
 #&gt; [1] 826469.5
 #&gt; 
-#&gt; $sqbloco
+#&gt; $anova_list$sqbloco
 #&gt; [1] 1200562
 #&gt; 
-#&gt; $sqe
+#&gt; $anova_list$sqe
 #&gt; [1] -1881304
 #&gt; 
-#&gt; $qmtrat
+#&gt; $anova_list$qmtrat
 #&gt; [1] 413234.8
 #&gt; 
-#&gt; $qmbloco
+#&gt; $anova_list$qmbloco
 #&gt; [1] 240112.3
 #&gt; 
-#&gt; $qme
+#&gt; $anova_list$qme
 #&gt; [1] -188130.4
 #&gt; 
-#&gt; $f0
+#&gt; $anova_list$f0
 #&gt; [1] -2.196533
 #&gt; 
-#&gt; $pvalor
+#&gt; $anova_list$pvalor
 #&gt; [1] 1
+#&gt; 
 #&gt; 
 #&gt; $estimados
 #&gt;   X..hat..mu.. X..hat..tau.. X..hat..beta.. X..hat..tau._i. X..hat..beta._i.
 #&gt; 1     146.6875      1417.979       635.6458        1564.667         782.3333
+#&gt; 
+#&gt; $pvalor
+#&gt; [1] 1
 #&gt; </div><div class='input'>
 </div></pre>
   </div>

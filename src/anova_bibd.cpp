@@ -74,7 +74,7 @@ List anova_bibd(DataFrame dados, std::string x, std::string y, std::string bloco
     }
   }
   nijvec.attr("dim") = Dimension(a, b);
-  NumericMatrix nij = as<NumericMatrix>(nijvec);
+  NumericMatrix nij = transpose(as<NumericMatrix>(nijvec));
   
   NumericMatrix yi_matrix(a, 1, yi_.begin());
   NumericMatrix y_jmatrix(b, 1, y_j.begin());
@@ -85,46 +85,90 @@ List anova_bibd(DataFrame dados, std::string x, std::string y, std::string bloco
   {
     Qi[i] = yi_matrix[i] - Qitmp[i];
   }
+
+  NumericVector Qi2 = pow(Qi, 2);
   
-  double sqtrat_aj = k * sum(pow(Qi, 2)) / lambda * a;
+  double sqtrat_aj = k * sum(Qi2) / (lambda * a);
   double sqe = sqt- sqtrat_aj - sqbloco;
   double qmtrat_aj = sqtrat_aj / (a-1);
   double qmbloco = sqbloco / (b-1);
   double qme = sqe / (N - a - b + 1);
   
   double f0 = qmtrat_aj / qme;
-  double pvalor = R::pf(f0, N - 1, N - a - b + 1, false, false);
+  double pvalor = R::pf(f0, a - 1, N - a - b + 1, false, false);
+  double pbloco = R::pf(qmbloco/qme, b - 1, N - a - b + 1, false, false);
   
   double tau_ = mean(tau);
   double beta_ = mean(beta);
   double tau_i = mean(yi_);
   double beta_i = mean(y_j);
   
-  DataFrame estimados = DataFrame::create(Named("`$\\hat{\\mu}$`") = mu,
-                                          Named("`$\\hat{\\tau}$`") = tau_,
-                                          Named("`$\\hat{\\beta}$`") = beta_,
-                                          Named("`$\\hat{\\tau}_i$`") = tau_i,
-                                          Named("`$\\hat{\\beta}_i$`") = beta_i);
+  List stat = List::create(
+    Named("a") = a,
+    Named("b") = b,
+    Named("N") = N,
+    Named("r") = r,
+    Named("k") = k,
+    Named("lambda") = lambda,
+    Named("y..") = y__,
+    Named("yi.") = yi_,
+    Named("y.j") = y_j,
+    Named("nij") = nij,
+    Named("Qi") = Qi,
+    Named("Qi2") = Qi2,
+    Named("mu") = mu,
+    Named("tau") = tau,
+    Named("beta") = beta,
+    Named("tau_") = tau_,
+    Named("beta_") = beta_,
+    Named("tau_i") = tau_i,
+    Named("beta_i") = beta_i
+  );
   
-  List L = List::create(Named("a") = a,
-                        Named("b") = b,
-                        Named("N") = N,
-                        Named("lambda") = lambda,
-                        Named("y..") = y__,
-                        Named("yi.") = yi_,
-                        Named("y.j") = y_j,
-                        Named("mu") = mu,
-                        Named("tau") = tau,
-                        Named("beta") = beta,
-                        Named("sqt") = sqt,
-                        Named("sqtrat_aj") = sqtrat_aj,
-                        Named("sqbloco") = sqbloco,
-                        Named("sqe") = sqe,
-                        Named("qmtrat_aj") = qmtrat_aj,
-                        Named("qmbloco") = qmbloco,
-                        Named("qme") = qme,
-                        Named("f0") = f0,
-                        Named("pvalor") = pvalor,
-                        Named("estimados") = estimados);
+  DataFrame anova_df = DataFrame::create(
+    Named("Fonte de variação") = CharacterVector::create(
+      x, bloco, "Erros", "Total"
+    ),
+    Named("Graus de liberdade") = NumericVector::create(
+      a-1, b-1, N - a - b + 1, N-1
+    ),
+    Named("Quadrado Médio") = NumericVector::create(
+      qmtrat_aj, qmbloco, qme, R_NaN
+    ),
+    Named("F0") = NumericVector::create(
+      f0, qmbloco/qme, R_NaN, R_NaN
+    ),
+    Named("p-valor") = NumericVector::create(
+      pvalor, pbloco, R_NaN, R_NaN
+    )
+  );
+  
+  List anova_list = List::create(
+    Named("sqt") = sqt,
+    Named("sqtrat_aj") = sqtrat_aj,
+    Named("sqbloco") = sqbloco,
+    Named("sqe") = sqe,
+    Named("qmtrat_aj") = qmtrat_aj,
+    Named("qmbloco") = qmbloco,
+    Named("qme") = qme,
+    Named("f0") = f0,
+    Named("pvalor") = pvalor
+  );
+  
+  DataFrame estimados = DataFrame::create(
+    Named("$\\hat{\\mu}$") = mu,
+    Named("$\\hat{\\tau}$") = tau_,
+    Named("$\\hat{\\beta}$") = beta_,
+    Named("$\\hat{\\tau}_i$") = tau_i,
+    Named("$\\hat{\\beta}_i$") = beta_i
+  );
+  
+  List L = List::create(
+    Named("stat") = stat,
+    Named("anova_df") = anova_df,
+    Named("anova_list") = anova_list,
+    Named("estimados") = estimados,
+    Named("pvalor") = pvalor
+  );
   return L;
 }

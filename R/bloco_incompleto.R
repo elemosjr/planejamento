@@ -61,9 +61,9 @@ bloco_incompleto <- function(ntrat, nbloco, k = NULL, fun = rnorm)
     sapply(function(x) paste0(paste0(rep("0", nchar(max(bloco)) - 1),
                                      collapse = ""), x))
   
-  ret_$dados <- tibble(Trat = rep(1:ntrat, nbloco),
+  ret_$dados <- tibble(Trat = as.factor(rep(1:ntrat, nbloco)),
                        resultado = as.numeric(resultado),
-                       bloco = paste0("B", bloco))
+                       bloco = as.factor(paste0("B", bloco)))
   
   ret_$dados_matriz <- ret_$dados %>%
     mutate(resultado = ifelse(is.na(resultado), "-", format(resultado, digits = 5))) %>%

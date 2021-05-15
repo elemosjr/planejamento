@@ -58,34 +58,75 @@ List anova_rbcd(DataFrame dados, std::string x, std::string y, std::string bloco
   
   double f0 = qmtrat / qme;
   double pvalor = R::pf(f0, a-1, (a-1) * (b-1), false, false);
+  double pbloco = R::pf(qmbloco / qme, b-1, (a-1) * (b-1), false, false);
   
   double tau_ = mean(tau);
   double beta_ = mean(beta);
   double tau_i = mean(yi_);
   double beta_i = mean(y_j);
   
-  DataFrame estimados = DataFrame::create(Named("$\\hat{\\mu}$") = mu,
-                                          Named("$\\hat{\\tau}$") = tau_,
-                                          Named("$\\hat{\\beta}$") = beta_,
-                                          Named("$\\hat{\\tau}_i$") = tau_i,
-                                          Named("$\\hat{\\beta}_i$") = beta_i);
+  List stat = List::create(
+    Named("a") = a,
+    Named("b") = b,
+    Named("N") = N,
+    Named("y..") = y__,
+    Named("yi.") = yi_,
+    Named("y.j") = y_j,
+    Named("mu") = mu,
+    Named("tau") = tau,
+    Named("beta") = beta,
+    Named("tau_") = tau_,
+    Named("beta_") = beta_,
+    Named("tau_i") = tau_i,
+    Named("beta_i") = beta_i
+  );
+
   
-  List L = List::create(Named("a") = a,
-                        Named("b") = b,
-                        Named("yi.") = yi_,
-                        Named("y.j") = y_j,
-                        Named("mu") = mu,
-                        Named("tau") = tau,
-                        Named("beta") = beta,
-                        Named("sqt") = sqt,
-                        Named("sqtrat") = sqtrat,
-                        Named("sqbloco") = sqbloco,
-                        Named("sqe") = sqe,
-                        Named("qmtrat") = qmtrat,
-                        Named("qmbloco") = qmbloco,
-                        Named("qme") = qme,
-                        Named("f0") = f0,
-                        Named("pvalor") = pvalor,
-                        Named("estimados") = estimados);
+  DataFrame anova_df = DataFrame::create(
+    Named("Fonte de variação") = CharacterVector::create(
+      x, bloco, "Erros", "Total"
+    ),
+    Named("Graus de liberdade") = NumericVector::create(
+      a-1, b-1, (a-1) * (b-1), N-1
+    ),
+    Named("Quadrado Médio") = NumericVector::create(
+      qmtrat, qmbloco, qme, R_NaN
+    ),
+    Named("F0") = NumericVector::create(
+      f0, qmbloco/qme, R_NaN, R_NaN
+    ),
+    Named("p-valor") = NumericVector::create(
+      pvalor, pbloco, R_NaN, R_NaN
+    )
+  );
+  
+  List anova_list = List::create(
+    Named("sqt") = sqt,
+    Named("sqtrat") = sqtrat,
+    Named("sqbloco") = sqbloco,
+    Named("sqe") = sqe,
+    Named("qmtrat") = qmtrat,
+    Named("qmbloco") = qmbloco,
+    Named("qme") = qme,
+    Named("f0") = f0,
+    Named("pvalor") = pvalor
+  );
+  
+  DataFrame estimados = DataFrame::create(
+    Named("$\\hat{\\mu}$") = mu,
+    Named("$\\hat{\\tau}$") = tau_,
+    Named("$\\hat{\\beta}$") = beta_,
+    Named("$\\hat{\\tau}_i$") = tau_i,
+    Named("$\\hat{\\beta}_i$") = beta_i
+  );
+  
+  List L = List::create(
+    Named("stat") = stat,
+    Named("anova_df") = anova_df,
+    Named("anova_list") = anova_list,
+    Named("estimados") = estimados,
+    Named("pvalor") = pvalor
+  );
+  
   return L;
 }
