@@ -6,10 +6,12 @@
 #'
 #' @description Análises múltiplas para ANOVA de delineamentos em quadrados latinos
 #'
+#' @param dados Data frame com colunas separadas para os tratamentos, resultados, linhas, colunas e, caso haja, blocos
 #' @param x String com o nome da coluna dos tratamentos
 #' @param y String com o nome da coluna dos resultados
-#' @param bloco String com o nome da coluna dos blocos, manter NULL caso não hajam blocos
-#' @param dados Data frame com colunas separadas para os tratamentos, resultados, e caso haja, blocos
+#' @param linha String com o nome da coluna dos linha
+#' @param coluna String com o nome da coluna dos coluna
+#' @param bloco String com o nome da coluna dos blocos, podendo ser as replicas, ou outro tratamento no caso de quadrados greco-latinos
 #' @param alpha Nivel de significancia a ser utilizado, padrao 0.05
 #' @param group Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos
 #'
@@ -30,22 +32,37 @@
 #'  
 #' @export
 
-comparacoes_lsqd <- function(dados, x, y, linha, coluna,  alpha = 0.05, group = FALSE)
+comparacoes_lsqd <- function(dados, x, y, linha, coluna, bloco = NULL,
+                             alpha = 0.05, group = FALSE)
 {
   if(!is.factor(dados[[x]])) dados[[x]] <- as.factor(dados[[x]])
   if(!is.factor(dados[[linha]])) dados[[linha]] <- as.factor(dados[[linha]])
   if(!is.factor(dados[[coluna]])) dados[[coluna]] <- as.factor(dados[[coluna]])
 
-  formula_ <- as.formula(glue("`{y}` ~ `{x}` + `{linha}` + `{coluna}`"))
-  
-  modelo_anova <- aov(formula_, data = dados)
-  
   ret_ <- list()
   
-  ret_$variaveis <- list(tratamento = x,
-                         linha = linha,
-                         coluna = coluna,
-                         resultado = y)
+  if(!is.null(bloco))
+  {
+    if(!is.factor(dados[[bloco]])) dados[[bloco]] <- as.factor(dados[[bloco]])
+    
+    formula_ <- as.formula(glue("`{y}` ~ `{x}` + `{linha}` + `{coluna}` + `{bloco}`"))
+    
+    ret_$variaveis <- list(tratamento = x,
+                           linha = linha,
+                           coluna = coluna,
+                           resultado = y,
+                           bloco = bloco)
+  } else
+  {
+    formula_ <- as.formula(glue("`{y}` ~ `{x}` + `{linha}` + `{coluna}`"))
+    
+    ret_$variaveis <- list(tratamento = x,
+                           linha = linha,
+                           coluna = coluna,
+                           resultado = y)
+  }
+  
+  modelo_anova <- aov(formula_, data = dados)
 
   ret_$formula <- formula_
   

@@ -4,20 +4,33 @@
 \alias{comparacoes_lsqd}
 \title{Comparacoes (Quadrados Latinos)}
 \usage{
-comparacoes_lsqd(dados, x, y, linha, coluna, alpha = 0.05, group = FALSE)
+comparacoes_lsqd(
+  dados,
+  x,
+  y,
+  linha,
+  coluna,
+  bloco = NULL,
+  alpha = 0.05,
+  group = FALSE
+)
 }
 \arguments{
-\item{dados}{Data frame com colunas separadas para os tratamentos, resultados, e caso haja, blocos}
+\item{dados}{Data frame com colunas separadas para os tratamentos, resultados, linhas, colunas e, caso haja, blocos}
 
 \item{x}{String com o nome da coluna dos tratamentos}
 
 \item{y}{String com o nome da coluna dos resultados}
 
+\item{linha}{String com o nome da coluna dos linha}
+
+\item{coluna}{String com o nome da coluna dos coluna}
+
+\item{bloco}{String com o nome da coluna dos blocos, podendo ser as replicas, ou outro tratamento no caso de quadrados greco-latinos}
+
 \item{alpha}{Nivel de significancia a ser utilizado, padrao 0.05}
 
 \item{group}{Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos}
-
-\item{bloco}{String com o nome da coluna dos blocos, manter NULL caso não hajam blocos}
 }
 \value{
 Objeto do tipo \code{comparacao_lsqd}, que contém:

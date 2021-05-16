@@ -165,14 +165,23 @@
     <p>Análises múltiplas para ANOVA de delineamentos em quadrados latinos</p>
     </div>
 
-    <pre class="usage"><span class='fu'>comparacoes_lsqd</span><span class='op'>(</span><span class='va'>dados</span>, <span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>linha</span>, <span class='va'>coluna</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, group <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>comparacoes_lsqd</span><span class='op'>(</span>
+  <span class='va'>dados</span>,
+  <span class='va'>x</span>,
+  <span class='va'>y</span>,
+  <span class='va'>linha</span>,
+  <span class='va'>coluna</span>,
+  bloco <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.05</span>,
+  group <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dados</th>
-      <td><p>Data frame com colunas separadas para os tratamentos, resultados, e caso haja, blocos</p></td>
+      <td><p>Data frame com colunas separadas para os tratamentos, resultados, linhas, colunas e, caso haja, blocos</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -183,16 +192,24 @@
       <td><p>String com o nome da coluna dos resultados</p></td>
     </tr>
     <tr>
+      <th>linha</th>
+      <td><p>String com o nome da coluna dos linha</p></td>
+    </tr>
+    <tr>
+      <th>coluna</th>
+      <td><p>String com o nome da coluna dos coluna</p></td>
+    </tr>
+    <tr>
+      <th>bloco</th>
+      <td><p>String com o nome da coluna dos blocos, podendo ser as replicas, ou outro tratamento no caso de quadrados greco-latinos</p></td>
+    </tr>
+    <tr>
       <th>alpha</th>
       <td><p>Nivel de significancia a ser utilizado, padrao 0.05</p></td>
     </tr>
     <tr>
       <th>group</th>
       <td><p>Valor lógico, onde quando verdadeiro, fará a análise de comparacoes multiplas por grupos</p></td>
-    </tr>
-    <tr>
-      <th>bloco</th>
-      <td><p>String com o nome da coluna dos blocos, manter NULL caso não hajam blocos</p></td>
     </tr>
     </table>
 
@@ -230,7 +247,7 @@
 #&gt; 
 #&gt; $formula
 #&gt; resultado ~ tratamento + linha + coluna
-#&gt; &lt;environment: 0x5591b295fa60&gt;
+#&gt; &lt;environment: 0x55835c750ae0&gt;
 #&gt; 
 #&gt; $modelos
 #&gt; $modelos$Modelo

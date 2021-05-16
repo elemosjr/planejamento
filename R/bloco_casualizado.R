@@ -37,18 +37,18 @@ bloco_casualizado <- function(ntrat, nbloco, nrep = 1, fun = rnorm)
   
   ret_$dados <- tibble(Trat = as.factor(rep(1:ntrat, nbloco*nrep)),
                        resultado = as.numeric(resultado),
-                       bloco = as.factor(paste0("B", bloco)))
+                       rep = c(replicate(nbloco, sort(rep(1:nrep, ntrat)))),
+                       bloco = as.factor(bloco))
   
   ret_$dados_matriz <- ret_$dados %>%
-    mutate(resultado = ifelse(is.na(resultado), "-", format(resultado, digits = 5))) %>%
+    mutate(resultado = ifelse(is.na(resultado), "-", format(resultado, digits = 5)),
+           bloco = paste0("B", bloco, "-", rep)) %>%
+    select(-rep) %>%
     spread(bloco, resultado) 
   
   matriz <- ret_$dados %>%
-    .$resultado %>% matrix(ntrat, nbloco)
-  
-  rownames(matriz) <- 1:ntrat
-  colnames(matriz) <- 1:nbloco
-  
+    .$resultado %>% matrix(ntrat, nbloco*nrep)
+
   ret_$matriz <- matriz
   
   ret_
