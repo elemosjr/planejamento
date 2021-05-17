@@ -1,8 +1,8 @@
-#' @title Regressão polinomial (DIC)
+#' @title Regressão polinomial
 #'
 #' @import ggplot2
 #'
-#' @description Regressões polinomiais de delineamentos inteiramente casualizados
+#' @description Regressões polinomiais de delineamentos
 #'
 #' @param dados Data frame com colunas separadas para os tratamentos, resultados, linhas, colunas e, caso haja, blocos
 #' @param x String com o nome da coluna dos tratamentos
@@ -28,11 +28,11 @@
 #' @examples 
 #' 
 #' bloco_casualizado(4, 1, 5)$dados %>%
-#'   reg_polinomial_dic("Trat", "resultado")
+#'   reg_polinomial("Trat", "resultado")
 #'  
 #' @export
 
-reg_polinomial_dic <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
+reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
 {
   if(!is.numeric(dados[[x]])) dados[[x]] <- as.numeric(dados[[x]])
   if(!is.numeric(dados[[y]])) dados[[y]] <- as.numeric(dados[[y]])
