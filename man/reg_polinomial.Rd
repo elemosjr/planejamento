@@ -4,7 +4,15 @@
 \alias{reg_polinomial}
 \title{Regressão polinomial}
 \usage{
-reg_polinomial(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
+reg_polinomial(
+  dados,
+  x,
+  y,
+  bloco = NULL,
+  grau = NULL,
+  alpha = 0.05,
+  uniroot_interval = NULL
+)
 }
 \arguments{
 \item{dados}{Data frame com colunas separadas para os tratamentos, resultados, linhas, colunas e, caso haja, blocos}
@@ -18,6 +26,8 @@ reg_polinomial(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
 \item{grau}{grau maximo a ser considerado no modelo}
 
 \item{alpha}{Nivel de significancia a ser utilizado, padrao 0.05}
+
+\item{uniroot_interval}{Vetor com dois valores indicando o intervalo para o calculo da raiz da derivada para o calculo do PMET.}
 }
 \value{
 Lista que contém:

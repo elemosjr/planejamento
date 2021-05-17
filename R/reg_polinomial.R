@@ -10,6 +10,7 @@
 #' @param bloco String com o nome da coluna dos blocos, caso haja 
 #' @param grau grau maximo a ser considerado no modelo
 #' @param alpha Nivel de significancia a ser utilizado, padrao 0.05
+#' @param uniroot_interval Vetor com dois valores indicando o intervalo para o calculo da raiz da derivada para o calculo do PMET.
 #'
 #' @return Lista que contém:
 #' * `formulas` Lista com as formulas de todos os possíveis modelos de regressão até o `grau` definido.
@@ -32,7 +33,8 @@
 #'  
 #' @export
 
-reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
+reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
+                           uniroot_interval = NULL)
 {
   if(!is.numeric(dados[[x]])) dados[[x]] <- as.numeric(dados[[x]])
   if(!is.numeric(dados[[y]])) dados[[y]] <- as.numeric(dados[[y]])
@@ -40,6 +42,8 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
   {
     if(!is.factor(dados[[bloco]])) dados[[bloco]] <- as.factor(dados[[bloco]])
   }
+  
+  if(is.null(uniroot_interval)) uniroot_interval <- c(min(dados[[x]]), max(dados[[x]]))
   
   gltrat <- length(unique(dados[[x]]))-1
   
@@ -101,7 +105,7 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
     for(i in seq_along(coef)) fun_str <- str_replace(fun_str, glue("coef\\[{i}\\]"), coef[i])
     fun <- eval(parse(text = fun_str))
     derivada <- Deriv::Deriv(fun)
-    raiz <- ifelse(idmodelo > 1, uniroot(derivada, c(-(2^1000), 2^1000))$root, NA)
+    raiz <- ifelse(idmodelo > 1, uniroot(derivada, uniroot_interval)$root, NA)
     pmet <- fun(raiz)
   }
   
@@ -121,16 +125,19 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05)
         geom_vline(xintercept = raiz, linetype = 3)
     }
   }
+  
+  modelo_ <- ifelse(!is.na(idmodelo), modelos[[idmodelo]], NULL)
 
   
   list(
     formula_str = formulas_str,
     modelos = modelos,
     falta_ajuste = falta_ajuste,
-    modelo = modelos,
+    modelo = modelo_,
     grau = idmodelo,
     plot = plot,
     coeficientes = coef,
+    fun_str = fun_str,
     fun = fun,
     derivada = derivada,
     raiz = raiz,
