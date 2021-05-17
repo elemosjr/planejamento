@@ -126,7 +126,13 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
     }
   }
   
-  modelo_ <- ifelse(!is.na(idmodelo), modelos[[idmodelo]], NULL)
+  if(!is.na(idmodelo))
+  {
+    modelo_ <- modelos[[idmodelo]]
+  } else
+  {
+    modelo_ <- NULL
+  }
 
   
   list(
