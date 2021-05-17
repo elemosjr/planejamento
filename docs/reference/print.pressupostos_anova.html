@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>Gera valores de anova para Quadrados Latinos — anova_lsqd • planejamento</title>
+<title>Print pressupostos — print.pressupostos_anova • planejamento</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,8 +73,8 @@
 
 
 
-<meta property="og:title" content="Gera valores de anova para Quadrados Latinos — anova_lsqd" />
-<meta property="og:description" content="Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadrados latinos" />
+<meta property="og:title" content="Print pressupostos — print.pressupostos_anova" />
+<meta property="og:description" content="Printa objeto de pressupostos de anova" />
 
 
 
@@ -156,160 +156,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Gera valores de anova para Quadrados Latinos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
-    <div class="hidden name"><code>anova_lsqd.Rd</code></div>
+    <h1>Print pressupostos</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/utilidades.R'><code>R/utilidades.R</code></a></small>
+    <div class="hidden name"><code>print.pressupostos_anova.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calcula valores utilizados para uma tabela de ANOVA de um delineamento em quadrados latinos</p>
+    <p>Printa objeto de pressupostos de anova</p>
     </div>
 
-    <pre class="usage"><span class='fu'>anova_lsqd</span><span class='op'>(</span><span class='va'>dados</span>, <span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>linha</span>, <span class='va'>coluna</span>, replica <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for pressupostos_anova</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dados</th>
-      <td><p>Data frame com colunas separadas para os tratamentos, os blocos e os resultados a serem analisados</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>String com o nome da coluna dos tratamentos</p></td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td><p>String com o nome da coluna dos resultados</p></td>
-    </tr>
-    <tr>
-      <th>linha</th>
-      <td><p>String com o nome da coluna do data frame que representa a linha do quadrado latino</p></td>
-    </tr>
-    <tr>
-      <th>coluna</th>
-      <td><p>String com o nome da coluna do data frame que representa a coluna do quadrado latino</p></td>
-    </tr>
-    <tr>
-      <th>replica</th>
-      <td><p>String com o nome da coluna do data frame que representa as replicas</p></td>
+      <th>p</th>
+      <td><p>Objeto de pressupostos</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Objeto de tipo lista contendo todos os valores utilizados para o calculo da tabela da ANOVA, os valores da tabela da ANOVA e os parâmetros estimados.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='quadrados_latinos.html'>quadrados_latinos</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>%&gt;%</span>
- <span class='fu'>anova_lsqd</span><span class='op'>(</span><span class='st'>"tratamento"</span>, <span class='st'>"resultado"</span>, <span class='st'>"linha"</span>, <span class='st'>"coluna"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $stat
-#&gt; $stat$N
-#&gt; [1] 16
-#&gt; 
-#&gt; $stat$p
-#&gt; [1] 4
-#&gt; 
-#&gt; $stat$n
-#&gt; [1] 1
-#&gt; 
-#&gt; $stat$y...
-#&gt; [1] 7.924357
-#&gt; 
-#&gt; $stat$yi..
-#&gt;        1        2        3        4 
-#&gt; 2.795857 1.734173 1.945296 1.449030 
-#&gt; 
-#&gt; $stat$y.j.
-#&gt;         1         2         3         4 
-#&gt;  2.879514 -1.019321  4.653764  1.410400 
-#&gt; 
-#&gt; $stat$y..k
-#&gt;        1        2        3        4 
-#&gt; 1.011920 2.973083 2.315280 1.624073 
-#&gt; 
-#&gt; $stat$mu
-#&gt; [1] 0.4952723
-#&gt; 
-#&gt; $stat$tau
-#&gt; [1]  2.3842419 -1.5145937  4.1584913  0.9151281
-#&gt; 
-#&gt; $stat$alpha
-#&gt; [1] 2.3005851 1.2389005 1.4500240 0.9537581
-#&gt; 
-#&gt; $stat$beta
-#&gt; [1] 0.5166477 2.4778110 1.8200080 1.1288010
-#&gt; 
-#&gt; $stat$tau_
-#&gt; [1] 1.485817
-#&gt; 
-#&gt; $stat$alpha_
-#&gt; [1] 1.485817
-#&gt; 
-#&gt; $stat$beta_
-#&gt; [1] 1.485817
-#&gt; 
-#&gt; $stat$tau_i
-#&gt; [1] 1.981089
-#&gt; 
-#&gt; $stat$alpha_i
-#&gt; [1] 1.981089
-#&gt; 
-#&gt; $stat$beta_i
-#&gt; [1] 1.981089
-#&gt; 
-#&gt; 
-#&gt; $anova_df
-#&gt;   Fonte.de.variação Graus.de.liberdade Quadrado.Médio        F0   p.valor
-#&gt; 1        tratamento                  3     1.43987546 7.8403434 0.0169036
-#&gt; 2             linha                  3     0.08409855 0.4579296 0.7216013
-#&gt; 3            coluna                  3     0.18020711 0.9812554 0.4618053
-#&gt; 4             Erros                  9     0.18364954 0.1836495       NaN
-#&gt; 5             Total                 15            NaN       NaN       NaN
-#&gt; 
-#&gt; $anova_list
-#&gt; $anova_list$sqt
-#&gt; [1] 6.214441
-#&gt; 
-#&gt; $anova_list$sqtrat
-#&gt; [1] 4.319626
-#&gt; 
-#&gt; $anova_list$sqlinha
-#&gt; [1] 0.2522957
-#&gt; 
-#&gt; $anova_list$sqcoluna
-#&gt; [1] 0.5406213
-#&gt; 
-#&gt; $anova_list$sqe
-#&gt; [1] 1.101897
-#&gt; 
-#&gt; $anova_list$qmtrat
-#&gt; [1] 1.439875
-#&gt; 
-#&gt; $anova_list$qmlinha
-#&gt; [1] 0.08409855
-#&gt; 
-#&gt; $anova_list$qmcoluna
-#&gt; [1] 0.1802071
-#&gt; 
-#&gt; $anova_list$f0
-#&gt; [1] 7.840343
-#&gt; 
-#&gt; $anova_list$pvalor
-#&gt; [1] 0.0169036
-#&gt; 
-#&gt; 
-#&gt; $estimados
-#&gt;   X..hat..mu.. X..hat..tau.. X..hat..alpha.. X..hat..beta.. X..hat..tau._i.
-#&gt; 1    0.4952723      1.485817        1.485817       1.485817        1.981089
-#&gt;   X..hat..alpha._i. X..hat..beta._i.
-#&gt; 1          1.981089         1.981089
-#&gt; 
-#&gt; $pvalor
-#&gt; [1] 0.0169036
-#&gt; </div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -3,6 +3,7 @@
 S3method(plot,comparacao)
 S3method(plot,comparacao_bib)
 S3method(plot,comparacao_lsqd)
+S3method(print,pressupostos_anova)
 export(anova_bibd)
 export(anova_glsqd)
 export(anova_lsqd)

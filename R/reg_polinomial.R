@@ -95,6 +95,7 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
   {  
     warning(glue("Não foi encontrado nenhum modelo significativo com alpha = {alpha}"))
     fun <- NULL
+    fun_str <- NULL
     pmet <- NULL
     raiz <- NULL
     derivada <- NULL
@@ -107,16 +108,12 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
     fun <- eval(parse(text = fun_str))
     derivada <- Deriv(fun)
     
-    raiz <- tryCatch(
-      ifelse(idmodelo > 1, uniroot(derivada, uniroot_interval)$root, NA),
-      error = function(e) dados[[x]][which(dados[[y]] == max(dados[[y]]))[1]]
-    )
+    tmp <- dados[[x]][which(dados[[y]] == max(dados[[y]]))[1]]
     
-    pmet <- fun(raiz)
-  }
-  
-  if(is.na(pmet) & is.na(raiz) & idmodelo == 1)
-  {
+    raiz <- tryCatch(
+      ifelse(idmodelo > 1, uniroot(derivada, uniroot_interval)$root, tmp),
+      error = function(e) tmp
+    )
     
     pmet <- fun(raiz)
   }

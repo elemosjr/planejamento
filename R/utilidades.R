@@ -109,3 +109,16 @@ estimando_ausentes <- function(dados, x, y, bloco)
   
   dados
 }
+
+#' Print pressupostos
+#'
+#' @description Printa objeto de pressupostos de anova
+#'
+#' @param p Objeto de pressupostos
+#' 
+#' @export
+print.pressupostos_anova <- function(p)
+{
+  print(rbind(sapply(p$testes, function(x) x$p.value)))
+  print(p$plot)
+}

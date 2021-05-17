@@ -109,7 +109,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">planejamento</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
@@ -230,7 +230,109 @@
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='bloco_casualizado.html'>bloco_casualizado</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>%&gt;%</span>
   <span class='fu'>reg_polinomial</span><span class='op'>(</span><span class='st'>"Trat"</span>, <span class='st'>"resultado"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Não foi encontrado nenhum modelo significativo com alpha = 0.05</span></div><div class='output co'>#&gt; <span class='error'>Error in if (is.na(pmet) &amp; is.na(raiz) &amp; idmodelo == 1) {    pmet &lt;- fun(raiz)}: argument is of length zero</span></div><div class='input'> 
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Não foi encontrado nenhum modelo significativo com alpha = 0.05</span></div><div class='output co'>#&gt; $formula_str
+#&gt; $formula_str[[1]]
+#&gt; `resultado` ~ + I(`Trat`^1)
+#&gt; 
+#&gt; $formula_str[[2]]
+#&gt; `resultado` ~ + I(`Trat`^1) + I(`Trat`^2)
+#&gt; 
+#&gt; $formula_str[[3]]
+#&gt; `resultado` ~ + I(`Trat`^1) + I(`Trat`^2) + I(`Trat`^3)
+#&gt; 
+#&gt; 
+#&gt; $modelos
+#&gt; $modelos[[1]]
+#&gt; Call:
+#&gt;    aov(formula = as.formula(formula_aov), data = dados)
+#&gt; 
+#&gt; Terms:
+#&gt;                 I(Trat^1) Residuals
+#&gt; Sum of Squares   0.281491 16.568802
+#&gt; Deg. of Freedom         1        18
+#&gt; 
+#&gt; Residual standard error: 0.9594212
+#&gt; Estimated effects may be unbalanced
+#&gt; 
+#&gt; $modelos[[2]]
+#&gt; Call:
+#&gt;    aov(formula = as.formula(formula_aov), data = dados)
+#&gt; 
+#&gt; Terms:
+#&gt;                 I(Trat^1) I(Trat^2) Residuals
+#&gt; Sum of Squares   0.281491  0.439354 16.129449
+#&gt; Deg. of Freedom         1         1        17
+#&gt; 
+#&gt; Residual standard error: 0.9740591
+#&gt; Estimated effects may be unbalanced
+#&gt; 
+#&gt; $modelos[[3]]
+#&gt; Call:
+#&gt;    aov(formula = as.formula(formula_aov), data = dados)
+#&gt; 
+#&gt; Terms:
+#&gt;                 I(Trat^1) I(Trat^2) I(Trat^3) Residuals
+#&gt; Sum of Squares   0.281491  0.439354  0.018263 16.111185
+#&gt; Deg. of Freedom         1         1         1        16
+#&gt; 
+#&gt; Residual standard error: 1.003469
+#&gt; Estimated effects may be unbalanced
+#&gt; 
+#&gt; 
+#&gt; $falta_ajuste
+#&gt; $falta_ajuste[[1]]
+#&gt; Analysis of Variance Table
+#&gt; 
+#&gt; Model 1: resultado ~ +I(Trat^1)
+#&gt; Model 2: resultado ~ +as.factor(Trat^1)
+#&gt;   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+#&gt; 1     18 16.569                           
+#&gt; 2     16 16.111  2   0.45762 0.2272 0.7993
+#&gt; 
+#&gt; $falta_ajuste[[2]]
+#&gt; Analysis of Variance Table
+#&gt; 
+#&gt; Model 1: resultado ~ +I(Trat^1) + I(Trat^2)
+#&gt; Model 2: resultado ~ +as.factor(Trat^1) + as.factor(Trat^2)
+#&gt;   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+#&gt; 1     17 16.129                           
+#&gt; 2     16 16.111  1  0.018263 0.0181 0.8945
+#&gt; 
+#&gt; $falta_ajuste[[3]]
+#&gt; Analysis of Variance Table
+#&gt; 
+#&gt; Model 1: resultado ~ +I(Trat^1) + I(Trat^2) + I(Trat^3)
+#&gt; Model 2: resultado ~ +as.factor(Trat^1) + as.factor(Trat^2) + as.factor(Trat^3)
+#&gt;   Res.Df    RSS Df  Sum of Sq F Pr(&gt;F)
+#&gt; 1     16 16.111                       
+#&gt; 2     16 16.111  0 3.5527e-15         
+#&gt; 
+#&gt; 
+#&gt; $modelo
+#&gt; NULL
+#&gt; 
+#&gt; $grau
+#&gt; [1] NA
+#&gt; 
+#&gt; $plot</div><div class='img'><img src='reg_polinomial-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; $coeficientes
+#&gt; NULL
+#&gt; 
+#&gt; $fun_str
+#&gt; NULL
+#&gt; 
+#&gt; $fun
+#&gt; NULL
+#&gt; 
+#&gt; $derivada
+#&gt; NULL
+#&gt; 
+#&gt; $raiz
+#&gt; NULL
+#&gt; 
+#&gt; $pmet
+#&gt; NULL
+#&gt; </div><div class='input'> 
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -38,7 +38,7 @@ pressupostos_anova <- function(dados, x, y)
   
   yi. <- tapply(dados[[y]], dados[[x]], sum)
   
-  qme <- last( a[[1]]$`Mean Sq` )
+  qme <- last( summary(modelo)[[1]]$`Mean Sq` )
   
   ajuste <- modelo$fitted.values
   eij <- modelo$residuals
@@ -53,7 +53,10 @@ pressupostos_anova <- function(dados, x, y)
   
   testes$shapiro <- shapiro.test(dij)
   
-  testes$cochran <- cochran.test(as.formula(formula_), dados)
+  testes$cochran <- tryCatch(
+    cochran.test(as.formula(formula_), dados),
+    error = function(e) NULL
+  )
   
   testes$barlett <- bartlett.test(as.formula(formula_), data = dados)
   
@@ -108,6 +111,8 @@ pressupostos_anova <- function(dados, x, y)
   
   ret_$plot <- plots$hist + plots$qqnorm + plots$resid_ajust + plots$ordem +
     plot_layout(2, 2)
+  
+  class(ret_) <- "pressupostos_anova"
   
   ret_
 }
