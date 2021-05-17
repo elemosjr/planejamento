@@ -31,8 +31,7 @@ List anova_rbcd(DataFrame dados, std::string x, std::string y, std::string bloco
   CharacterVector X = dados[x];
   NumericVector Y = dados[y];
   CharacterVector Bloco = dados[bloco];
-  X = na_omit(X); Y = na_omit(Y); Bloco = na_omit(Bloco);
-  
+
   if(X.size() != Y.size() | X.size() != Bloco.size()) stop("Comprimento dos vetores difere!");
   
   double a = unique(X).size();

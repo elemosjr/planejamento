@@ -31,14 +31,17 @@ bloco_casualizado <- function(ntrat, nbloco, nrep = 1, fun = rnorm)
   bloco <- sort(rep(1:nbloco, ntrat*nrep))
   . <- sapply(bloco, function(x) nchar(x) != nchar(max(bloco)))
   
-  bloco[.] <- bloco[.] %>%
-    sapply(function(x) paste0(paste0(rep("0", nchar(max(bloco)) - 1),
-                                     collapse = ""), x))
+  if(any(.))
+  {
+    bloco[which(.)] <- bloco[which(.)] %>%
+      sapply(function(x) paste0(paste0(rep("0", nchar(max(bloco)) - 1),
+                                       collapse = ""), x))
+  }
   
   ret_$dados <- tibble(Trat = as.factor(rep(1:ntrat, nbloco*nrep)),
                        resultado = as.numeric(resultado),
                        rep = c(replicate(nbloco, sort(rep(1:nrep, ntrat)))),
-                       bloco = as.factor(bloco))
+                       bloco = as.factor(c(bloco)))
   
   ret_$dados_matriz <- ret_$dados %>%
     mutate(resultado = ifelse(is.na(resultado), "-", format(resultado, digits = 5)),

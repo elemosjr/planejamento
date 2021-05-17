@@ -7,7 +7,7 @@ pkgcall <- function(pkg)
   }
 }
 
-.onAttach <- function(...) mapply(pkgcall, c("tidyverse", "knitr", "glue"))
+.onAttach <- function(...) mapply(pkgcall, c("tidyverse", "broom", "knitr", "glue"))
 
 #' @useDynLib planejamento, .registration=TRUE
 #' @importFrom Rcpp sourceCpp evalCpp

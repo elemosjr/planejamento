@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>Simula delineamento de blocos incompletos — bloco_casualizado • planejamento</title>
+<title>Regressão polinomial (DIC) — reg_polinomial_dic • planejamento</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,8 +73,8 @@
 
 
 
-<meta property="og:title" content="Simula delineamento de blocos incompletos — bloco_casualizado" />
-<meta property="og:description" content="Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições." />
+<meta property="og:title" content="Regressão polinomial (DIC) — reg_polinomial_dic" />
+<meta property="og:description" content="Regressões polinomiais de delineamentos inteiramente casualizados" />
 
 
 
@@ -156,77 +156,70 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simula delineamento de blocos incompletos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/bloco_casualizado.R'><code>R/bloco_casualizado.R</code></a></small>
-    <div class="hidden name"><code>bloco_casualizado.Rd</code></div>
+    <h1>Regressão polinomial (DIC)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/elemosjr/planejamento/blob/master/R/reg_polinomial_dic.R'><code>R/reg_polinomial_dic.R</code></a></small>
+    <div class="hidden name"><code>reg_polinomial_dic.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Simula um delineamento em blocos incompletos a partir de numeros de tratamentos, blocos e repetições.</p>
+    <p>Regressões polinomiais de delineamentos inteiramente casualizados</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bloco_casualizado</span><span class='op'>(</span><span class='va'>ntrat</span>, <span class='va'>nbloco</span>, nrep <span class='op'>=</span> <span class='fl'>1</span>, fun <span class='op'>=</span> <span class='va'>rnorm</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>reg_polinomial_dic</span><span class='op'>(</span><span class='va'>dados</span>, <span class='va'>x</span>, <span class='va'>y</span>, bloco <span class='op'>=</span> <span class='cn'>NULL</span>, grau <span class='op'>=</span> <span class='cn'>NULL</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ntrat</th>
-      <td><p>Numero de tratamentos a serem simulados</p></td>
+      <th>dados</th>
+      <td><p>Data frame com colunas separadas para os tratamentos, resultados, linhas, colunas e, caso haja, blocos</p></td>
     </tr>
     <tr>
-      <th>nbloco</th>
-      <td><p>Numero de blocos a serem simulados</p></td>
+      <th>x</th>
+      <td><p>String com o nome da coluna dos tratamentos</p></td>
     </tr>
     <tr>
-      <th>fun</th>
-      <td><p>Função que gere valores aleatórios cujo primeiro argumento é a quantidade de valores a serem gerados, Padrão = rnorm()</p></td>
+      <th>y</th>
+      <td><p>String com o nome da coluna dos resultados</p></td>
+    </tr>
+    <tr>
+      <th>bloco</th>
+      <td><p>String com o nome da coluna dos blocos, caso haja</p></td>
+    </tr>
+    <tr>
+      <th>grau</th>
+      <td><p>grau maximo a ser considerado no modelo</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Nivel de significancia a ser utilizado, padrao 0.05</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Objeto de tipo lista com os elementos:</p><ul>
-<li><p><strong>dados</strong> Dados simulados em formato longo</p></li>
-<li><p><strong>dados_matriz</strong> Dados simulados em formato largo, como matiz</p></li>
-<li><p><strong>kable</strong> Texto em LaTeX da tabela pré-formatada</p></li>
-<li><p><strong>matriz</strong> Matriz dos dados simulados</p></li>
+    <p>Lista que contém:</p><ul>
+<li><p><code>formulas</code> Lista com as formulas de todos os possíveis modelos de regressão até o <code>grau</code> definido.</p></li>
+<li><p><code>formula_str</code>Lista com as strings das formulas de todos os modelos de ANOVA de todos os possíveis modelos de regressão até o <code>grau</code> definido.</p></li>
+<li><p><code>modelos</code> Lista com  os modelos de ANOVA de todos os possíveis modelos de regressão até o <code>grau</code> definido.</p></li>
+<li><p><code>falta_ajuste</code> Lista com  as faltas de ajuste de todos os possíveis modelos de regressão até o <code>grau</code> definido.</p></li>
+<li><p><code>modelo</code> Modelo com o melhor ajuste.</p></li>
+<li><p><code>grau</code> Grau do modelo com melhor ajuste.</p></li>
+<li><p><code>plot</code> Gráfico dos dados com o modelo sobreposto.</p></li>
+<li><p><code>coeficiente</code> Coeficientes do modelo.</p></li>
+<li><p><code>fun</code> Função do modelo.</p></li>
+<li><p><code>derivada</code> Derivada da função do modelo.</p></li>
+<li><p><code>raiz</code> Valor da raiz da função do modelo.</p></li>
+<li><p><code>pmet</code> Ponto de máxima eficiência técnica.</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>bloco_casualizado</span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $dados
-#&gt; <span style='color: #949494;'># A tibble: 8 x 4</span><span>
-#&gt;   Trat  resultado   rep bloco
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1        -</span><span style='color: #BB0000;'>0.861</span><span>     1 1    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2         0.421     1 1    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 3         1.45      1 1    
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 4         0.194     1 1    
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 1        -</span><span style='color: #BB0000;'>0.691</span><span>     1 2    
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 2         1.34      1 2    
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span> 3         2.74      1 2    
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span> 4        -</span><span style='color: #BB0000;'>0.944</span><span>     1 2    
-#&gt; 
-#&gt; $dados_matriz
-#&gt; </span><span style='color: #949494;'># A tibble: 4 x 3</span><span>
-#&gt;   Trat  `B1-1`     `B2-1`    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1     </span><span style='color: #949494;'>"</span><span>-0.86072</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span>-0.69121</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2     </span><span style='color: #949494;'>"</span><span> 0.42123</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span> 1.33986</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 3     </span><span style='color: #949494;'>"</span><span> 1.45054</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span> 2.73611</span><span style='color: #949494;'>"</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 4     </span><span style='color: #949494;'>"</span><span> 0.19439</span><span style='color: #949494;'>"</span><span> </span><span style='color: #949494;'>"</span><span>-0.94410</span><span style='color: #949494;'>"</span><span>
-#&gt; 
-#&gt; $matriz
-#&gt;            [,1]       [,2]
-#&gt; [1,] -0.8607243 -0.6912054
-#&gt; [2,]  0.4212304  1.3398599
-#&gt; [3,]  1.4505432  2.7361084
-#&gt; [4,]  0.1943924 -0.9441017
-#&gt; </div><div class='input'>
-</div></span></pre>
+<span class='fu'><a href='bloco_casualizado.html'>bloco_casualizado</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>reg_polinom</span><span class='op'>(</span><span class='st'>"Trat"</span>, <span class='st'>"resultado"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in reg_polinom(., "Trat", "resultado"): could not find function "reg_polinom"</span></div><div class='input'> 
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
