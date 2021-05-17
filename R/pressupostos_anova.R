@@ -1,6 +1,7 @@
 #' @title Análise de pressupostos (ANOVA)
 #'
 #' @import ggplot2
+#' @import outliers
 #'
 #' @description Análises de pressupostos para o uso da ANOVA
 #'

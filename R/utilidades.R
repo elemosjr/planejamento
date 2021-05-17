@@ -8,7 +8,7 @@ pkgcall <- function(pkg)
 }
 
 .onAttach <- function(...) mapply(pkgcall, c("tidyverse", "broom", "patchwork",
-                                             "knitr", "glue", "outliers"))
+                                             "knitr", "glue", "outliers", "Deriv"))
 
 #' @useDynLib planejamento, .registration=TRUE
 #' @importFrom Rcpp sourceCpp evalCpp

@@ -1,6 +1,7 @@
 #' @title Regressão polinomial
 #'
 #' @import ggplot2
+#' @import Deriv
 #'
 #' @description Regressões polinomiais de delineamentos
 #'
@@ -104,7 +105,7 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
     coef <- as.character(coeficientes[[idmodelo]])
     for(i in seq_along(coef)) fun_str <- str_replace(fun_str, glue("coef\\[{i}\\]"), coef[i])
     fun <- eval(parse(text = fun_str))
-    derivada <- Deriv::Deriv(fun)
+    derivada <- Deriv(fun)
     raiz <- ifelse(idmodelo > 1, uniroot(derivada, uniroot_interval)$root, NA)
     pmet <- fun(raiz)
   }
