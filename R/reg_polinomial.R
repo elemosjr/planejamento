@@ -106,13 +106,18 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
     for(i in seq_along(coef)) fun_str <- str_replace(fun_str, glue("coef\\[{i}\\]"), coef[i])
     fun <- eval(parse(text = fun_str))
     derivada <- Deriv(fun)
-    raiz <- ifelse(idmodelo > 1, uniroot(derivada, uniroot_interval)$root, NA)
+    
+    raiz <- tryCatch(
+      ifelse(idmodelo > 1, uniroot(derivada, uniroot_interval)$root, NA),
+      error = function(e) dados[[x]][which(dados[[y]] == max(dados[[y]]))[1]]
+    )
+    
     pmet <- fun(raiz)
   }
   
   if(is.na(pmet) & is.na(raiz) & idmodelo == 1)
   {
-    raiz <- dados[[x]][which(dados[[y]] == max(dados[[y]]))[1]]
+    
     pmet <- fun(raiz)
   }
   
