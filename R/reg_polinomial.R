@@ -109,6 +109,12 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
     pmet <- fun(raiz)
   }
   
+  if(is.na(pmet) & is.na(raiz) & idmodelo == 1)
+  {
+    raiz <- dados[[x]][which(dados[[y]] == max(dados[[y]]))[1]]
+    pmet <- fun(raiz)
+  }
+  
   plot <- dados %>% ggplot(aes(x = .data[[x]], y = .data[[y]],
                                col = factor(.data[[x]]))) +
     geom_point() + labs(col = x) + theme(legend.position = "top")
@@ -116,14 +122,10 @@ reg_polinomial <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0.05,
   
   if(!is.na(idmodelo))
   {
-    plot <- plot + stat_function(fun = fun, col = 1)
+    plot <- plot + stat_function(fun = fun, col = 1) + 
+      geom_hline(yintercept = fun(raiz), linetype = 3) +
+      geom_vline(xintercept = raiz, linetype = 3)
 
-    if(idmodelo > 1)
-    {
-      plot <- plot + 
-        geom_hline(yintercept = fun(raiz), linetype = 3) +
-        geom_vline(xintercept = raiz, linetype = 3)
-    }
   }
   
   if(!is.na(idmodelo))
