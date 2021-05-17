@@ -42,6 +42,6 @@ Regressões polinomiais de delineamentos inteiramente casualizados
 \examples{
 
 bloco_casualizado(4, 1, 5)$dados \%>\%
-  reg_polinom("Trat", "resultado")
+  reg_polinomial_dic("Trat", "resultado")
  
 }

@@ -28,7 +28,7 @@
 #' @examples 
 #' 
 #' bloco_casualizado(4, 1, 5)$dados %>%
-#'   reg_polinom("Trat", "resultado")
+#'   reg_polinomial_dic("Trat", "resultado")
 #'  
 #' @export
 
@@ -36,7 +36,10 @@ reg_polinomial_dic <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0
 {
   if(!is.numeric(dados[[x]])) dados[[x]] <- as.numeric(dados[[x]])
   if(!is.numeric(dados[[y]])) dados[[y]] <- as.numeric(dados[[y]])
-  if(!is.null(bloco) & !is.factor(dados[[bloco]])) dados[[bloco]] <- as.factor(dados[[bloco]])
+  if(!is.null(bloco))
+  {
+    if(!is.factor(dados[[bloco]])) dados[[bloco]] <- as.factor(dados[[bloco]])
+  }
   
   gltrat <- length(unique(dados[[x]]))-1
   
@@ -87,6 +90,10 @@ reg_polinomial_dic <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0
   {  
     warning(glue("Não foi encontrado nenhum modelo significativo com alpha = {alpha}"))
     fun <- NULL
+    pmet <- NULL
+    raiz <- NULL
+    derivada <- NULL
+    coef <- NULL
   } else
   {
     fun_str <- str_replace(functions_str[[idmodelo]], "x, coef\\)", "x\\)")
@@ -95,31 +102,38 @@ reg_polinomial_dic <- function(dados, x, y, bloco = NULL, grau = NULL, alpha = 0
     fun <- eval(parse(text = fun_str))
     derivada <- Deriv::Deriv(fun)
     raiz <- ifelse(idmodelo > 1, uniroot(derivada, c(-(2^1000), 2^1000))$root, NA)
+    pmet <- fun(raiz)
   }
   
   plot <- dados %>% ggplot(aes(x = .data[[x]], y = .data[[y]],
                                col = factor(.data[[x]]))) +
-    geom_point() + stat_function(fun = fun, col = 1) +
-    labs(col = x) + theme(legend.position = "top")
+    geom_point() + labs(col = x) + theme(legend.position = "top")
   
-  if(idmodelo > 1)
+  
+  if(!is.na(idmodelo))
   {
-    plot <- plot + 
-      geom_hline(yintercept = fun(raiz), linetype = 3) +
-      geom_vline(xintercept = raiz, linetype = 3)
+    plot <- plot + stat_function(fun = fun, col = 1)
+
+    if(idmodelo > 1)
+    {
+      plot <- plot + 
+        geom_hline(yintercept = fun(raiz), linetype = 3) +
+        geom_vline(xintercept = raiz, linetype = 3)
+    }
   }
+
   
   list(
-    formula_str = formulas_str[[idmodelo]],
+    formula_str = formulas_str,
     modelos = modelos,
     falta_ajuste = falta_ajuste,
-    modelo = modelos[[idmodelo]],
+    modelo = modelos,
     grau = idmodelo,
     plot = plot,
-    coeficientes = coeficientes[[idmodelo]],
+    coeficientes = coef,
     fun = fun,
     derivada = derivada,
     raiz = raiz,
-    pmet = fun(raiz)
+    pmet = pmet
   )
 }
