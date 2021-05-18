@@ -23,7 +23,7 @@ Calcula valores utilizados para uma tabela de ANOVA de um delineamento em blocos
 }
 \examples{
 
-bloco_incompleto(4, 6, 2)$dados \%>\%
+bloco_incompleto(4, 4, 2)$dados \%>\%
   anova_bibd("Trat", "resultado", "bloco")
 
 }

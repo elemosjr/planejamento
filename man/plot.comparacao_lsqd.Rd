@@ -17,8 +17,8 @@ Graficos de comparacoes multiplas de delineamentos em quadrados latinos
 }
 \examples{
 
-comparacao <- quadrados_latinos(tibble(y = rnorm(16)), 1:4) \%>\%
-  comparacoes_lsqd("tratamento", "y", "linha", "coluna")
+comparacao <- quadrados_latinos(4)$dados \%>\%
+  comparacoes_lsqd("tratamento", "resultado", "linha", "coluna")
   
 plot(comparacao)
 

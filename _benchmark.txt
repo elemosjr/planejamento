@@ -1,0 +1,8 @@
+Unit: milliseconds
+                                        expr       min        lq      mean    median        uq        max neval   cld
+            anova_rbcd(dados_r, x, y, bloco)  3.394077  3.608839  3.982548  3.709131  3.870360  99.452941  1000 ab   
+          anova_rbcd_R(dados_r, x, y, bloco)  3.645856  3.851817  4.281913  3.950887  4.201268  77.745991  1000  bc  
+            anova_bibd(dados_b, x, y, bloco)  3.311664  3.537322  3.785547  3.648684  3.803697   7.913786  1000 a    
+          anova_bibd_R(dados_b, x, y, bloco) 38.913399 40.459266 42.919109 41.321631 44.034860 187.593688  1000     e
+   anova_lsqd(dados_l, xl, y, linha, coluna)  4.108903  4.404401  4.672007  4.506370  4.695640   9.084187  1000   cd 
+ anova_lsqd_R(dados_l, xl, y, linha, coluna)  4.114979  4.327507  4.803674  4.435341  4.655202 154.422641  1000    d 

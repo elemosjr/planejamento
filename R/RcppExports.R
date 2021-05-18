@@ -14,7 +14,7 @@
 #'
 #' @examples
 #'
-#' bloco_incompleto(4, 6, 2)$dados %>%
+#' bloco_incompleto(4, 4, 2)$dados %>%
 #'   anova_bibd("Trat", "resultado", "bloco")
 #'
 #' @export

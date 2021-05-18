@@ -194,9 +194,120 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='bloco_incompleto.html'>bloco_incompleto</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>%&gt;%</span>
+<span class='fu'><a href='bloco_incompleto.html'>bloco_incompleto</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>dados</span> <span class='op'>%&gt;%</span>
   <span class='fu'>anova_bibd</span><span class='op'>(</span><span class='st'>"Trat"</span>, <span class='st'>"resultado"</span>, <span class='st'>"bloco"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in anova_bibd(., "Trat", "resultado", "bloco"): Evaluation error: non-conformable arguments.</span></div><div class='input'>
+</div><div class='output co'>#&gt; $stat
+#&gt; $stat$a
+#&gt; [1] 4
+#&gt; 
+#&gt; $stat$b
+#&gt; [1] 4
+#&gt; 
+#&gt; $stat$N
+#&gt; [1] 8
+#&gt; 
+#&gt; $stat$r
+#&gt; [1] 2
+#&gt; 
+#&gt; $stat$k
+#&gt; [1] 2
+#&gt; 
+#&gt; $stat$lambda
+#&gt; [1] 0.6666667
+#&gt; 
+#&gt; $stat$y..
+#&gt; [1] -2.691518
+#&gt; 
+#&gt; $stat$yi.
+#&gt;           1           2           3           4 
+#&gt; -1.40004352  0.86570616 -0.04127243 -2.11590808 
+#&gt; 
+#&gt; $stat$y.j
+#&gt;         B1         B2         B3         B4 
+#&gt; -1.4056148  0.9010863 -0.8364048 -1.3505845 
+#&gt; 
+#&gt; $stat$nij
+#&gt;      [,1] [,2] [,3] [,4]
+#&gt; [1,]    1    0    0    1
+#&gt; [2,]    0    1    0    1
+#&gt; [3,]    0    1    1    0
+#&gt; [4,]    0    0    1    1
+#&gt; 
+#&gt; $stat$Qi
+#&gt;             [,1]
+#&gt; [1,] -0.02194384
+#&gt; [2,]  1.09045528
+#&gt; [3,] -0.07361317
+#&gt; [4,] -1.02241339
+#&gt; 
+#&gt; $stat$Qi2
+#&gt; [1] 0.0004815323 1.1890927097 0.0054188987 1.0453291473
+#&gt; 
+#&gt; $stat$mu
+#&gt; [1] -0.3364397
+#&gt; 
+#&gt; $stat$tau
+#&gt; [1] -1.0636038  1.2021459  0.2951673 -1.7794683
+#&gt; 
+#&gt; $stat$beta
+#&gt; [1] -1.0691751  1.2375260 -0.4999651 -1.0141448
+#&gt; 
+#&gt; $stat$tau_
+#&gt; [1] -0.3364397
+#&gt; 
+#&gt; $stat$beta_
+#&gt; [1] -0.3364397
+#&gt; 
+#&gt; $stat$tau_i
+#&gt; [1] -0.6728795
+#&gt; 
+#&gt; $stat$beta_i
+#&gt; [1] -0.6728795
+#&gt; 
+#&gt; 
+#&gt; $anova_df
+#&gt;   Fonte.de.variação Graus.de.liberdade Quadrado.Médio        F0   p.valor
+#&gt; 1              Trat                  3      0.5600806 0.1792746 0.9007608
+#&gt; 2             bloco                  3      0.5833823 0.1867332 0.8963620
+#&gt; 3             Erros                  1      3.1241482       NaN       NaN
+#&gt; 4             Total                  7            NaN       NaN       NaN
+#&gt; 
+#&gt; $anova_list
+#&gt; $anova_list$sqt
+#&gt; [1] 6.554537
+#&gt; 
+#&gt; $anova_list$sqtrat_aj
+#&gt; [1] 1.680242
+#&gt; 
+#&gt; $anova_list$sqbloco
+#&gt; [1] 1.750147
+#&gt; 
+#&gt; $anova_list$sqe
+#&gt; [1] 3.124148
+#&gt; 
+#&gt; $anova_list$qmtrat_aj
+#&gt; [1] 0.5600806
+#&gt; 
+#&gt; $anova_list$qmbloco
+#&gt; [1] 0.5833823
+#&gt; 
+#&gt; $anova_list$qme
+#&gt; [1] 3.124148
+#&gt; 
+#&gt; $anova_list$f0
+#&gt; [1] 0.1792746
+#&gt; 
+#&gt; $anova_list$pvalor
+#&gt; [1] 0.9007608
+#&gt; 
+#&gt; 
+#&gt; $estimados
+#&gt;   X..hat..mu.. X..hat..tau.. X..hat..beta.. X..hat..tau._i. X..hat..beta._i.
+#&gt; 1   -0.3364397    -0.3364397     -0.3364397      -0.6728795       -0.6728795
+#&gt; 
+#&gt; $pvalor
+#&gt; [1] 0.9007608
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

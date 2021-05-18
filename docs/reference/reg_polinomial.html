@@ -248,10 +248,10 @@
 #&gt; 
 #&gt; Terms:
 #&gt;                 I(Trat^1) Residuals
-#&gt; Sum of Squares   0.281491 16.568802
+#&gt; Sum of Squares   0.089608 15.723942
 #&gt; Deg. of Freedom         1        18
 #&gt; 
-#&gt; Residual standard error: 0.9594212
+#&gt; Residual standard error: 0.9346402
 #&gt; Estimated effects may be unbalanced
 #&gt; 
 #&gt; $modelos[[2]]
@@ -260,10 +260,10 @@
 #&gt; 
 #&gt; Terms:
 #&gt;                 I(Trat^1) I(Trat^2) Residuals
-#&gt; Sum of Squares   0.281491  0.439354 16.129449
+#&gt; Sum of Squares   0.089608  0.019707 15.704235
 #&gt; Deg. of Freedom         1         1        17
 #&gt; 
-#&gt; Residual standard error: 0.9740591
+#&gt; Residual standard error: 0.961134
 #&gt; Estimated effects may be unbalanced
 #&gt; 
 #&gt; $modelos[[3]]
@@ -272,10 +272,10 @@
 #&gt; 
 #&gt; Terms:
 #&gt;                 I(Trat^1) I(Trat^2) I(Trat^3) Residuals
-#&gt; Sum of Squares   0.281491  0.439354  0.018263 16.111185
+#&gt; Sum of Squares   0.089608  0.019707  0.291178 15.413057
 #&gt; Deg. of Freedom         1         1         1        16
 #&gt; 
-#&gt; Residual standard error: 1.003469
+#&gt; Residual standard error: 0.9814867
 #&gt; Estimated effects may be unbalanced
 #&gt; 
 #&gt; 
@@ -286,8 +286,8 @@
 #&gt; Model 1: resultado ~ +I(Trat^1)
 #&gt; Model 2: resultado ~ +as.factor(Trat^1)
 #&gt;   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
-#&gt; 1     18 16.569                           
-#&gt; 2     16 16.111  2   0.45762 0.2272 0.7993
+#&gt; 1     18 15.724                           
+#&gt; 2     16 15.413  2   0.31089 0.1614 0.8524
 #&gt; 
 #&gt; $falta_ajuste[[2]]
 #&gt; Analysis of Variance Table
@@ -295,8 +295,8 @@
 #&gt; Model 1: resultado ~ +I(Trat^1) + I(Trat^2)
 #&gt; Model 2: resultado ~ +as.factor(Trat^1) + as.factor(Trat^2)
 #&gt;   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
-#&gt; 1     17 16.129                           
-#&gt; 2     16 16.111  1  0.018263 0.0181 0.8945
+#&gt; 1     17 15.704                           
+#&gt; 2     16 15.413  1   0.29118 0.3023 0.5901
 #&gt; 
 #&gt; $falta_ajuste[[3]]
 #&gt; Analysis of Variance Table
@@ -304,8 +304,8 @@
 #&gt; Model 1: resultado ~ +I(Trat^1) + I(Trat^2) + I(Trat^3)
 #&gt; Model 2: resultado ~ +as.factor(Trat^1) + as.factor(Trat^2) + as.factor(Trat^3)
 #&gt;   Res.Df    RSS Df  Sum of Sq F Pr(&gt;F)
-#&gt; 1     16 16.111                       
-#&gt; 2     16 16.111  0 3.5527e-15         
+#&gt; 1     16 15.413                       
+#&gt; 2     16 15.413  0 7.1054e-15         
 #&gt; 
 #&gt; 
 #&gt; $modelo
